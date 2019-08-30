@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     view.backgroundColor = .white
   }
   
-  private func autolayout 
+//  private func autolayout 
   
   private func configureView() {
     
