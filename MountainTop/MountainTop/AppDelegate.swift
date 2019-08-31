@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Firebase 등록
     FirebaseApp.configure()
     
+    // Kakao
+    initializeKakao()
+    
     window = UIWindow(frame: UIScreen.main.bounds)
     
     window?.backgroundColor = .white
@@ -26,6 +29,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = LoginVC()
     
     return true
+  }
+  
+  func applicationDidEnterBackground(_ application: UIApplication) {
+    KOSession.handleDidEnterBackground() // Kakao 서버에 상태 전달
+  }
+  
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    KOSession.handleDidBecomeActive() // Kakao 서버에 상태 전달
+  }
+  
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    <#code#>
+  }
+  
+  func initializeKakao() {
+    
   }
 }
 
