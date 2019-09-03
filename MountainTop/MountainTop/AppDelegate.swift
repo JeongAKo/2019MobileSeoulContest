@@ -26,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window?.backgroundColor = .white
     window?.makeKeyAndVisible()
-    window?.rootViewController = LoginVC()
+    
+//    window?.rootViewController = LoginVC()
+    window?.rootViewController = NMapViewController()
     
     return true
   }

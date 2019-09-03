@@ -9,8 +9,6 @@
 import UIKit
 import NMapsMap
 
-public let DEFAULT_CAMERA_POSITION = NMFCameraPosition(NMGLatLng(lat: 37.5666102, lng: 126.9783881), zoom: 14, tilt: 0, heading: 0)
-
 class NMapViewController: UIViewController, NMFMapViewDelegate {
   
   override func viewDidLoad() {
@@ -29,8 +27,6 @@ class NMapViewController: UIViewController, NMFMapViewDelegate {
      
      
      */
-    
-    
-    
+ 
   }
 }
