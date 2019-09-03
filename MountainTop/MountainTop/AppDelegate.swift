@@ -28,7 +28,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     
 //    window?.rootViewController = LoginVC()
-    window?.rootViewController = NMapVC()
+//    window?.rootViewController = NMapVC()
+    
+    let tapBarController = UITabBarController()
+    let mountainVC = MountainVC()
+    let nMapVC = NMapVC()
+    let userSettingVC = UINavigationController(rootViewController: UserSettingVC())
+    
+    mountainVC.title = "Mountain"
+    nMapVC.title = "Map"
+    userSettingVC.title = "Profile"
+    
+    tapBarController.viewControllers = [mountainVC, nMapVC, userSettingVC]
+    
+    mountainVC.tabBarItem.image = UIImage(named: "top")
+    nMapVC.tabBarItem.image = UIImage(named: "placeholder")
+    userSettingVC.tabBarItem.image = UIImage(named: "profile")
+    
+    window?.rootViewController = tapBarController
+    UITabBar.appearance().tintColor = UIColor.darkGray // 틴트컬러 변경
     
     return true
   }
