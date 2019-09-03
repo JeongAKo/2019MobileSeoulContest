@@ -51,6 +51,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - NMapsMap (3.5.0)
   - SnapKit (5.0.0)
   - SQLite.swift (0.12.0):
     - SQLite.swift/standard (= 0.12.0)
@@ -58,6 +59,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
+  - NMapsMap
   - SnapKit (~> 5.0.0)
   - SQLite.swift (~> 0.12.0)
 
@@ -70,6 +72,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
+    - NMapsMap
     - SnapKit
     - SQLite.swift
 
@@ -81,9 +84,10 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 51d8d9ea48f0ca44484d29cfbdef976fbd4fc336
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NMapsMap: ec883e061245e3636d12640fec4dbb7de5659146
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
 
-PODFILE CHECKSUM: 5c4673a252b634b7552c3c294833f683124c8ce3
+PODFILE CHECKSUM: 521d2cc6d814c69fee0f7232d401457fba7813b7
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.7.5

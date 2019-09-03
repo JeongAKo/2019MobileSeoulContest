@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
 		42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FEF2317B25D0011A751 /* PictureInfomationManager.swift */; };
 		42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FF12317F7A60011A751 /* GoogleService-Info.plist */; };
+		AB26F894231E2C0A0014C468 /* NMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F893231E2C0A0014C468 /* NMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		42D89FF12317F7A60011A751 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B10AC2C79D9DD6C2C470EA2 /* Pods-MountainTop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.release.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.release.xcconfig"; sourceTree = "<group>"; };
 		97CC9E82CDAD8CB1021227FA /* Pods-MountainTop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.debug.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.debug.xcconfig"; sourceTree = "<group>"; };
+		AB26F893231E2C0A0014C468 /* NMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMapViewController.swift; sourceTree = "<group>"; };
 		CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MountainTop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				42D89FDB231691A30011A751 /* LoginVC.swift */,
+				AB26F893231E2C0A0014C468 /* NMapViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -219,22 +222,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MountainTop/Pods-MountainTop-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-MountainTop/Pods-MountainTop-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-MountainTop/Pods-MountainTop-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -250,6 +242,7 @@
 			files = (
 				42D89FDC231691A30011A751 /* LoginVC.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
+				AB26F894231E2C0A0014C468 /* NMapViewController.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
