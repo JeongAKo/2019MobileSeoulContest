@@ -9,7 +9,7 @@
 import UIKit
 import NMapsMap
 
-class NMapViewController: UIViewController, NMFMapViewDelegate {
+class NMapVC: UIViewController, NMFMapViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,7 +24,9 @@ class NMapViewController: UIViewController, NMFMapViewDelegate {
     naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부.
     
     /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
-     
+     - 한국어 표시 (영어, 중국어, 일본어)
+     - 나침판 표시
+     - 로케이션버튼
      
      */
  

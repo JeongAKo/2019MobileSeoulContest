@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     
 //    window?.rootViewController = LoginVC()
-    window?.rootViewController = NMapViewController()
+    window?.rootViewController = NMapVC()
     
     return true
   }
