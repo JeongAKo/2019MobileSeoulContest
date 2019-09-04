@@ -13,6 +13,7 @@ class RecordView: UIView {
   private lazy var cameraButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("사진찍기", for: .normal)
+    button.backgroundColor = .blue
     button.addTarget(self, action: #selector(didTapCameraButton(_:)), for: .touchUpInside)
     addSubview(button)
     return button
@@ -22,7 +23,8 @@ class RecordView: UIView {
     let label = UILabel(frame: CGRect.zero)
     label.text = "1위 기록"
     label.font = UIFont.systemFont(ofSize: 13)
-    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textColor = .darkGray
+    label.backgroundColor = .lightGray
     addSubview(label)
     return label
   }()
@@ -31,7 +33,9 @@ class RecordView: UIView {
     let label = UILabel(frame: CGRect.zero)
     label.text = "나의 기록"
     label.font = UIFont.systemFont(ofSize: 13)
-    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textColor = .darkGray
+    label.backgroundColor = .lightGray
+
     addSubview(label)
     return label
   }()
@@ -48,19 +52,36 @@ class RecordView: UIView {
     return label
   }()
   
-  var timeStamp: Double!
+  var startTime = TimeInterval()
   
   @objc func didTapCameraButton(_ sender: UIButton) {
-    timeStamp = Date().timeIntervalSince1970
-    winnerRecordLabel.text = "\(timeStamp)"
+   
   }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    makeConstraints()
+    backgroundColor = .yellow
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  private func makeConstraints() {
+    
+    cameraButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(safeAreaLayoutGuide).inset(10)
+      $0.width.equalToSuperview().multipliedBy(0.6)
+      $0.height.equalTo(cameraButton.snp.width).multipliedBy(0.2)
+    }
+    
+    winnerRecordLabel.snp.makeConstraints {
+      $0.top.equalTo(cameraButton.snp.bottom).inset(10)
+      $0.leading.bottom.equalToSuperview()
+    }
+    
+  }
+  
 }
