@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		200CAE6CE94CA4F19A03851C /* Pods_MountainTop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
+		42B52B7B231CFE590043A3D2 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B7A231CFE590043A3D2 /* UIAlertController.swift */; };
+		42B52B7D231D04B80043A3D2 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B7C231D04B80043A3D2 /* LogoutVC.swift */; };
+		42B52B80231D35C80043A3D2 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B7F231D35C80043A3D2 /* Metric.swift */; };
+		42B52B83231E2C0F0043A3D2 /* logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B82231E2C0F0043A3D2 /* logger.swift */; };
+		42B52B85231E2CC80043A3D2 /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B84231E2CC80043A3D2 /* NetworkExtensions.swift */; };
+		42B52B88231F8C420043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B87231F8C420043A3D2 /* LoginUserInfo.swift */; };
 		42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FD9231691A30011A751 /* AppDelegate.swift */; };
 		42D89FDC231691A30011A751 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FDB231691A30011A751 /* LoginVC.swift */; };
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
@@ -20,6 +26,12 @@
 /* Begin PBXFileReference section */
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
+		42B52B7A231CFE590043A3D2 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		42B52B7C231D04B80043A3D2 /* LogoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
+		42B52B7F231D35C80043A3D2 /* Metric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
+		42B52B82231E2C0F0043A3D2 /* logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logger.swift; sourceTree = "<group>"; };
+		42B52B84231E2CC80043A3D2 /* NetworkExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
+		42B52B87231F8C420043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
 		42D89FD6231691A30011A751 /* MountainTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D89FD9231691A30011A751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D89FDB231691A30011A751 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -55,6 +67,39 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		42B52B79231CFE2A0043A3D2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				42B52B7A231CFE590043A3D2 /* UIAlertController.swift */,
+				42B52B84231E2CC80043A3D2 /* NetworkExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		42B52B7E231D35A10043A3D2 /* enum */ = {
+			isa = PBXGroup;
+			children = (
+				42B52B7F231D35C80043A3D2 /* Metric.swift */,
+			);
+			path = enum;
+			sourceTree = "<group>";
+		};
+		42B52B81231E29FA0043A3D2 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				42B52B82231E2C0F0043A3D2 /* logger.swift */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
+		42B52B86231F8C160043A3D2 /* DataType */ = {
+			isa = PBXGroup;
+			children = (
+				42B52B87231F8C420043A3D2 /* LoginUserInfo.swift */,
+			);
+			path = DataType;
+			sourceTree = "<group>";
+		};
 		42D89FCD231691A30011A751 = {
 			isa = PBXGroup;
 			children = (
@@ -82,9 +127,13 @@
 				42D89FE5231691A40011A751 /* Info.plist */,
 				42D89FE2231691A40011A751 /* LaunchScreen.storyboard */,
 				42D89FD9231691A30011A751 /* AppDelegate.swift */,
+				42B52B7E231D35A10043A3D2 /* enum */,
+				42B52B81231E29FA0043A3D2 /* helper */,
+				42B52B79231CFE2A0043A3D2 /* Extensions */,
 				42D89FED23178D6C0011A751 /* VC */,
 				42D89FEC23178D5C0011A751 /* View */,
 				42D89FEB23178D4A0011A751 /* Model */,
+				42B52B86231F8C160043A3D2 /* DataType */,
 			);
 			path = MountainTop;
 			sourceTree = "<group>";
@@ -108,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				42D89FDB231691A30011A751 /* LoginVC.swift */,
+				42B52B7C231D04B80043A3D2 /* LogoutVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -248,8 +298,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42B52B7D231D04B80043A3D2 /* LogoutVC.swift in Sources */,
+				42B52B7B231CFE590043A3D2 /* UIAlertController.swift in Sources */,
+				42B52B88231F8C420043A3D2 /* LoginUserInfo.swift in Sources */,
 				42D89FDC231691A30011A751 /* LoginVC.swift in Sources */,
+				42B52B80231D35C80043A3D2 /* Metric.swift in Sources */,
+				42B52B85231E2CC80043A3D2 /* NetworkExtensions.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
+				42B52B83231E2C0F0043A3D2 /* logger.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
