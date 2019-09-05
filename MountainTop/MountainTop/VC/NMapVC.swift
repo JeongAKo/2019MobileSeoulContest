@@ -24,9 +24,15 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
 //    configure(naverMapView as! NMFNaverMapView)
     configure(naverMapView)
-    
     makeConstraints()
+    
+    recordView.clipsToBounds = true
+    recordView.layer.cornerRadius = 25
+    recordView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    
   }
+  
+  
 
   
   private func configure(_ naverMapView: NMFNaverMapView) {
