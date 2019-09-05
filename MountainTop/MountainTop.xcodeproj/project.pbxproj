@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		200CAE6CE94CA4F19A03851C /* Pods_MountainTop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
-		42B52B8A2320AD8F0043A3D2 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B892320AD8F0043A3D2 /* LogoutVC.swift */; };
 		42B52B902320B0010043A3D2 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B8F2320B0010043A3D2 /* Metric.swift */; };
-		42B52B932320B00C0043A3D2 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B912320B00C0043A3D2 /* UIAlertController.swift */; };
-		42B52B942320B00C0043A3D2 /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B922320B00C0043A3D2 /* NetworkExtensions.swift */; };
-		42B52B962320B0E30043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B952320B0E30043A3D2 /* LoginUserInfo.swift */; };
+		42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */; };
+		42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */; };
+		42B52B9D2320B8370043A3D2 /* logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9C2320B8370043A3D2 /* logger.swift */; };
+		42B52BA02320B83E0043A3D2 /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9E2320B83E0043A3D2 /* NetworkExtensions.swift */; };
+		42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */; };
 		42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FD9231691A30011A751 /* AppDelegate.swift */; };
 		42D89FDC231691A30011A751 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FDB231691A30011A751 /* LoginVC.swift */; };
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
@@ -34,11 +35,12 @@
 /* Begin PBXFileReference section */
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
-		42B52B892320AD8F0043A3D2 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogoutVC.swift; path = "../../../../2019MobileSeoulContest 복사본 2/MountainTop/MountainTop/VC/LogoutVC.swift"; sourceTree = "<group>"; };
 		42B52B8F2320B0010043A3D2 /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Metric.swift; path = "../../../../2019MobileSeoulContest 복사본 2/MountainTop/MountainTop/enum/Metric.swift"; sourceTree = "<group>"; };
-		42B52B912320B00C0043A3D2 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertController.swift; path = "../../../../2019MobileSeoulContest 복사본 2/MountainTop/MountainTop/Extensions/UIAlertController.swift"; sourceTree = "<group>"; };
-		42B52B922320B00C0043A3D2 /* NetworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkExtensions.swift; path = "../../../../2019MobileSeoulContest 복사본 2/MountainTop/MountainTop/Extensions/NetworkExtensions.swift"; sourceTree = "<group>"; };
-		42B52B952320B0E30043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginUserInfo.swift; path = "../../../../2019MobileSeoulContest 복사본 2/MountainTop/MountainTop/DataType/LoginUserInfo.swift"; sourceTree = "<group>"; };
+		42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
+		42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
+		42B52B9C2320B8370043A3D2 /* logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logger.swift; sourceTree = "<group>"; };
+		42B52B9E2320B83E0043A3D2 /* NetworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
+		42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		42D89FD6231691A30011A751 /* MountainTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D89FD9231691A30011A751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D89FDB231691A30011A751 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -86,6 +88,8 @@
 		42B52B8B2320AF870043A3D2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				42B52B9E2320B83E0043A3D2 /* NetworkExtensions.swift */,
+				42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -93,8 +97,7 @@
 		42B52B8C2320AF8E0043A3D2 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				42B52B922320B00C0043A3D2 /* NetworkExtensions.swift */,
-				42B52B912320B00C0043A3D2 /* UIAlertController.swift */,
+				42B52B9C2320B8370043A3D2 /* logger.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -110,7 +113,7 @@
 		42B52B8E2320AFBE0043A3D2 /* DataType */ = {
 			isa = PBXGroup;
 			children = (
-				42B52B952320B0E30043A3D2 /* LoginUserInfo.swift */,
+				42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */,
 			);
 			path = DataType;
 			sourceTree = "<group>";
@@ -173,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				42D89FDB231691A30011A751 /* LoginVC.swift */,
-				42B52B892320AD8F0043A3D2 /* LogoutVC.swift */,
+				42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */,
 				AB26F897231E462B0014C468 /* MountainVC.swift */,
 				AB26F893231E2C0A0014C468 /* NMapVC.swift */,
 				AB26F8DB2320B7010014C468 /* VC */,
@@ -319,23 +322,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42B52B9D2320B8370043A3D2 /* logger.swift in Sources */,
 				42D89FDC231691A30011A751 /* LoginVC.swift in Sources */,
 				42B52B942320B00C0043A3D2 /* NetworkExtensions.swift in Sources */,
 				42B52B962320B0E30043A3D2 /* LoginUserInfo.swift in Sources */,
-				AB26F8E22320B7010014C468 /* RecordView.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
-				AB26F898231E462B0014C468 /* MountainVC.swift in Sources */,
 				AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */,
 				AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */,
-				42B52B932320B00C0043A3D2 /* UIAlertController.swift in Sources */,
-				AB26F8E32320B7010014C468 /* UserSettingVC.swift in Sources */,
-				AB26F8E52320B7010014C468 /* NMapVC.swift in Sources */,
-				AB26F8E42320B7010014C468 /* LoginVC.swift in Sources */,
-				42B52B8A2320AD8F0043A3D2 /* LogoutVC.swift in Sources */,
 				AB26F894231E2C0A0014C468 /* NMapVC.swift in Sources */,
+				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
+				42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */,
 				42B52B902320B0010043A3D2 /* Metric.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
 				AB26F89A231E46BF0014C468 /* UserSettingVC.swift in Sources */,
+				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
