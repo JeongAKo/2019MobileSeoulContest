@@ -631,6 +631,12 @@ Copyright 2019 Google
    limitations under the License.
 
 
+## NMapsMap
+
+Copyright © 2018 NAVER Corp.
+All rights reserved.
+
+
 ## SQLite.swift
 
 (The MIT License)

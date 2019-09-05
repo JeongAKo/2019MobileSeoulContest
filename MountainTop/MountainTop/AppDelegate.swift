@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var loginViewController: UIViewController?
   var mainViewController: UIViewController?
-
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     window = UIWindow(frame: UIScreen.main.bounds)
@@ -34,22 +34,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     reloadRootViewController()
     
-    
     return true
   }
-  
+
   fileprivate func setupEntryController() {
-//    let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let navigationController = UINavigationController(rootViewController: LoginVC())
-    let navigationController2 = UINavigationController(rootViewController: LogoutVC())
+//    let navigationController2 = UINavigationController(rootViewController: LogoutVC())
     
-//    let viewController = storyboard.instantiateViewController(withIdentifier: "login") as UIViewController
-//    navigationController.pushViewController(viewController, animated: true)
+    let tapBarController = UITabBarController()
+    let mountainVC = MountainVC()
+    let nMapVC = NMapVC()
+    let userSettingVC = UINavigationController(rootViewController: LogoutVC())//UserSettingVC())
+    
+    mountainVC.title = "Mountain"
+    nMapVC.title = "Map"
+    userSettingVC.title = "Profile"
+    
+    tapBarController.viewControllers = [mountainVC, nMapVC, userSettingVC]
+    
+    mountainVC.tabBarItem.image = UIImage(named: "top")
+    nMapVC.tabBarItem.image = UIImage(named: "placeholder")
+    userSettingVC.tabBarItem.image = UIImage(named: "profile")
+    
+//    window?.rootViewController = tapBarController
+    UITabBar.appearance().tintColor = UIColor.darkGray // 틴트컬러 변경
+    
     self.loginViewController = navigationController
-    
-//    let viewController2 = storyboard.instantiateViewController(withIdentifier: "main") as UIViewController
-//    navigationController2.pushViewController(viewController2, animated: true)
-    self.mainViewController = navigationController2
+    self.mainViewController = tapBarController//navigationController2
   }
   
   fileprivate func reloadRootViewController() {
@@ -58,8 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return
     }
     if !isOpened {
-      let mainViewController = self.mainViewController as! UINavigationController
-      mainViewController.popToRootViewController(animated: true)
+//      let mainViewController = self.mainViewController as! UINavigationController
+//      mainViewController.popToRootViewController(animated: true)
     }
     
     self.window?.rootViewController = isOpened ? self.mainViewController : self.loginViewController
@@ -91,9 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidBecomeActive(_ application: UIApplication) {
     KOSession.handleDidBecomeActive()
   }
-  
-  func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-//    MapleBaconStorage.sharedStorage.clearMemoryStorage()
-  }
 }
+
 

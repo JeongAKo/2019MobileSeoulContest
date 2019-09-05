@@ -20,7 +20,7 @@ final class LoginVC: UIViewController {
     view.addSubview(btn)
     return btn
   }()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -95,4 +95,5 @@ final class LoginVC: UIViewController {
     
   }
 }
+
 
