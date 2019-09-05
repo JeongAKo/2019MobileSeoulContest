@@ -24,6 +24,11 @@
 		AB26F898231E462B0014C468 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F897231E462B0014C468 /* MountainVC.swift */; };
 		AB26F89A231E46BF0014C468 /* UserSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F899231E46BF0014C468 /* UserSettingVC.swift */; };
 		AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F89D231E8BFF0014C468 /* RecordView.swift */; };
+		AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F8DC2320B7010014C468 /* MountainVC.swift */; };
+		AB26F8E22320B7010014C468 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F8DD2320B7010014C468 /* RecordView.swift */; };
+		AB26F8E32320B7010014C468 /* UserSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F8DE2320B7010014C468 /* UserSettingVC.swift */; };
+		AB26F8E42320B7010014C468 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F8DF2320B7010014C468 /* LoginVC.swift */; };
+		AB26F8E52320B7010014C468 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F8E02320B7010014C468 /* NMapVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +53,11 @@
 		AB26F897231E462B0014C468 /* MountainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
 		AB26F899231E46BF0014C468 /* UserSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingVC.swift; sourceTree = "<group>"; };
 		AB26F89D231E8BFF0014C468 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordView.swift; path = MountainTop/VC/RecordView.swift; sourceTree = SOURCE_ROOT; };
+		AB26F8DC2320B7010014C468 /* MountainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
+		AB26F8DD2320B7010014C468 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		AB26F8DE2320B7010014C468 /* UserSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingVC.swift; sourceTree = "<group>"; };
+		AB26F8DF2320B7010014C468 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		AB26F8E02320B7010014C468 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
 		CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MountainTop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -166,6 +176,7 @@
 				42B52B892320AD8F0043A3D2 /* LogoutVC.swift */,
 				AB26F897231E462B0014C468 /* MountainVC.swift */,
 				AB26F893231E2C0A0014C468 /* NMapVC.swift */,
+				AB26F8DB2320B7010014C468 /* VC */,
 				AB26F899231E46BF0014C468 /* UserSettingVC.swift */,
 			);
 			path = VC;
@@ -178,6 +189,18 @@
 				CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB26F8DB2320B7010014C468 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				AB26F8DC2320B7010014C468 /* MountainVC.swift */,
+				AB26F8DD2320B7010014C468 /* RecordView.swift */,
+				AB26F8DE2320B7010014C468 /* UserSettingVC.swift */,
+				AB26F8DF2320B7010014C468 /* LoginVC.swift */,
+				AB26F8E02320B7010014C468 /* NMapVC.swift */,
+			);
+			name = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,10 +322,15 @@
 				42D89FDC231691A30011A751 /* LoginVC.swift in Sources */,
 				42B52B942320B00C0043A3D2 /* NetworkExtensions.swift in Sources */,
 				42B52B962320B0E30043A3D2 /* LoginUserInfo.swift in Sources */,
+				AB26F8E22320B7010014C468 /* RecordView.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
 				AB26F898231E462B0014C468 /* MountainVC.swift in Sources */,
+				AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */,
 				AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */,
 				42B52B932320B00C0043A3D2 /* UIAlertController.swift in Sources */,
+				AB26F8E32320B7010014C468 /* UserSettingVC.swift in Sources */,
+				AB26F8E52320B7010014C468 /* NMapVC.swift in Sources */,
+				AB26F8E42320B7010014C468 /* LoginVC.swift in Sources */,
 				42B52B8A2320AD8F0043A3D2 /* LogoutVC.swift in Sources */,
 				AB26F894231E2C0A0014C468 /* NMapVC.swift in Sources */,
 				42B52B902320B0010043A3D2 /* Metric.swift in Sources */,
