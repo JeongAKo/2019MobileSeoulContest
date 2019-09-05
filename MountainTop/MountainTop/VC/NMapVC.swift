@@ -24,9 +24,11 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
 //    configure(naverMapView as! NMFNaverMapView)
     configure(naverMapView)
-    
     makeConstraints()
+    
   }
+  
+  
 
   
   private func configure(_ naverMapView: NMFNaverMapView) {
@@ -51,3 +53,5 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     }
   }
 }
+
+

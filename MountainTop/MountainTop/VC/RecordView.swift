@@ -55,6 +55,7 @@ class RecordView: UIView {
   var startTime = TimeInterval()
   
   @objc func didTapCameraButton(_ sender: UIButton) {
+    print("버튼 눌러따🤩")
    
   }
   

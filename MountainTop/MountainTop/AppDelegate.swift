@@ -13,27 +13,38 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+  var loginViewController: UIViewController?
+  var mainViewController: UIViewController?
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.backgroundColor = .white
     
     // Firebase 등록
     FirebaseApp.configure()
     
+    setupEntryController()
+    
     // Kakao
-    initializeKakao()
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(AppDelegate.kakaoSessionDidChangeWithNotification),
+                                           name: NSNotification.Name.KOSessionDidChange,
+                                           object: nil)
     
-    window = UIWindow(frame: UIScreen.main.bounds)
+    reloadRootViewController()
     
-    window?.backgroundColor = .white
-    window?.makeKeyAndVisible()
-    
-//    window?.rootViewController = LoginVC()
-//    window?.rootViewController = NMapVC()
+    return true
+  }
+
+  fileprivate func setupEntryController() {
+    let navigationController = UINavigationController(rootViewController: LoginVC())
+//    let navigationController2 = UINavigationController(rootViewController: LogoutVC())
     
     let tapBarController = UITabBarController()
     let mountainVC = MountainVC()
     let nMapVC = NMapVC()
-    let userSettingVC = UINavigationController(rootViewController: UserSettingVC())
+    let userSettingVC = UINavigationController(rootViewController: LogoutVC())//UserSettingVC())
     
     mountainVC.title = "Mountain"
     nMapVC.title = "Map"
@@ -45,27 +56,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     nMapVC.tabBarItem.image = UIImage(named: "placeholder")
     userSettingVC.tabBarItem.image = UIImage(named: "profile")
     
-    window?.rootViewController = tapBarController
+//    window?.rootViewController = tapBarController
     UITabBar.appearance().tintColor = UIColor.darkGray // 틴트컬러 변경
     
-    return true
+    self.loginViewController = navigationController
+    self.mainViewController = tapBarController//navigationController2
   }
   
-  func applicationDidEnterBackground(_ application: UIApplication) {
-    KOSession.handleDidEnterBackground() // Kakao 서버에 상태 전달
-  }
-  
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    KOSession.handleDidBecomeActive() // Kakao 서버에 상태 전달
-  }
-  
-  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+  fileprivate func reloadRootViewController() {
+    guard let isOpened = KOSession.shared()?.isOpen() else {
+      print("isOpened is nil")
+      return
+    }
+    if !isOpened {
+//      let mainViewController = self.mainViewController as! UINavigationController
+//      mainViewController.popToRootViewController(animated: true)
+    }
     
+    self.window?.rootViewController = isOpened ? self.mainViewController : self.loginViewController
+    self.window?.makeKeyAndVisible()
+  }
+  
+  @objc func kakaoSessionDidChangeWithNotification() {
+    reloadRootViewController()
+  }
+  
+  func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    if KOSession.handleOpen(url) {
+      return true
+    }
     return false
   }
   
-  func initializeKakao() {
-    
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+    if KOSession.handleOpen(url) {
+      return true
+    }
+    return false
+  }
+  
+  func applicationDidEnterBackground(_ application: UIApplication) {
+    KOSession.handleDidEnterBackground()
+  }
+  
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    KOSession.handleDidBecomeActive()
   }
 }
+
 
