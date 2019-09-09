@@ -62,7 +62,7 @@ class RecordView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     makeConstraints()
-    backgroundColor = .yellow
+    backgroundColor = .white
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -81,6 +81,11 @@ class RecordView: UIView {
     winnerRecordLabel.snp.makeConstraints {
       $0.top.equalTo(cameraButton.snp.bottom).inset(10)
       $0.leading.bottom.equalToSuperview()
+    }
+    
+    challengerRecordLabel.snp.makeConstraints {
+      $0.top.equalTo(cameraButton.snp.bottom).inset(10)
+      $0.trailing.bottom.equalToSuperview()
     }
     
   }

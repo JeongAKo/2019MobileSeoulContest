@@ -12,29 +12,20 @@ import NMapsMap
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
   let recordView = RecordView()
-//  var naverMapView: UIView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let naverMapView = NMFNaverMapView(frame: view.frame)
-
+  
     view.addSubview(naverMapView)
     view.addSubview(recordView)
     
-//    configure(naverMapView as! NMFNaverMapView)
     configure(naverMapView)
+    applyDesign()
     makeConstraints()
     
-
-    recordView.clipsToBounds = true
-    recordView.layer.cornerRadius = 25
-    recordView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-
   }
-  
-  
-
   
   private func configure(_ naverMapView: NMFNaverMapView) {
     
@@ -47,14 +38,24 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
      naverMapView.mapView.showLegalNotice() // 지도 관련 법적고지
      */
-    
+  }
+  
+  private func applyDesign() {
+    recordView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner] //하단만 cornerRadius 적용
+    recordView.layer.cornerRadius = 25
+    recordView.clipsToBounds = true
+    recordView.layer.shadowColor = UIColor.darkGray.cgColor  //CGColor 랑 UIClolor 차이?
+    recordView.layer.shadowRadius = 10
+    recordView.layer.shadowOpacity = 0.5
+    recordView.layer.shadowOffset = CGSize.zero
+    recordView.layer.masksToBounds = false
   }
   
   private func makeConstraints() {
-    
     recordView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
-      $0.height.equalToSuperview().multipliedBy(0.3)
+      $0.height.equalToSuperview().multipliedBy(0.2)
+      
     }
   }
 }
