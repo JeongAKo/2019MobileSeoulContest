@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		200CAE6CE94CA4F19A03851C /* Pods_MountainTop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */; };
+		4222C2862324E01200619406 /* UserHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2852324E01200619406 /* UserHistoryModel.swift */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
 		42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */; };
 		42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4222C2852324E01200619406 /* UserHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryModel.swift; sourceTree = "<group>"; };
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
 		42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				42D89FEF2317B25D0011A751 /* PictureInfomationManager.swift */,
+				4222C2852324E01200619406 /* UserHistoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
 				42B52BA32320BC850043A3D2 /* Metric.swift in Sources */,
 				AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */,
+				4222C2862324E01200619406 /* UserHistoryModel.swift in Sources */,
 				AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */,
 				AB26F894231E2C0A0014C468 /* NMapVC.swift in Sources */,
 				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
