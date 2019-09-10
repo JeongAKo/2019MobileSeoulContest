@@ -12,20 +12,22 @@
 		4222C289232751BA00619406 /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C288232751BA00619406 /* UserRecord.swift */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
 		42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */; };
-		42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */; };
 		42B52B9D2320B8370043A3D2 /* logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9C2320B8370043A3D2 /* logger.swift */; };
 		42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */; };
 		42B52BA32320BC850043A3D2 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52BA22320BC850043A3D2 /* Metric.swift */; };
 		42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FD9231691A30011A751 /* AppDelegate.swift */; };
-		42D89FDC231691A30011A751 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FDB231691A30011A751 /* LoginVC.swift */; };
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
 		42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FEF2317B25D0011A751 /* PictureInfomationManager.swift */; };
 		42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FF12317F7A60011A751 /* GoogleService-Info.plist */; };
-		AB26F894231E2C0A0014C468 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F893231E2C0A0014C468 /* NMapVC.swift */; };
-		AB26F89A231E46BF0014C468 /* UserSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F899231E46BF0014C468 /* UserSettingVC.swift */; };
-		AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F89D231E8BFF0014C468 /* RecordView.swift */; };
-		AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F8DC2320B7010014C468 /* MountainVC.swift */; };
+		AB49F80723277EED00754504 /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80523277EED00754504 /* Error+.swift */; };
+		AB49F80823277EED00754504 /* CustomAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80623277EED00754504 /* CustomAlbum.swift */; };
+		AB49F8112327860D00754504 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80C2327860D00754504 /* LogoutVC.swift */; };
+		AB49F8122327860D00754504 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80D2327860D00754504 /* MountainVC.swift */; };
+		AB49F8132327860D00754504 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80E2327860D00754504 /* NMapVC.swift */; };
+		AB49F8142327860D00754504 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80F2327860D00754504 /* LoginVC.swift */; };
+		AB49F8152327860D00754504 /* UserSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F8102327860D00754504 /* UserSettingVC.swift */; };
+		AB49F8172327861B00754504 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F8162327861A00754504 /* RecordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,14 +36,12 @@
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
 		42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
-		42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
 		42B52B9C2320B8370043A3D2 /* logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logger.swift; sourceTree = "<group>"; };
 		42B52B9E2320B83E0043A3D2 /* NetworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
 		42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		42B52BA22320BC850043A3D2 /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
 		42D89FD6231691A30011A751 /* MountainTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D89FD9231691A30011A751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		42D89FDB231691A30011A751 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		42D89FE0231691A40011A751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42D89FE3231691A40011A751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42D89FE5231691A40011A751 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,15 +49,14 @@
 		42D89FF12317F7A60011A751 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B10AC2C79D9DD6C2C470EA2 /* Pods-MountainTop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.release.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.release.xcconfig"; sourceTree = "<group>"; };
 		97CC9E82CDAD8CB1021227FA /* Pods-MountainTop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.debug.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.debug.xcconfig"; sourceTree = "<group>"; };
-		AB26F893231E2C0A0014C468 /* NMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
-		AB26F897231E462B0014C468 /* MountainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
-		AB26F899231E46BF0014C468 /* UserSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingVC.swift; sourceTree = "<group>"; };
-		AB26F89D231E8BFF0014C468 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordView.swift; path = MountainTop/VC/RecordView.swift; sourceTree = SOURCE_ROOT; };
-		AB26F8DC2320B7010014C468 /* MountainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
-		AB26F8DD2320B7010014C468 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
-		AB26F8DE2320B7010014C468 /* UserSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingVC.swift; sourceTree = "<group>"; };
-		AB26F8DF2320B7010014C468 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		AB26F8E02320B7010014C468 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
+		AB49F80523277EED00754504 /* Error+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Error+.swift"; path = "../../../../../Rebeloper/SwiftImageManiaResources/Error+.swift"; sourceTree = "<group>"; };
+		AB49F80623277EED00754504 /* CustomAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomAlbum.swift; path = ../../../../../Rebeloper/SwiftImageManiaResources/CustomAlbum.swift; sourceTree = "<group>"; };
+		AB49F80C2327860D00754504 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
+		AB49F80D2327860D00754504 /* MountainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
+		AB49F80E2327860D00754504 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
+		AB49F80F2327860D00754504 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		AB49F8102327860D00754504 /* UserSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingVC.swift; sourceTree = "<group>"; };
+		AB49F8162327861A00754504 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MountainTop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -96,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				42B52B9C2320B8370043A3D2 /* logger.swift */,
+				AB49F80623277EED00754504 /* CustomAlbum.swift */,
+				AB49F80523277EED00754504 /* Error+.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -167,7 +168,7 @@
 		42D89FEC23178D5C0011A751 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AB26F89D231E8BFF0014C468 /* RecordView.swift */,
+				AB49F8162327861A00754504 /* RecordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,12 +176,11 @@
 		42D89FED23178D6C0011A751 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				42D89FDB231691A30011A751 /* LoginVC.swift */,
-				42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */,
-				AB26F897231E462B0014C468 /* MountainVC.swift */,
-				AB26F893231E2C0A0014C468 /* NMapVC.swift */,
-				AB26F8DB2320B7010014C468 /* VC */,
-				AB26F899231E46BF0014C468 /* UserSettingVC.swift */,
+				AB49F80F2327860D00754504 /* LoginVC.swift */,
+				AB49F80C2327860D00754504 /* LogoutVC.swift */,
+				AB49F80D2327860D00754504 /* MountainVC.swift */,
+				AB49F80E2327860D00754504 /* NMapVC.swift */,
+				AB49F8102327860D00754504 /* UserSettingVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -192,18 +192,6 @@
 				CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		AB26F8DB2320B7010014C468 /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				AB26F8DC2320B7010014C468 /* MountainVC.swift */,
-				AB26F8DD2320B7010014C468 /* RecordView.swift */,
-				AB26F8DE2320B7010014C468 /* UserSettingVC.swift */,
-				AB26F8DF2320B7010014C468 /* LoginVC.swift */,
-				AB26F8E02320B7010014C468 /* NMapVC.swift */,
-			);
-			name = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,19 +310,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB49F8132327860D00754504 /* NMapVC.swift in Sources */,
 				42B52B9D2320B8370043A3D2 /* logger.swift in Sources */,
-				42D89FDC231691A30011A751 /* LoginVC.swift in Sources */,
+				AB49F80823277EED00754504 /* CustomAlbum.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
 				42B52BA32320BC850043A3D2 /* Metric.swift in Sources */,
 				AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */,
 				4222C2862324E01200619406 /* UserHistoryModel.swift in Sources */,
 				AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */,
 				AB26F894231E2C0A0014C468 /* NMapVC.swift in Sources */,
+				AB49F8112327860D00754504 /* LogoutVC.swift in Sources */,
+				AB49F8152327860D00754504 /* UserSettingVC.swift in Sources */,
 				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
-				42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */,
+				AB49F80723277EED00754504 /* Error+.swift in Sources */,
+				AB49F8142327860D00754504 /* LoginVC.swift in Sources */,
+				AB49F8122327860D00754504 /* MountainVC.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
 				4222C289232751BA00619406 /* UserRecord.swift in Sources */,
 				AB26F89A231E46BF0014C468 /* UserSettingVC.swift in Sources */,
+				AB49F8172327861B00754504 /* RecordView.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
