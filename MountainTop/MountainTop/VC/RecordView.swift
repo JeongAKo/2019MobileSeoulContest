@@ -10,6 +10,10 @@ import UIKit
 
 class RecordView: UIView {
   
+  var timer = Timer()
+  var startTime = TimeInterval()
+  var (hours, minutes, seconds) = (0, 0, 0 )
+  
   private lazy var cameraButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("사진찍기", for: .normal)
@@ -19,44 +23,81 @@ class RecordView: UIView {
     return button
   }()
   
-  private lazy var winnerRecordLabel: UILabel = {
+  private lazy var winnerTitleLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "1위 기록"
     label.font = UIFont.systemFont(ofSize: 13)
     label.textColor = .darkGray
+    label.textAlignment = .center
     label.backgroundColor = .lightGray
     addSubview(label)
     return label
   }()
 
-  private lazy var challengerRecordLabel: UILabel = {
+  private lazy var challengerTitleLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "나의 기록"
     label.font = UIFont.systemFont(ofSize: 13)
-    label.textColor = .darkGray
-    label.backgroundColor = .lightGray
+    label.textColor = .lightGray
+    label.textAlignment = .center
+    label.backgroundColor = .yellow
 
     addSubview(label)
     return label
   }()
   
-  private lazy var gapValueLabel: UILabel = {
+  private lazy var winnerRecordTimeLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
-    label.text = "01:32:47"
-    label.font = UIFont.systemFont(ofSize: 13)
-    label.backgroundColor = .blue
-    label.textColor = .white
-    label.layer.cornerRadius = 10
-    label.clipsToBounds = true
+    label.text = "00 : 00 : 00"
+    label.font = UIFont(name: "Courier", size: 20)
+    label.textColor = .darkGray
+    label.textAlignment = .center
+    label.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
     addSubview(label)
     return label
   }()
   
-  var startTime = TimeInterval()
+  private lazy var challengerRecordTimeLabel: UILabel = {
+    let label = UILabel(frame: CGRect.zero)
+    label.text = "00 : 00 : 00"
+    label.font = UIFont(name: "Courier", size: 20)
+    label.textColor = .lightGray
+    label.textAlignment = .center
+    label.backgroundColor = .green
+    
+    addSubview(label)
+    return label
+  }()
   
+  
+  // MARK: - Action Method
   @objc func didTapCameraButton(_ sender: UIButton) {
-    print("버튼 눌러따🤩")
+    print("📌눌러써여📌")
+    
+    timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(keepTimer), userInfo: nil, repeats: true)
    
+  }
+  
+  @objc private func keepTimer() {
+    
+    seconds += 1
+    
+    if seconds == 60 {
+      minutes += 1
+      seconds = 0
+    }
+    
+    if minutes == 60 {
+      hours += 1
+      minutes = 0
+    }
+    
+    let secondsString = seconds > 9 ? "\(seconds)" : "0\(seconds)"
+    let minutesString = minutes > 9 ? "\(minutes)" : "0\(minutes)"
+    let hoursString = hours > 9 ? "\(hours)" : "0\(hours)"
+    
+    challengerRecordTimeLabel.text =  "\(hoursString) : \(minutesString) : \(secondsString)"
+    
   }
   
   override init(frame: CGRect) {
@@ -69,8 +110,8 @@ class RecordView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  // MARK: - AutoLayout
   private func makeConstraints() {
-    
     cameraButton.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.top.equalTo(safeAreaLayoutGuide).inset(10)
@@ -78,14 +119,28 @@ class RecordView: UIView {
       $0.height.equalTo(cameraButton.snp.width).multipliedBy(0.2)
     }
     
-    winnerRecordLabel.snp.makeConstraints {
-      $0.top.equalTo(cameraButton.snp.bottom).inset(10)
-      $0.leading.bottom.equalToSuperview()
+    winnerTitleLabel.snp.makeConstraints {
+      $0.top.equalTo(cameraButton.snp.bottom).offset(10)
+      $0.width.equalToSuperview().multipliedBy(0.5)
+      $0.leading.equalToSuperview()
     }
     
-    challengerRecordLabel.snp.makeConstraints {
-      $0.top.equalTo(cameraButton.snp.bottom).inset(10)
-      $0.trailing.bottom.equalToSuperview()
+    challengerTitleLabel.snp.makeConstraints {
+      $0.top.equalTo(cameraButton.snp.bottom).offset(10)
+      $0.width.equalToSuperview().multipliedBy(0.5)
+      $0.trailing.equalToSuperview()
+      
+    }
+    
+    winnerRecordTimeLabel.snp.makeConstraints {
+      $0.top.equalTo(winnerTitleLabel.snp.bottom).offset(10)
+      $0.centerX.equalTo(winnerTitleLabel.snp.centerX)
+    }
+    
+    challengerRecordTimeLabel.snp.makeConstraints {
+      $0.top.equalTo(challengerTitleLabel.snp.bottom).offset(10)
+      $0.centerX.equalTo(challengerTitleLabel.snp.centerX)
+    
     }
     
   }

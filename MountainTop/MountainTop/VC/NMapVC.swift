@@ -11,20 +11,20 @@ import NMapsMap
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
+  let containerView = UIView()
   let recordView = RecordView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let naverMapView = NMFNaverMapView(frame: view.frame)
-  
-    view.addSubview(naverMapView)
-    view.addSubview(recordView)
     
+    view.addSubview(naverMapView)
+    view.addSubview(containerView)
+    containerView.addSubview(recordView)
     configure(naverMapView)
     applyDesign()
     makeConstraints()
-    
   }
   
   private func configure(_ naverMapView: NMFNaverMapView) {
@@ -41,20 +41,29 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   }
   
   private func applyDesign() {
+    let cornerRadius : CGFloat = 15.0
+    
     recordView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner] //하단만 cornerRadius 적용
-    recordView.layer.cornerRadius = 25
+    recordView.layer.cornerRadius = cornerRadius
     recordView.clipsToBounds = true
-    recordView.layer.shadowColor = UIColor.darkGray.cgColor  //CGColor 랑 UIClolor 차이?
-    recordView.layer.shadowRadius = 10
-    recordView.layer.shadowOpacity = 0.5
-    recordView.layer.shadowOffset = CGSize.zero
-    recordView.layer.masksToBounds = false
+    
+    containerView.layer.shadowColor = UIColor.darkGray.cgColor  //CGColor 랑 UIClolor 차이?
+    containerView.layer.shadowOffset = CGSize.zero
+    containerView.layer.shadowRadius = 10
+    containerView.layer.shadowOpacity = 0.5
+//    recordView.layer.masksToBounds = false
+    
   }
   
   private func makeConstraints() {
-    recordView.snp.makeConstraints {
+    containerView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview().multipliedBy(0.2)
+    }
+    
+    recordView.snp.makeConstraints {
+      $0.top.leading.trailing.equalToSuperview()
+      $0.height.equalToSuperview()
       
     }
   }
