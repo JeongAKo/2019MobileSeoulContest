@@ -104,21 +104,36 @@ class LogoutVC: UIViewController {
     
     switch sender {
     case add:
-      print("add")
-      
-      db?.insertRecode(start: "testStart", finish: "testFinish", recode: "testRecode", mountainID: 1)
+      db?.insertRecode(start: Date().timeIntervalSinceNow, finish: nil, recode: "0", mountainID: 1)
+      let _ = db?.getTotal()
     case update:
-      print("update")
-      
-      db?.updateRecode()
+      let now = Date()
+      let format = DateFormatter()
+      format.dateFormat = "MM.dd."
+      db?.updateRecode(updateID: 1, finish: now.timeIntervalSinceNow, record: "updateRecord")
+      let _ = db?.getTotal()
+      getRecordID()
     case delete:
-      print("delete")
-      
-      db?.deleteRecode(delete: 0)
+      db?.deleteRecode(delete: 1)
+      let _ = db?.getTotal()
     default:
       
       break
     }
+    
+//    getAllRecord()
+  }
+  
+  private func getAllRecord() {
+    db?.getAllRecode(complete: { (records) in
+      print("records.count: \(records.count)")
+    })
+  }
+  
+  private func getRecordID() {
+    db?.getRecordID(id: db?.getTotal() ?? 1, complete: { (record) in
+      print("record: \(record)")
+    })
   }
 
 }

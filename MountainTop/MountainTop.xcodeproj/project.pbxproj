@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		200CAE6CE94CA4F19A03851C /* Pods_MountainTop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */; };
 		4222C2862324E01200619406 /* UserHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2852324E01200619406 /* UserHistoryModel.swift */; };
+		4222C289232751BA00619406 /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C288232751BA00619406 /* UserRecord.swift */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
 		42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */; };
 		42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9A2320B78A0043A3D2 /* LogoutVC.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		4222C2852324E01200619406 /* UserHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryModel.swift; sourceTree = "<group>"; };
+		4222C288232751BA00619406 /* UserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecord.swift; sourceTree = "<group>"; };
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
 		42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */,
+				4222C288232751BA00619406 /* UserRecord.swift */,
 			);
 			path = DataType;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
 				42B52B9B2320B78A0043A3D2 /* LogoutVC.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
+				4222C289232751BA00619406 /* UserRecord.swift in Sources */,
 				AB26F89A231E46BF0014C468 /* UserSettingVC.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 			);
