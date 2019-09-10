@@ -315,10 +315,7 @@
 				AB49F81B23279B6E00754504 /* CustomAlbum.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
 				42B52BA32320BC850043A3D2 /* Metric.swift in Sources */,
-				AB26F8E12320B7010014C468 /* MountainVC.swift in Sources */,
 				4222C2862324E01200619406 /* UserHistoryModel.swift in Sources */,
-				AB26F89E231E8BFF0014C468 /* RecordView.swift in Sources */,
-				AB26F894231E2C0A0014C468 /* NMapVC.swift in Sources */,
 				AB49F8112327860D00754504 /* LogoutVC.swift in Sources */,
 				AB49F8152327860D00754504 /* UserSettingVC.swift in Sources */,
 				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
@@ -327,7 +324,6 @@
 				AB49F81D23279BB600754504 /* Error+.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
 				4222C289232751BA00619406 /* UserRecord.swift in Sources */,
-				AB26F89A231E46BF0014C468 /* UserSettingVC.swift in Sources */,
 				AB49F8172327861B00754504 /* RecordView.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 			);
