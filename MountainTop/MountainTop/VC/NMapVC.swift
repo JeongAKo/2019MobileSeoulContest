@@ -11,8 +11,10 @@ import NMapsMap
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
-  let containerView = UIView()
-  let recordView = RecordView()
+  private let notiCenter = NotificationCenter.default
+  
+  private let containerView = UIView()
+  private let recordView = RecordView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,14 +26,20 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     containerView.addSubview(recordView)
     configure(naverMapView)
     applyDesign()
+    addObservers()
     makeConstraints()
   }
+  
+  deinit {
+    removeObservers()
+  }
+
   
   private func configure(_ naverMapView: NMFNaverMapView) {
     
     naverMapView.mapView.setLayerGroup(NMF_LAYER_GROUP_MOUNTAIN, isEnabled: true)  // 등산로 모드
     naverMapView.positionMode = .direction
-    naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부.
+    naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부
     //    naverMapView.mapView.locale = "en-US"    // 영문표시
     naverMapView.mapView.buildingHeight = 0.5
     
@@ -47,14 +55,53 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     recordView.layer.cornerRadius = cornerRadius
     recordView.clipsToBounds = true
     
-    containerView.layer.shadowColor = UIColor.darkGray.cgColor  //CGColor 랑 UIClolor 차이?
+    containerView.layer.shadowColor = UIColor.darkGray.cgColor
     containerView.layer.shadowOffset = CGSize.zero
     containerView.layer.shadowRadius = 10
     containerView.layer.shadowOpacity = 0.5
-//    recordView.layer.masksToBounds = false
     
   }
   
+  private func addObservers() {
+    notiCenter.addObserver(self,
+                           selector: #selector(presentCamera(_:)),
+                           name: .presentCamera,
+                           object: nil      
+    )
+    notiCenter.addObserver(self,
+                           selector: #selector(presentAlert(_:)),
+                           name: .presentAlert,
+                           object: nil
+      
+    )
+  }
+  
+  private func removeObservers() {
+    notiCenter.removeObserver(self, name: .presentCamera, object: nil)
+    notiCenter.removeObserver(self, name: .presentAlert, object: nil)
+  }
+  
+  @objc private func presentCamera(_ sender: Notification) {
+    
+    guard let userInfo = sender.userInfo as? [String: UIImagePickerController],
+      let picker = userInfo["presentCamera"]
+      else {
+        return print("fail downCasting")
+    }
+    present(picker, animated: true)
+  }
+  
+  @objc private func presentAlert(_ sender: Notification) {
+    
+    guard let userInfo = sender.userInfo as? [String: UIAlertController],
+      let alert = userInfo["presentAlert"]
+      else {
+        return print("fail downCasting")
+    }
+    present(alert, animated: true)
+  }
+  
+  // MARK: - AutoLayout
   private func makeConstraints() {
     containerView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
