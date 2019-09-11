@@ -25,7 +25,7 @@
 		AB49F8132327860D00754504 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80E2327860D00754504 /* NMapVC.swift */; };
 		AB49F8142327860D00754504 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80F2327860D00754504 /* LoginVC.swift */; };
 		AB49F8152327860D00754504 /* UserSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F8102327860D00754504 /* UserSettingVC.swift */; };
-		AB49F8172327861B00754504 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F8162327861A00754504 /* RecordView.swift */; };
+		AB49F8172327861B00754504 /* RecordTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F8162327861A00754504 /* RecordTopView.swift */; };
 		AB49F81B23279B6E00754504 /* CustomAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F81923279B6E00754504 /* CustomAlbum.swift */; };
 		AB49F81D23279BB600754504 /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F81C23279BB600754504 /* Error+.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +54,7 @@
 		AB49F80E2327860D00754504 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
 		AB49F80F2327860D00754504 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		AB49F8102327860D00754504 /* UserSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingVC.swift; sourceTree = "<group>"; };
-		AB49F8162327861A00754504 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		AB49F8162327861A00754504 /* RecordTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTopView.swift; sourceTree = "<group>"; };
 		AB49F81923279B6E00754504 /* CustomAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlbum.swift; sourceTree = "<group>"; };
 		AB49F81C23279BB600754504 /* Error+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+.swift"; sourceTree = "<group>"; };
 		CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MountainTop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +168,7 @@
 		42D89FEC23178D5C0011A751 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AB49F8162327861A00754504 /* RecordView.swift */,
+				AB49F8162327861A00754504 /* RecordTopView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,7 +324,7 @@
 				AB49F81D23279BB600754504 /* Error+.swift in Sources */,
 				42D89FF02317B25D0011A751 /* PictureInfomationManager.swift in Sources */,
 				4222C289232751BA00619406 /* UserRecord.swift in Sources */,
-				AB49F8172327861B00754504 /* RecordView.swift in Sources */,
+				AB49F8172327861B00754504 /* RecordTopView.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

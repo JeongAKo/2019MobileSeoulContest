@@ -11,13 +11,23 @@ import NMapsMap
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
-  private let notiCenter = NotificationCenter.default
   private let activityIndicator = UIActivityIndicatorView(style: .gray)
   private let containerView = UIView()
-  private let recordView = RecordView()
+  let recordView = RecordTopView()
   
-  var timer = Timer()
+//  var timer = Timer()
   
+  
+  // FIXME: - 여기부터
+  
+  let minute:TimeInterval = 60.0
+//  let hour:TimeInterval = 60.0 * self.minute
+//  let day:TimeInterval = 24 * self.hour
+//  
+//  
+//  var date = Date(timeIntervalSinceNow: self.minute)
+// 
+ // FIXME: - 여기
   private lazy var cameraButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("사진찍기", for: .normal)
@@ -42,12 +52,12 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     view.addSubview(naverMapView)
     view.addSubview(containerView)
     containerView.addSubview(recordView)
-    configure(naverMapView)
+    configureMapView(naverMapView)
     applyDesign()
     makeConstraints()
   }
   
-  private func configure(_ naverMapView: NMFNaverMapView) {
+  private func configureMapView(_ naverMapView: NMFNaverMapView) {
     
     naverMapView.mapView.setLayerGroup(NMF_LAYER_GROUP_MOUNTAIN, isEnabled: true)  // 등산로 모드
     naverMapView.positionMode = .direction
@@ -77,14 +87,14 @@ func saveToAlbum(named: String, image: UIImage) {
   let album = CustomAlbum(name: named)
   album.save(image: image) { (result) in
   DispatchQueue.main.async {
-  switch result {
-  case .success(_):
-  self.presentAlert(title: "사진 저장", message: "사진이\(named) 앨범에 저장 되었습니다.")
-  case .failure(let err):
-  self.presentAlert(title: "Error", message: err.localizedDescription)
-  }
-  }
-  }
+    switch result {
+    case .success(_):
+      self.presentAlert(title: "사진 저장", message: "사진이\(named) 앨범에 저장 되었습니다.")
+    case .failure(let err):
+      self.presentAlert(title: "Error", message: err.localizedDescription)
+        }
+      }
+    }
   }
   
   private func applyDesign() {
@@ -117,7 +127,7 @@ func saveToAlbum(named: String, image: UIImage) {
       $0.centerX.equalToSuperview()
       $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
       $0.width.equalToSuperview().multipliedBy(0.6)
-      $0.height.equalToSuperview().multipliedBy(0.04)
+      $0.height.equalToSuperview().multipliedBy(0.05)
     }
   }
 }
@@ -130,10 +140,11 @@ extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegat
       return
     }
     
+    saveToAlbum(named: "서울 봉우리", image: image)
     print("📷saved image📷")
-        saveToAlbum(named: "서울 봉우리", image: image)
     
-        timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(RecordView.keepTimer), userInfo: nil, repeats: true)
+//    timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(recordView.keepTimer), userInfo: nil, repeats: true)
+    
     imagePickerController.dismiss(animated: true, completion: nil)
     
   }

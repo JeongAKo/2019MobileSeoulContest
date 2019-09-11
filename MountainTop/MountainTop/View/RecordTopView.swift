@@ -8,11 +8,7 @@
 
 import UIKit
 
-extension Notification.Name {
-  static let presentAlert = Notification.Name("presentAlert")
-}
-
-class RecordView: UIView {
+class RecordTopView: UIView {
   
   //notification
   private let notiCenter = NotificationCenter.default
