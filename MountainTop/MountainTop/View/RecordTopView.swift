@@ -48,7 +48,7 @@ class RecordTopView: UIView {
     return label
   }()
   
-  private lazy var challengerRecordTimeLabel: UILabel = {
+  lazy var challengerRecordTimeLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "00 : 00 : 00"
     label.font = UIFont(name: "Courier", size: 20)

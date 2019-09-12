@@ -15,19 +15,31 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private let containerView = UIView()
   let recordView = RecordTopView()
   
-//  var timer = Timer()
   
   
-  // FIXME: - 여기부터
+  // FIXME: - 여기부터 시험 코드
   
-  let minute:TimeInterval = 60.0
-//  let hour:TimeInterval = 60.0 * self.minute
-//  let day:TimeInterval = 24 * self.hour
-//  
-//  
-//  var date = Date(timeIntervalSinceNow: self.minute)
-// 
- // FIXME: - 여기
+  var fractions = 0
+  var timer = Timer()
+  var startTime = TimeInterval()
+  let now = Date()
+  lazy var startDate = Date(timeIntervalSinceNow: TimeInterval(self.fractions))
+  
+  func time() {
+  timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(keepTimer), userInfo: nil, repeats: true)
+    
+    recordView.challengerRecordTimeLabel.text = "\(timer)"
+    print("\(timer)")
+    
+  }
+  
+  @objc func keepTimer() {
+    fractions += 1
+  }
+
+  
+  
+
   private lazy var cameraButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("사진찍기", for: .normal)
@@ -144,7 +156,7 @@ extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegat
     print("📷saved image📷")
     
 //    timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(recordView.keepTimer), userInfo: nil, repeats: true)
-    
+    time()
     imagePickerController.dismiss(animated: true, completion: nil)
     
   }
