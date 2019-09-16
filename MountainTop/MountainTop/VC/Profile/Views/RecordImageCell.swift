@@ -1,14 +1,14 @@
 //
-//  ProfileMainCell.swift
+//  RecordImageCell.swift
 //  MountainTop
 //
-//  Created by CHANGGUEN YU on 11/09/2019.
+//  Created by CHANGGUEN YU on 16/09/2019.
 //  Copyright © 2019 CHANGGUEN YU. All rights reserved.
 //
 
 import UIKit
 
-class ProfileMainCell: UITableViewCell {
+class RecordImageCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
