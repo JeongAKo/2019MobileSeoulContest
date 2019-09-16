@@ -18,11 +18,12 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   
   // FIXME: - 여기부터 시험 코드
-  
+  let date = Date()
+  let calender = Calendar.current
   var fractions = 0
   var timer = Timer()
   var startTime = TimeInterval()
-  let now = Date()
+//  let now = Date()
   lazy var startDate = Date(timeIntervalSinceNow: TimeInterval(self.fractions))
   
   func time() {
