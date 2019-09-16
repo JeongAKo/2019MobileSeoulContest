@@ -8,6 +8,7 @@
 
 import UIKit
 import NMapsMap
+//import CoreLocation
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
@@ -57,10 +58,16 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     return controller
   }()
   
+  private var mapLocation: NMFLocationOverlay!
+  
+  private var location: CLLocationManager!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let naverMapView = NMFNaverMapView(frame: view.frame)
+    
+    mapLocation = naverMapView.mapView.locationOverlay
     
     view.addSubview(naverMapView)
     view.addSubview(containerView)
@@ -68,6 +75,12 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     configureMapView(naverMapView)
     applyDesign()
     makeConstraints()
+    
+    location = CLLocationManager()
+    location.desiredAccuracy = kCLLocationAccuracyBest
+    location.distanceFilter = 10_000.0
+    location.delegate = self
+    location.startUpdatingLocation()
   }
   
   private func configureMapView(_ naverMapView: NMFNaverMapView) {
@@ -77,6 +90,8 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부
     //    naverMapView.mapView.locale = "en-US"    // 영문표시
     naverMapView.mapView.buildingHeight = 0.5
+    
+//    naverMapView.mapView.delegate
     
     /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
      naverMapView.mapView.showLegalNotice() // 지도 관련 법적고지
@@ -124,6 +139,48 @@ func saveToAlbum(named: String, image: UIImage) {
     
   }
   
+//  private func addObservers() {
+//    notiCenter.addObserver(self,
+//                           selector: #selector(presentCamera(_:)),
+//                           name: .presentCamera,
+//                           object: nil      
+//    )
+//    notiCenter.addObserver(self,
+//                           selector: #selector(presentAlert(_:)),
+//                           name: .presentAlert,
+//                           object: nil
+//    )
+//  }
+//  
+//  private func removeObservers() {
+//    notiCenter.removeObserver(self, name: .presentCamera, object: nil)
+//    notiCenter.removeObserver(self, name: .presentAlert, object: nil)
+//  }
+  
+  @objc private func presentCamera(_ sender: Notification) {
+    
+    guard let userInfo = sender.userInfo as? [String: UIImagePickerController],
+      let picker = userInfo["presentCamera"]
+      else {
+        return print("fail downCasting")
+    }
+    
+    
+    
+    print("location lat: \(mapLocation.location.lat), location lng: \(mapLocation.location.lng)")
+    print("location.location?.altitude: \(String(describing: location.location?.altitude))")
+    present(picker, animated: true)
+  }
+  
+  @objc private func presentAlert(_ sender: Notification) {
+    
+    guard let userInfo = sender.userInfo as? [String: UIAlertController],
+      let alert = userInfo["presentAlert"]
+      else {
+        return print("fail downCasting")
+    }
+    present(alert, animated: true)
+  }
   // MARK: - AutoLayout
   private func makeConstraints() {
     containerView.snp.makeConstraints {
@@ -145,6 +202,32 @@ func saveToAlbum(named: String, image: UIImage) {
   }
 }
 
+extension NMapVC: CLLocationManagerDelegate {
+  
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    print("------------status-------------")
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      print("Authorized")
+    default:
+      print("Unauthorized")
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+//    locations.first?.altitude
+    
+//    print("altitude", locations.first?.altitude)
+    
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    print("trueHeading : ", newHeading.trueHeading)
+    print("magnetincHeading :", newHeading.magneticHeading)
+    print("values \(newHeading.x), \(newHeading.y), \(newHeading.z)")
+  }
+}
 
 extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

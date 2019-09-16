@@ -46,6 +46,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.2.0):
     - GoogleUtilities/Logger
+  - Kingfisher (5.7.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -59,6 +60,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
+  - Kingfisher (~> 5.0)
   - NMapsMap
   - SnapKit (~> 5.0.0)
   - SQLite.swift (~> 0.12.0)
@@ -71,6 +73,7 @@ SPEC REPOS:
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleUtilities
+    - Kingfisher
     - nanopb
     - NMapsMap
     - SnapKit
@@ -83,11 +86,12 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: cdb3827746d53ece7ae87a5c51c25c3055443366
   GoogleAppMeasurement: 51d8d9ea48f0ca44484d29cfbdef976fbd4fc336
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
+  Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NMapsMap: ec883e061245e3636d12640fec4dbb7de5659146
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
 
-PODFILE CHECKSUM: 521d2cc6d814c69fee0f7232d401457fba7813b7
+PODFILE CHECKSUM: dd0a9804cd3e2bfe7f21bb1cefc464cb68e28fb1
 
 COCOAPODS: 1.7.5
