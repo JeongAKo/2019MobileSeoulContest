@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tapBarController = UITabBarController()
     let mountainVC = MountainVC()
     let nMapVC = NMapVC()
-    let userSettingVC = UINavigationController(rootViewController: LogoutVC())//UserSettingVC())
+    let userSettingVC = UINavigationController(rootViewController: ProfileVC())//UserSettingVC())
     
     mountainVC.title = "Mountain"
     nMapVC.title = "Map"
@@ -69,9 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return
     }
     if !isOpened {
+      print("login: \(isOpened)")
 //      let mainViewController = self.mainViewController as! UINavigationController
 //      mainViewController.popToRootViewController(animated: true)
     }
+    UserInfo.def.getUserInfomation()
     
     self.window?.rootViewController = isOpened ? self.mainViewController : self.loginViewController
     self.window?.makeKeyAndVisible()

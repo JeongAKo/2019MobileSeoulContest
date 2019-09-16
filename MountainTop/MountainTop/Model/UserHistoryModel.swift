@@ -106,7 +106,7 @@ final class UserHistoryModel {
   
   public func getTotal() -> Int {
     let count = try? self.DB.scalar(self.userRecode.count)
-    print("count: \(count)")
+    print("count: \(String(describing: count))")
     return count ?? 0
   }
   

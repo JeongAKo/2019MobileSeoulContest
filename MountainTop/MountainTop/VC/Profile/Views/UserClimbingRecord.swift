@@ -76,6 +76,16 @@ class UserClimbingRecordCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+    self.selectionStyle = .none
+    autolayout()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func autolayout() {
     recordLabel.snp.makeConstraints {
       $0.top.leading.equalToSuperview().inset(Metric.margin)
     }
@@ -105,11 +115,6 @@ class UserClimbingRecordCell: UITableViewCell {
       $0.top.equalTo(distanceLabel)
       $0.leading.equalTo(distanceLabel.snp.trailing).offset(Metric.margin)
     }
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    fatalError("init(coder:) has not been implemented")
   }
   
   public func setupCell(times: String, hour: String, distance: String) {

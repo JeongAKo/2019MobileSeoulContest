@@ -194,14 +194,12 @@ extension RecordView: UINavigationControllerDelegate, UIImagePickerControllerDel
       return
     }
     
-      print("📷saved image📷")
+    print("📷saved image📷")
     saveToAlbum(named: "서울 봉우리", image: image)
-
+    
     
     // FIXME: - 사진 다 찍고 니면 recordView를 올리기
-    
     timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(keepTimer), userInfo: nil, repeats: true)
     imagePickerController.dismiss(animated: true, completion: nil)
-    
   }
 }

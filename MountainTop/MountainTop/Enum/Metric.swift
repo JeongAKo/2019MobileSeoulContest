@@ -9,5 +9,5 @@
 import Foundation
 
 enum Metric {
-  static let margin = 15
+  static let margin = 15.0
 }

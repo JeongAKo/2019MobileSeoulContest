@@ -41,7 +41,18 @@ class ProfileMainCell: UITableViewCell {
   // MARK: - View life cycle
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    self.selectionStyle = .none
+    autolayout()
+    setupViews()
     
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - setupViews
+  private func autolayout() {
     profileLabel.snp.makeConstraints {
       $0.top.leading.equalTo(self.contentView).inset(Metric.margin)
     }
@@ -54,13 +65,11 @@ class ProfileMainCell: UITableViewCell {
       $0.centerY.equalTo(self.userImageView)
       $0.leading.equalTo(self.userImageView.snp.trailing).offset(Metric.margin)
     }
-    
-    userImageView.layer.masksToBounds = true
-    userImageView.layer.cornerRadius = UIScreen.main.bounds.width/10
   }
   
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  private func setupViews() {
+    userImageView.layer.masksToBounds = true
+    userImageView.layer.cornerRadius = UIScreen.main.bounds.width/10
   }
   
   public func setupCell(url: String, name: String) {

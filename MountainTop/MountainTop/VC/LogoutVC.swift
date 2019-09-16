@@ -61,6 +61,10 @@ class LogoutVC: UIViewController {
     } else {
       print("create is success")
     }
+    
+    print("uuid: \(String(describing: UIDevice.current.identifierForVendor?.uuidString))")
+//    import AdSupport
+//    print("uuid: \(String(describing: ASIdentifierManager.shared().advertisingIdentifier.uuidString))") // 광고 식별자
   }
   
   private func autolayout() {
@@ -121,7 +125,6 @@ class LogoutVC: UIViewController {
       break
     }
     
-//    getAllRecord()
   }
   
   private func getAllRecord() {
@@ -135,5 +138,4 @@ class LogoutVC: UIViewController {
       print("record: \(record)")
     })
   }
-
 }

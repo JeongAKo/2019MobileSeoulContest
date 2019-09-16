@@ -30,6 +30,8 @@ class DefaultCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+    self.selectionStyle = .none
+    
     mainLabel.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.margin)
       $0.centerY.equalToSuperview()

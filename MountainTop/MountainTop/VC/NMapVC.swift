@@ -8,6 +8,7 @@
 
 import UIKit
 import NMapsMap
+//import CoreLocation
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
@@ -16,10 +17,16 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private let containerView = UIView()
   private let recordView = RecordView()
   
+  private var mapLocation: NMFLocationOverlay!
+  
+  private var location: CLLocationManager!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let naverMapView = NMFNaverMapView(frame: view.frame)
+    
+    mapLocation = naverMapView.mapView.locationOverlay
     
     view.addSubview(naverMapView)
     view.addSubview(containerView)
@@ -28,6 +35,12 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     applyDesign()
     addObservers()
     makeConstraints()
+    
+    location = CLLocationManager()
+    location.desiredAccuracy = kCLLocationAccuracyBest
+    location.distanceFilter = 10_000.0
+    location.delegate = self
+    location.startUpdatingLocation()
   }
   
   deinit {
@@ -42,6 +55,8 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부
     //    naverMapView.mapView.locale = "en-US"    // 영문표시
     naverMapView.mapView.buildingHeight = 0.5
+    
+//    naverMapView.mapView.delegate
     
     /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
      naverMapView.mapView.showLegalNotice() // 지도 관련 법적고지
@@ -72,7 +87,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
                            selector: #selector(presentAlert(_:)),
                            name: .presentAlert,
                            object: nil
-      
     )
   }
   
@@ -88,6 +102,11 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       else {
         return print("fail downCasting")
     }
+    
+    
+    
+    print("location lat: \(mapLocation.location.lat), location lng: \(mapLocation.location.lng)")
+    print("location.location?.altitude: \(String(describing: location.location?.altitude))")
     present(picker, animated: true)
   }
   
@@ -117,3 +136,29 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
 }
 
 
+extension NMapVC: CLLocationManagerDelegate {
+  
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    print("------------status-------------")
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      print("Authorized")
+    default:
+      print("Unauthorized")
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+//    locations.first?.altitude
+    
+//    print("altitude", locations.first?.altitude)
+    
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    print("trueHeading : ", newHeading.trueHeading)
+    print("magnetincHeading :", newHeading.magneticHeading)
+    print("values \(newHeading.x), \(newHeading.y), \(newHeading.z)")
+  }
+}

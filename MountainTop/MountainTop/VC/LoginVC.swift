@@ -26,6 +26,8 @@ final class LoginVC: UIViewController {
     
     configureView()
     autolayout()
+    
+    print("uuid: \(String(describing: UIDevice.current.identifierForVendor?.uuidString))")
   }
   
   private func autolayout() {
@@ -66,31 +68,32 @@ final class LoginVC: UIViewController {
         }
       }
       
+      UserInfo.def.getUserInfomation()
       /// 사용자 정보 요청하기
-      KOSessionTask.userMeTask { (error, me) in
-        
-        if let error = error as NSError? {
-          UIAlertController.showMessage(error.description)
-          
-        } else if let me = me as KOUserMe? {
-          
-          guard let id = me.id else { return }
-          
-          var userInfo = LoginUserInfo()
-          userInfo.id = id
-          
-          if let account = me.account {
-            if let email = account.email {
-              userInfo.email = email
-            }
-          }
-          if let properties = me.properties {
-            userInfo.name = properties["nickname"] ?? ""
-            userInfo.profile = properties["thumbnail_image"] ?? ""
-          }
-        }
-        
-      }
+//      KOSessionTask.userMeTask { (error, me) in
+//
+//        if let error = error as NSError? {
+//          UIAlertController.showMessage(error.description)
+//
+//        } else if let me = me as KOUserMe? {
+//
+//          guard let id = me.id else { return }
+//
+////          var userInfo = LoginUserInfo()
+//          UserInfo.def.login.id = id
+//
+//          if let account = me.account {
+//            if let email = account.email {
+//              UserInfo.def.login.email = email
+//            }
+//          }
+//          if let properties = me.properties {
+//            UserInfo.def.login.name = properties["nickname"] ?? ""
+//            UserInfo.def.login.profile = properties["thumbnail_image"] ?? ""
+//          }
+//        }
+//
+//      }
     })
     
   }
