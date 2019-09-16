@@ -12,10 +12,51 @@ import NMapsMap
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
-  private let notiCenter = NotificationCenter.default
-  
+  private let activityIndicator = UIActivityIndicatorView(style: .gray)
   private let containerView = UIView()
-  private let recordView = RecordView()
+  let recordView = RecordTopView()
+  
+  
+  
+  // FIXME: - 여기부터 시험 코드
+  let date = Date()
+  let calender = Calendar.current
+  var fractions = 0
+  var timer = Timer()
+  var startTime = TimeInterval()
+//  let now = Date()
+  lazy var startDate = Date(timeIntervalSinceNow: TimeInterval(self.fractions))
+  
+  func time() {
+  timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(keepTimer), userInfo: nil, repeats: true)
+    
+    recordView.challengerRecordTimeLabel.text = "\(timer)"
+    print("\(timer)")
+    
+  }
+  
+  @objc func keepTimer() {
+    fractions += 1
+  }
+
+  
+  
+
+  private lazy var cameraButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("사진찍기", for: .normal)
+    button.backgroundColor = .blue
+    button.addTarget(self, action: #selector(didTapCameraButton(_:)), for: .touchUpInside)
+    view.addSubview(button)
+    return button
+  }()
+  
+  lazy var imagePickerController: UIImagePickerController = {
+    let controller = UIImagePickerController()
+    controller.delegate = self
+    controller.sourceType = .camera
+    return controller
+  }()
   
   private var mapLocation: NMFLocationOverlay!
   
@@ -31,9 +72,8 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     view.addSubview(naverMapView)
     view.addSubview(containerView)
     containerView.addSubview(recordView)
-    configure(naverMapView)
+    configureMapView(naverMapView)
     applyDesign()
-    addObservers()
     makeConstraints()
     
     location = CLLocationManager()
@@ -43,12 +83,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     location.startUpdatingLocation()
   }
   
-  deinit {
-    removeObservers()
-  }
-
-  
-  private func configure(_ naverMapView: NMFNaverMapView) {
+  private func configureMapView(_ naverMapView: NMFNaverMapView) {
     
     naverMapView.mapView.setLayerGroup(NMF_LAYER_GROUP_MOUNTAIN, isEnabled: true)  // 등산로 모드
     naverMapView.positionMode = .direction
@@ -61,6 +96,33 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
      naverMapView.mapView.showLegalNotice() // 지도 관련 법적고지
      */
+  }
+  
+  @objc func didTapCameraButton(_ sender: UIButton) {
+    present(imagePickerController, animated: true)
+  }
+  
+  func presentAlert(title: String, message: String) {
+    print("✏️ presentAlert")
+    activityIndicator.stopAnimating()
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default))
+    present(alert, animated: true)
+  }
+  
+func saveToAlbum(named: String, image: UIImage) {
+  print("📍saveToAlbum")
+  let album = CustomAlbum(name: named)
+  album.save(image: image) { (result) in
+  DispatchQueue.main.async {
+    switch result {
+    case .success(_):
+      self.presentAlert(title: "사진 저장", message: "사진이\(named) 앨범에 저장 되었습니다.")
+    case .failure(let err):
+      self.presentAlert(title: "Error", message: err.localizedDescription)
+        }
+      }
+    }
   }
   
   private func applyDesign() {
@@ -77,23 +139,23 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
   }
   
-  private func addObservers() {
-    notiCenter.addObserver(self,
-                           selector: #selector(presentCamera(_:)),
-                           name: .presentCamera,
-                           object: nil      
-    )
-    notiCenter.addObserver(self,
-                           selector: #selector(presentAlert(_:)),
-                           name: .presentAlert,
-                           object: nil
-    )
-  }
-  
-  private func removeObservers() {
-    notiCenter.removeObserver(self, name: .presentCamera, object: nil)
-    notiCenter.removeObserver(self, name: .presentAlert, object: nil)
-  }
+//  private func addObservers() {
+//    notiCenter.addObserver(self,
+//                           selector: #selector(presentCamera(_:)),
+//                           name: .presentCamera,
+//                           object: nil      
+//    )
+//    notiCenter.addObserver(self,
+//                           selector: #selector(presentAlert(_:)),
+//                           name: .presentAlert,
+//                           object: nil
+//    )
+//  }
+//  
+//  private func removeObservers() {
+//    notiCenter.removeObserver(self, name: .presentCamera, object: nil)
+//    notiCenter.removeObserver(self, name: .presentAlert, object: nil)
+//  }
   
   @objc private func presentCamera(_ sender: Notification) {
     
@@ -119,22 +181,26 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     }
     present(alert, animated: true)
   }
-  
   // MARK: - AutoLayout
   private func makeConstraints() {
     containerView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
-      $0.height.equalToSuperview().multipliedBy(0.2)
+      $0.height.equalToSuperview().multipliedBy(0.13)
     }
     
     recordView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview()
-      
+    }
+    
+    cameraButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+      $0.width.equalToSuperview().multipliedBy(0.6)
+      $0.height.equalToSuperview().multipliedBy(0.05)
     }
   }
 }
-
 
 extension NMapVC: CLLocationManagerDelegate {
   
@@ -160,5 +226,22 @@ extension NMapVC: CLLocationManagerDelegate {
     print("trueHeading : ", newHeading.trueHeading)
     print("magnetincHeading :", newHeading.magneticHeading)
     print("values \(newHeading.x), \(newHeading.y), \(newHeading.z)")
+  }
+}
+
+extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    guard let image = info[.originalImage] as? UIImage else {
+      print("Image not found!")
+      return
+    }
+    
+    saveToAlbum(named: "서울 봉우리", image: image)
+    print("📷saved image📷")
+    
+//    timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(recordView.keepTimer), userInfo: nil, repeats: true)
+    time()
+    imagePickerController.dismiss(animated: true, completion: nil)
+    
   }
 }
