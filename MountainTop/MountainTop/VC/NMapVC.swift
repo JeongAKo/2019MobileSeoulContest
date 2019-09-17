@@ -20,6 +20,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   // FIXME: - 여기부터 시험 코드
   let date = Date()
+  var date2 = Date(timeIntervalSinceNow: 9 * 60 * 60)
+  
+//  print("\(sds)")
   let calender = Calendar.current
   var fractions = 0
   var timer = Timer()
