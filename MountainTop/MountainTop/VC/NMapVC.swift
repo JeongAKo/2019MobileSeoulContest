@@ -14,37 +14,13 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   private let activityIndicator = UIActivityIndicatorView(style: .gray)
   private let containerView = UIView()
+  
   let recordView = RecordTopView()
-  
-  
-  
-  // FIXME: - 여기부터 시험 코드
-  let date = Date()
-  var date2 = Date(timeIntervalSinceNow: 9 * 60 * 60)
-  
-//  print("\(sds)")
   let calender = Calendar.current
-  var fractions = 0
+  
   var timer = Timer()
-  var startTime = TimeInterval()
-//  let now = Date()
-  lazy var startDate = Date(timeIntervalSinceNow: TimeInterval(self.fractions))
+  lazy var startDate = Date()
   
-  func time() {
-  timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(keepTimer), userInfo: nil, repeats: true)
-    
-    recordView.challengerRecordTimeLabel.text = "\(timer)"
-    print("\(timer)")
-    
-  }
-  
-  @objc func keepTimer() {
-    fractions += 1
-  }
-
-  
-  
-
   private lazy var cameraButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitle("사진찍기", for: .normal)
@@ -94,13 +70,39 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     //    naverMapView.mapView.locale = "en-US"    // 영문표시
     naverMapView.mapView.buildingHeight = 0.5
     
-//    naverMapView.mapView.delegate
-    
     /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
      naverMapView.mapView.showLegalNotice() // 지도 관련 법적고지
      */
   }
   
+  func time() {
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(keepTimer), userInfo: nil, repeats: true)
+    
+  }
+  
+  @objc func keepTimer() {
+    
+    let startTime = calender.dateInterval(of: .nanosecond, for: startDate)
+    var endDate = Date()
+    let endTime = calender.dateInterval(of: .nanosecond, for: endDate)
+    let timePeriod = calender.dateComponents([.second], from: startTime!.start, to: endTime!.end)
+    let progressTime = timePeriod.second
+    
+    recordView.challengerRecordTimeLabel.text = "\(progressTime)"
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    let endFommat = dateFormatter.string(from: endDate)
+    let startFommat = dateFormatter.string(from: startDate)
+
+    print("endFommat", endFommat)
+    print("startFommat", startFommat)
+    print("timePeriod", timePeriod)
+    print("progressTime", progressTime)
+  }
+
   @objc func didTapCameraButton(_ sender: UIButton) {
     present(imagePickerController, animated: true)
   }
@@ -142,23 +144,6 @@ func saveToAlbum(named: String, image: UIImage) {
     
   }
   
-//  private func addObservers() {
-//    notiCenter.addObserver(self,
-//                           selector: #selector(presentCamera(_:)),
-//                           name: .presentCamera,
-//                           object: nil      
-//    )
-//    notiCenter.addObserver(self,
-//                           selector: #selector(presentAlert(_:)),
-//                           name: .presentAlert,
-//                           object: nil
-//    )
-//  }
-//  
-//  private func removeObservers() {
-//    notiCenter.removeObserver(self, name: .presentCamera, object: nil)
-//    notiCenter.removeObserver(self, name: .presentAlert, object: nil)
-//  }
   
   @objc private func presentCamera(_ sender: Notification) {
     
@@ -168,11 +153,10 @@ func saveToAlbum(named: String, image: UIImage) {
         return print("fail downCasting")
     }
     
-    
-    
     print("location lat: \(mapLocation.location.lat), location lng: \(mapLocation.location.lng)")
     print("location.location?.altitude: \(String(describing: location.location?.altitude))")
     present(picker, animated: true)
+  
   }
   
   @objc private func presentAlert(_ sender: Notification) {
@@ -182,8 +166,11 @@ func saveToAlbum(named: String, image: UIImage) {
       else {
         return print("fail downCasting")
     }
+  
     present(alert, animated: true)
+  
   }
+  
   // MARK: - AutoLayout
   private func makeConstraints() {
     containerView.snp.makeConstraints {
@@ -204,6 +191,7 @@ func saveToAlbum(named: String, image: UIImage) {
     }
   }
 }
+
 
 extension NMapVC: CLLocationManagerDelegate {
   
@@ -240,9 +228,7 @@ extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegat
     }
     
     saveToAlbum(named: "서울 봉우리", image: image)
-    print("📷saved image📷")
-    
-//    timer = Timer.scheduledTimer(timeInterval: 1, target:  self , selector: #selector(recordView.keepTimer), userInfo: nil, repeats: true)
+    print("📷saved image")
     time()
     imagePickerController.dismiss(animated: true, completion: nil)
     
