@@ -10,10 +10,6 @@ import UIKit
 
 class RecordTopView: UIView {
   
-  //notification
-  private let notiCenter = NotificationCenter.default
-  
-  
   var startTime = TimeInterval()
   var (hours, minutes, seconds) = (0, 0, 0 )
   
@@ -23,7 +19,6 @@ class RecordTopView: UIView {
     label.font = UIFont.systemFont(ofSize: 13)
     label.textColor = .darkGray
     label.textAlignment = .center
-//    label.backgroundColor = .yellow
     addSubview(label)
     return label
   }()
@@ -34,7 +29,6 @@ class RecordTopView: UIView {
     label.font = UIFont.systemFont(ofSize: 13)
     label.textColor = .darkGray
     label.textAlignment = .center
-//    label.backgroundColor = .green
     addSubview(label)
     return label
   }()
