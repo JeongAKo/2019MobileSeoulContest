@@ -35,6 +35,7 @@
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
 		42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FF12317F7A60011A751 /* GoogleService-Info.plist */; };
+		AB11D7B023312B380012D2E2 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D7AF23312B380012D2E2 /* TimeInterval.swift */; };
 		AB49F8112327860D00754504 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80C2327860D00754504 /* LogoutVC.swift */; };
 		AB49F8122327860D00754504 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80D2327860D00754504 /* MountainVC.swift */; };
 		AB49F8132327860D00754504 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80E2327860D00754504 /* NMapVC.swift */; };
@@ -79,6 +80,7 @@
 		42D89FF12317F7A60011A751 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B10AC2C79D9DD6C2C470EA2 /* Pods-MountainTop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.release.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.release.xcconfig"; sourceTree = "<group>"; };
 		97CC9E82CDAD8CB1021227FA /* Pods-MountainTop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.debug.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.debug.xcconfig"; sourceTree = "<group>"; };
+		AB11D7AF23312B380012D2E2 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		AB49F80C2327860D00754504 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
 		AB49F80D2327860D00754504 /* MountainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
 		AB49F80E2327860D00754504 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */,
 				4222C2942328D3EC00619406 /* Identifiable.swift */,
 				4222C2A2232E029900619406 /* CALayer.swift */,
+				AB11D7AF23312B380012D2E2 /* TimeInterval.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB49F8132327860D00754504 /* NMapVC.swift in Sources */,
+				AB11D7B023312B380012D2E2 /* TimeInterval.swift in Sources */,
 				42B52B9D2320B8370043A3D2 /* logger.swift in Sources */,
 				AB49F81B23279B6E00754504 /* CustomAlbum.swift in Sources */,
 				42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */,
