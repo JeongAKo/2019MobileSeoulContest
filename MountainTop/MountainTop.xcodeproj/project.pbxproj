@@ -44,6 +44,9 @@
 		AB49F8172327861B00754504 /* RecordTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F8162327861A00754504 /* RecordTopView.swift */; };
 		AB49F81B23279B6E00754504 /* CustomAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F81923279B6E00754504 /* CustomAlbum.swift */; };
 		AB49F81D23279BB600754504 /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F81C23279BB600754504 /* Error+.swift */; };
+		AB7BF86D2333486900097D63 /* MainColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BF86C2333486900097D63 /* MainColor.swift */; };
+		AB7BF878233371C400097D63 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BF877233371C400097D63 /* CustomInfoWindow.swift */; };
+		AB7BF87A233371FA00097D63 /* CustomInfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB7BF879233371FA00097D63 /* CustomInfoWindowView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +92,9 @@
 		AB49F8162327861A00754504 /* RecordTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTopView.swift; sourceTree = "<group>"; };
 		AB49F81923279B6E00754504 /* CustomAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlbum.swift; sourceTree = "<group>"; };
 		AB49F81C23279BB600754504 /* Error+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+.swift"; sourceTree = "<group>"; };
+		AB7BF86C2333486900097D63 /* MainColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainColor.swift; sourceTree = "<group>"; };
+		AB7BF877233371C400097D63 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
+		AB7BF879233371FA00097D63 /* CustomInfoWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomInfoWindowView.xib; sourceTree = "<group>"; };
 		CB015A758DE4BAA045322779 /* Pods_MountainTop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MountainTop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +147,7 @@
 		42B52B8B2320AF870043A3D2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AB7BF877233371C400097D63 /* CustomInfoWindow.swift */,
 				4222C2922328D39700619406 /* TableCollectionExtension.swift */,
 				42B52B9E2320B83E0043A3D2 /* NetworkExtensions.swift */,
 				42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */,
@@ -165,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				42B52BA22320BC850043A3D2 /* Metric.swift */,
+				AB7BF86C2333486900097D63 /* MainColor.swift */,
 				4222C29A232CCDE500619406 /* FontSize.swift */,
 				4222C2A4232E06E500619406 /* MountainLevel.swift */,
 			);
@@ -244,6 +252,7 @@
 				AB49F80D2327860D00754504 /* MountainVC.swift */,
 				AB49F80E2327860D00754504 /* NMapVC.swift */,
 				AB49F8102327860D00754504 /* UserSettingVC.swift */,
+				AB7BF879233371FA00097D63 /* CustomInfoWindowView.xib */,
 				4222C28C2328D14F00619406 /* Profile */,
 			);
 			path = VC;
@@ -322,6 +331,7 @@
 				42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */,
 				42D89FE1231691A40011A751 /* Assets.xcassets in Resources */,
 				42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */,
+				AB7BF87A233371FA00097D63 /* CustomInfoWindowView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +398,7 @@
 				AB49F8152327860D00754504 /* UserSettingVC.swift in Sources */,
 				421E60FC232F6912005D994B /* RecordImageCell.swift in Sources */,
 				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
+				AB7BF878233371C400097D63 /* CustomInfoWindow.swift in Sources */,
 				AB49F8142327860D00754504 /* LoginVC.swift in Sources */,
 				4222C2A1232D527800619406 /* VoidCell.swift in Sources */,
 				4222C2A7232E31CE00619406 /* RecordHeaderView.swift in Sources */,
@@ -406,6 +417,7 @@
 				4222C2972328D59C00619406 /* UserClimbingRecord.swift in Sources */,
 				AB49F8172327861B00754504 /* RecordTopView.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
+				AB7BF86D2333486900097D63 /* MainColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

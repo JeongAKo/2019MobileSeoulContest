@@ -60,9 +60,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private var location: CLLocationManager!
   
   // MARK: - App Lifecycle
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    naverMapView.mapView.delegate = self
     
     mapLocation = naverMapView.mapView.locationOverlay
 
@@ -70,6 +70,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     configureMapView(naverMapView)
     makeConstraints()
     locationOfMarker()
+    popInfoWindow()
     
     location = CLLocationManager()
     location.desiredAccuracy = kCLLocationAccuracyBest
@@ -77,39 +78,36 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     location.delegate = self
     location.startUpdatingLocation()
     
-    
-    //test
-    var infoWindow = NMFInfoWindow()
-    var defaultInfoWindowImage = NMFInfoWindowDefaultTextSource.data()
-    
-    info(infoWindow, defaultInfoWindowImage)
-    didTapMapView()
   }
   
+  let infoWindow = NMFInfoWindow()
+  var customInfoWindowDataSource = CustomInfoWindowDataSource()
   
-  fileprivate func info(_ infoWindow: NMFInfoWindow, _ defaultInfoWindowImage: NMFInfoWindowDefaultTextSource) {
-    infoWindow.dataSource = defaultInfoWindowImage
-    defaultInfoWindowImage.title = "인포 윈도우"
-    infoWindow.position = NMGLatLng(lat: 37.5666102, lng: 126.9783881)
+  fileprivate func popInfoWindow() {
+
+    infoWindow.dataSource = customInfoWindowDataSource
+    infoWindow.offsetY = 5
     infoWindow.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
       self?.infoWindow.close()
       return true
     }
-    infoWindow.mapView = naverMapView.mapView
     
     let marker1 = NMFMarker(position: NMGLatLng(lat: 37.57000, lng: 126.97618))
     marker1.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
-      infoWindow.close()
-      defaultInfoWindowImage.title = marker1.userInfo["tag"] as! String
-      infoWindow.open(with: marker1)
+      self?.infoWindow.open(with: marker1)
       return true
     }
-    marker1.userInfo = ["tag" : "Marker 1"]
+    marker1.userInfo = ["title" : "Marker 1"]
     marker1.mapView = naverMapView.mapView
+    
   }
   
-  func didTapMapView() {
+  //지도 클릭시 CustomInfoWindow close
+  func didTapMapView(_ point: CGPoint, latLng latlng: NMGLatLng) {
     infoWindow.close()
+    
+    print("CGPoint", CGPoint())
+    print("NMGLatLng", NMGLatLng())
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -118,24 +116,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   }
   
   
- // FIXME: - test code
-  
-  let infoWindow = NMFInfoWindow()
-  let dataSource = NMFInfoWindowDefaultTextSource.data()
-  
-  func popInfoWindow() {
-    dataSource.title = "정보 창 내용"
-    infoWindow.dataSource = dataSource
-    
-    infoWindow.position = NMGLatLng(lat: 37.5666102, lng: 126.9783881)
-    infoWindow.open(with: naverMapView.mapView)
-    
-    
-  }
-  
-  
   private func locationOfMarker() {
-    
     let marker: NMFMarker = {
       let marker = NMFMarker()
       marker.position = NMGLatLng(lat: 37.686099, lng: 127.036238)
@@ -148,14 +129,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       return marker
     }()
     
-    let sulockmarker: NMFMarker = {
-      let marker = NMFMarker()
-      marker.position = NMGLatLng(lat: 37.5666102, lng: 126.9783881)
-      marker.iconImage = NMFOverlayImage(name: "icon")
-      marker.mapView = naverMapView.mapView
-      marker.iconPerspectiveEnabled = true
-      return marker
-    }()
     
     let startSulockmarker: NMFMarker = {
       let marker = NMFMarker()
@@ -165,7 +138,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       marker.iconPerspectiveEnabled = true
       return marker
     }()
-    
   }
   
   // MARK: - Action method
@@ -355,3 +327,8 @@ extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegat
   }
 }
 
+extension NMGLatLng {
+  func positionString() -> String {
+    return String(format: "(%.5f, %.5f)", lat, lng)
+  }
+}
