@@ -57,6 +57,9 @@ final class MauntainDatabase {
     do {
       try self.DB.run(table)
       print("create success!!")
+      
+      // table 생성이 성공하면 빈 db 이므로 sample로 채운다
+      self.insertSampleData()
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     }catch {
@@ -64,7 +67,7 @@ final class MauntainDatabase {
     }
   }
   
-  public func insertMountainInfomations(info: MountainInfo) {
+  public func insertMountainInfomations(info: MountainInfo) -> Bool {
     
     let insert = self.mountain.insert(self.name <- info.name,
                          self.infoLat <- info.infoLat,
@@ -78,11 +81,15 @@ final class MauntainDatabase {
     do {
       let id = try self.DB.run(insert)
       print("insert success!! id: \(String(describing: id))")
+      
+      return true
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     } catch {
       print("insert error insertRecode: \(error.localizedDescription)")
     }
+    
+    return false
   }
   
   public func deleteAllMountainInfomations() {
@@ -133,5 +140,15 @@ final class MauntainDatabase {
     }
     
     return info
+  }
+  
+  private func insertSampleData() {
+    
+    guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
+      else { return print("MountainInfo.self decoding fail")}
+    
+    for mountain in mountainInfos {
+      guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
+    }
   }
 }

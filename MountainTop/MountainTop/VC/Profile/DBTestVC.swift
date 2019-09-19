@@ -103,6 +103,29 @@ class DBTestVC: UIViewController {
     let data = db.getMountainInfomations()
     
     print("data: \(data)")
+    
+    let encoder = JSONEncoder()
+    
+    encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+    
+    let jsonData = try? encoder.encode(data)
+    
+    if let jsonData = jsonData,let jsonString = String(data: jsonData, encoding: .utf8){
+      
+      print(jsonString)
+      
+    }
+//    guard let str = try? JSONSerialization.jsonObject(with: encoded, options: []) else { return print("JSONSerialization")}
+//
+//    print("jsonObject:\(str)")
+//
+//    guard let json11 = try? JSONSerialization.jsonObject(with: mountainSampleData, options: []) else { return print("JSONSerialization")}
+//    print("json11:\(json11)")
+//
+    guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData) else { return print("decoding fail")}
+    
+    print("moutain:\(moutain)")
   }
   
 }
+
