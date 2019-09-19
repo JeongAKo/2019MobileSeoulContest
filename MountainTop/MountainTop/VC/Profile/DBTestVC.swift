@@ -31,6 +31,15 @@ class DBTestVC: UIViewController {
     return btn
   }()
   
+  private lazy var getMoutain: UIButton = {
+    let btn = UIButton(type: .custom)
+    btn.setTitle("getMoutains", for: .normal)
+    btn.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+    btn.addTarget(self, action: #selector(touchGetMoutain(_:)), for: .touchUpInside)
+    self.view.addSubview(btn)
+    return btn
+  }()
+  
   // MARK: - View life cycle
 
   override func viewDidLoad() {
@@ -44,6 +53,11 @@ class DBTestVC: UIViewController {
     
     endButton.snp.makeConstraints {
       $0.top.equalTo(startButton.snp.bottom).offset(Metric.margin)
+      $0.leading.width.height.equalTo(startButton)
+    }
+    
+    getMoutain.snp.makeConstraints {
+      $0.top.equalTo(endButton.snp.bottom).offset(Metric.margin)
       $0.leading.width.height.equalTo(startButton)
     }
   }
@@ -79,4 +93,16 @@ class DBTestVC: UIViewController {
       UserInfo.def.recordingID = nil
     }
   }
+  
+  @objc private func touchGetMoutain(_ sender:UIButton) {
+    
+    guard let db = moutainDB else {
+      return print("moutainDB is nil")
+    }
+    
+    let data = db.getMountainInfomations()
+    
+    print("data: \(data)")
+  }
+  
 }

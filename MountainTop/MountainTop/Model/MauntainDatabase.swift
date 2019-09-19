@@ -103,7 +103,7 @@ final class MauntainDatabase {
     var info = [MountainInfo]()
     
     do {
-     
+      
       for mt in try DB.prepare(mountain) {
         let id = try mt.get(self.id)
         let name = try mt.get(self.name)
