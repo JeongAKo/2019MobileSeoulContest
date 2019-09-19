@@ -13,6 +13,9 @@ class CustomInfoWindowView: UIView {
   
   @IBOutlet var mountainNameLabel: UILabel!
   @IBOutlet var phoneNumber: UILabel!
+  
+  @IBOutlet weak var iconView: UIImageView!
+  
 }
 
 class CustomInfoWindowDataSource: NSObject, NMFOverlayImageDataSource {
@@ -25,15 +28,12 @@ class CustomInfoWindowDataSource: NSObject, NMFOverlayImageDataSource {
     }
     
     if infoWindow.marker != nil {
-//      rootView.iconView.image = UIImage(named: "baseline_room_black_24pt")
+      rootView.iconView.image = UIImage(named: "information")
       rootView.mountainNameLabel.text = infoWindow.marker?.userInfo["title"] as? String
     } else {
-//      rootView.iconView.image = UIImage(named: "baseline_gps_fixed_black_24pt")
+      rootView.iconView.image = UIImage(named: "information")
       rootView.mountainNameLabel.text = "\(infoWindow.position.lat), \(infoWindow.position.lng)"
     }
-    rootView.mountainNameLabel.sizeToFit()
-    let width = rootView.mountainNameLabel.frame.size.width + 80
-    rootView.frame = CGRect(x: 0, y: 0, width: width, height: 88)
     rootView.layoutIfNeeded()
     
     
