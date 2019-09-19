@@ -12,7 +12,22 @@ final class UserInfo {
   
   static public let def = UserInfo()
   
+  public var record = ClibmingDatabase()
+  
   public var login = LoginUserInfo()
+  
+  // app의 현재 기록중인지 아닌지 결정하는 변수
+  public var recordingID: Int? {
+    didSet {
+      guard let id = recordingID else {
+        record?.updateID(0)
+        return print("recordingID is nil")
+      }
+      
+      record?.updateID(id)
+      print("didSet recordingID is \(id)")
+    }
+  }
   
   private init() {}
   
@@ -40,5 +55,13 @@ final class UserInfo {
         }
       }
     }
+  }
+  
+  public func activeApp() {
+    self.recordingID = record?.getUsingID()
+  }
+  
+  public func backgroundApp() {
+    
   }
 }

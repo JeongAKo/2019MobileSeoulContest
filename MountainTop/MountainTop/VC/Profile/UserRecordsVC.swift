@@ -27,6 +27,13 @@ class UserRecordsVC: UIViewController {
   }()
   
   // MARK: - View life cycle
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self,
+                                              name: .dismissVC,
+                                              object: nil)
+  }
+  
   override func loadView() {
     super.loadView()
     view.backgroundColor = .white
@@ -64,7 +71,6 @@ class UserRecordsVC: UIViewController {
   
   // MARK: - Notification Function
   @objc private func dismissUserRecordVC(_ notification: Notification) {
-//    presentingViewController?.dismiss(animated: true, completion: nil)
     self.navigationController?.popViewController(animated: true)
   }
   
@@ -83,6 +89,11 @@ extension UserRecordsVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row % 2 == 0 {
       let cell = tableView.dequeue(RecordCell.self)
+      cell.setupCell(date: "0000.00.00",
+                     level: .high,
+                     name: "힘든산",
+                     record: "00:00:00",
+                     distance: "0.00")
       return cell
     } else {
       let cell = tableView.dequeue(VoidCell.self)
@@ -110,6 +121,6 @@ extension UserRecordsVC: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 150
+    return 100
   }
 }

@@ -67,6 +67,7 @@ class RecordCell: UITableViewCell {
   
   private lazy var levelMarkView: UIView = {
     let v = UIView(frame: .zero)
+    v.layer.masksToBounds = true
     v.backgroundColor = .white
     self.clipView.addSubview(v)
     return v
@@ -97,12 +98,17 @@ class RecordCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
-    autolayout()
-    setupViews()
+    self.autolayout()
+    self.contentView.layoutIfNeeded()
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    setupViews()
   }
   
   private func autolayout() {
@@ -125,7 +131,7 @@ class RecordCell: UITableViewCell {
     }
     mountainLabel.snp.makeConstraints {
       $0.top.equalTo(levelMarkView)
-      $0.leading.equalTo(levelMarkView)
+      $0.leading.equalTo(levelMarkView.snp.trailing).offset(Metric.margin/3)
     }
     
     lineView.snp.makeConstraints {
@@ -140,7 +146,7 @@ class RecordCell: UITableViewCell {
     }
     timeLabel.snp.makeConstraints {
       $0.centerY.equalTo(recordMarkImageView)
-      $0.leading.equalTo(recordMarkImageView.snp.trailing)
+      $0.leading.equalTo(recordMarkImageView.snp.trailing).offset(Metric.margin)
     }
     distanceLabel.snp.makeConstraints {
       $0.leading.equalTo(self.contentView.snp.centerX)
@@ -148,12 +154,12 @@ class RecordCell: UITableViewCell {
     }
     distanceMarkImageView.snp.makeConstraints {
       $0.centerY.equalTo(distanceLabel)
-      $0.trailing.equalTo(distanceLabel.snp.leading)
+      $0.trailing.equalTo(distanceLabel.snp.leading).offset(Metric.margin)
     }
   }
   
   private func setupViews() {
-    
+    levelMarkView.layer.cornerRadius = levelMarkView.frame.height/2
   }
   
   public func setupCell(date: String, level: LevelOfMountain, name: String, record: String, distance: String) {

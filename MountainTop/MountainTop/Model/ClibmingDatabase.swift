@@ -1,5 +1,5 @@
 //
-//  UserHistoryModel.swift
+//  ClibmingDatabase.swift
 //  MountainTop
 //
 //  Created by CHANGGUEN YU on 08/09/2019.
@@ -9,9 +9,10 @@
 import Foundation
 import SQLite
 
-final class UserHistoryModel {
+final class ClibmingDatabase {
 
-  private var DB: Connection!
+  private var recordDB: Connection!
+  private var idDB: Connection!
   
   private let userRecode = Table("UserRecode")
   private let id = Expression<Int>("id")
@@ -20,22 +21,34 @@ final class UserHistoryModel {
   private let record = Expression<String>("Record")
   private let mountainID = Expression<Int>("idMountain")
   
+  private let usingID = Table("StartID")
+  private let primeID = Expression<Int>("id")
+  private let userID = Expression<Int>("using")
+  
   init?() {
     do {
       let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-      let fileUrl = documentDirectory.appendingPathComponent("userRecode").appendingPathExtension("sqlite3")
-      let database = try Connection(fileUrl.path)
-      self.DB = database
+      
+      // 사용자 등산기록 table
+      let recordFileUrl = documentDirectory.appendingPathComponent("userRecode").appendingPathExtension("sqlite3")
+      let recordDatabase = try Connection(recordFileUrl.path)
+      self.recordDB = recordDatabase
+      
+      // 사용자 등산도전 id 기록 table
+      let idFileUrl = documentDirectory.appendingPathComponent("usingID").appendingPathExtension("sqlite3")
+      let idDatabase = try Connection(idFileUrl.path)
+      self.idDB = idDatabase
       
       // table 생성
-      self.createTable()
+      self.createUserRecodeTable()
+      self.createUsingIDTable()
     } catch {
       print("error: \(error)")
       return nil
     }
   }
   
-  private func createTable() {
+  private func createUserRecodeTable() {
     let table = self.userRecode.create { t in
       t.column(self.id, primaryKey: true)
       t.column(self.startTime)
@@ -45,7 +58,7 @@ final class UserHistoryModel {
     }
     
     do {
-      try self.DB.run(table)
+      try self.recordDB.run(table)
       print("create success!!")
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
@@ -54,26 +67,104 @@ final class UserHistoryModel {
     }
   }
   
-  public func insertRecode(start: Double, finish: Double?, recode: String, mountainID: Int) {
-    print("insert Recode")
+  private func createUsingIDTable() {
+    let table = self.usingID.create { t in
+      t.column(self.primeID, primaryKey: true)
+      t.column(self.userID)
+    }
     
-    let insertRecode = self.userRecode.insert(self.startTime <- start,
-                                              self.finishTime <- finish ?? 0.0,
-                                              self.record <- record,
-                                              self.mountainID <- mountainID
-                                              )
     do {
-      let id = try self.DB.run(insertRecode)
-      print("insert success!! id: \(id)")
+      try self.idDB.run(table)
+      print("create success!!")
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
+      print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
+    }catch {
+      print("error createTable: \(error.localizedDescription)")
+    }
+  }
+  
+  private func insertID(_ id: Int) {
+    print("setId")
+    let insertId = self.usingID.insert(self.userID <- id)
+    
+    do {
+      try self.idDB.run(insertId)
+    }  catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     }catch {
       print("insert error insertRecode: \(error.localizedDescription)")
     }
   }
   
+  public func updateID(_ id: Int) {
+    print("updateId")
+    
+    if self.getIDTotal() == 0 {
+      self.insertID(0)
+    }
+    
+    let updateFilter = self.usingID.filter(self.primeID == 1)
+    let updateId = updateFilter.update(self.userID <- id)
+    
+    do {
+      try self.idDB.run(updateId)
+      print("update success id: \(id)")
+    }  catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
+      print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
+    }catch {
+      print("update updateRecode: \(error.localizedDescription)")
+    }
+  }
+  
+  public func getUsingID() -> Int? {
+    do {
+      let getID = self.usingID.filter(self.primeID == 1)
+      
+      for ids in try idDB.prepare(getID) {
+        let id = try ids.get(self.userID)
+        return id != 0 ? id : nil
+      }
+      
+    } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
+      print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
+    } catch {
+      print("getUsingID error: \(error.localizedDescription)")
+    }
+    self.updateID(0)
+    return nil
+  }
+  
+  private func getIDTotal() -> Int {
+    let count = try? self.idDB.scalar(self.usingID.count)
+    print("count: \(String(describing: count))")
+    return count ?? 0
+  }
+  
+  public func insertRecode(start: Double, finish: Double?, recode: String, mountainID: Int) -> Int {
+    print("insert Recode: \(start), \(Date(timeIntervalSinceNow: start as TimeInterval))")
+    
+    
+    let insertRecode = self.userRecode.insert(self.startTime <- start,
+                                              self.finishTime <- finish ?? 0.0,
+                                              self.record <- record,
+                                              self.mountainID <- mountainID
+                                              )
+    
+    do {
+      let id = try self.recordDB.run(insertRecode)
+      print("insert success!! id: \(String(describing: id))")
+      return Int(id)
+    } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
+      print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
+    } catch {
+      print("insert error insertRecode: \(error.localizedDescription)")
+    }
+    
+    return 0
+  }
+  
   public func updateRecode(updateID: Int, finish: Double, record: String) {
-    print("update Recode")
+    print("update Recode: \(finish), \(Date(timeIntervalSinceNow: finish as TimeInterval))")
     
     let updateFilter = self.userRecode.filter(self.id == updateID)
     
@@ -81,7 +172,7 @@ final class UserHistoryModel {
                                             self.record <- record
                                             ])
     do {
-      let id = try self.DB.run(updateRecode)
+      let id = try self.recordDB.run(updateRecode)
       print("update success id: \(id)")
     }  catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
@@ -95,7 +186,7 @@ final class UserHistoryModel {
     
     do {
       let deleteId = self.userRecode.filter(self.id == delete)
-      try self.DB.run(deleteId.delete())
+      try self.recordDB.run(deleteId.delete())
       print("delete succes!!")
     }  catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
@@ -105,7 +196,7 @@ final class UserHistoryModel {
   }
   
   public func getTotal() -> Int {
-    let count = try? self.DB.scalar(self.userRecode.count)
+    let count = try? self.recordDB.scalar(self.userRecode.count)
     print("count: \(String(describing: count))")
     return count ?? 0
   }
@@ -114,7 +205,7 @@ final class UserHistoryModel {
     do {
       var records = [UserRecord]()
       
-      for record in try DB.prepare(userRecode) {
+      for record in try recordDB.prepare(userRecode) {
         let id = try record.get(self.id)
         let start = try record.get(self.startTime)
         let finish = try record.get(self.finishTime)
@@ -144,7 +235,7 @@ final class UserHistoryModel {
       
       let getRow = self.userRecode.filter(self.id == id)
       
-      for record in try DB.prepare(getRow) {
+      for record in try recordDB.prepare(getRow) {
         let id = try record.get(self.id)
         let start = try record.get(self.startTime)
         let finish = try record.get(self.finishTime)
