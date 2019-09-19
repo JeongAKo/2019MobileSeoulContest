@@ -48,11 +48,11 @@ class RecordHeaderView: UITableViewHeaderFooterView {
   // MARK: - autolayout
   private func autolayout() {
     dissmissButton.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().inset(Metric.margin/3)
+      $0.top.leading.equalToSuperview().inset(Metric.margin/2)
     }
     titleLabel.snp.makeConstraints {
-      $0.top.equalTo(dissmissButton.snp.bottom).offset(Metric.margin)
-      $0.leading.equalToSuperview().inset(Metric.margin/3)
+      $0.top.equalTo(dissmissButton.snp.bottom).offset(Metric.margin*2)
+      $0.leading.equalToSuperview().inset(Metric.margin/2)
     }
   }
   
