@@ -47,7 +47,7 @@ class LogoutVC: UIViewController {
     return btn
   }()
   
-  private var db: UserHistoryModel? = nil
+  private var db: ClibmingDatabase? = nil
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,7 +55,7 @@ class LogoutVC: UIViewController {
     configureView()
     autolayout()
     
-    db = UserHistoryModel()
+    db = ClibmingDatabase()
     if db == nil {
       print("db is nil")
     } else {
@@ -108,7 +108,7 @@ class LogoutVC: UIViewController {
     
     switch sender {
     case add:
-      db?.insertRecode(start: Date().timeIntervalSinceNow, finish: nil, recode: "0", mountainID: 1)
+      _ = db?.insertRecode(start: Date().timeIntervalSinceNow, finish: nil, recode: "0", mountainID: 1)
       let _ = db?.getTotal()
     case update:
       let now = Date()

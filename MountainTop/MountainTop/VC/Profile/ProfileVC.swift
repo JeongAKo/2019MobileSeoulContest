@@ -107,6 +107,8 @@ extension ProfileVC: UITableViewDelegate {
     case 1:
       self.navigationController?.pushViewController(UserRecordsVC(), animated: true)
 //      present(UserRecordsVC(), animated: true, completion: nil)
+    case 2:
+      self.navigationController?.pushViewController(DBTestVC(), animated: true)
     case 5:
       self.showAlert()
     default:
