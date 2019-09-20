@@ -18,6 +18,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private let recordView = RecordTopView()
   private let calender = Calendar.current
   private var timer = Timer()
+  private var recordBool = false
   private lazy var startDate = Date()
   
   private lazy var recordContainerView: UIView = {
@@ -46,6 +47,14 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     button.backgroundColor = .black
     button.alpha = 0.5
     button.addTarget(self, action: #selector(didTapCameraButton(_:)), for: .touchUpInside)
+    return button
+  }()
+  
+  private lazy var recordButton: UIButton = {
+    let button = UIButton(type: .custom)
+    button.setImage(UIImage(named: "clock"), for: .normal)
+    button.alpha = 0.7
+    button.addTarget(self, action: #selector(didTapRecordButton(_:)), for: .touchUpInside)
     return button
   }()
   
@@ -164,7 +173,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     naverMapView.positionMode = .direction
     naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부
     naverMapView.mapView.buildingHeight = 0.5
- 
   }
   
   private func time() {
@@ -175,6 +183,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     view.addSubview(naverMapView)
     view.addSubview(recordContainerView)
     view.addSubview(buttonContainerView)
+    view.addSubview(recordButton)
     recordContainerView.addSubview(recordView)
     buttonContainerView.addSubview(cameraButton)
   }
@@ -204,14 +213,16 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   private func applyDesign() {
     view.layoutIfNeeded()
-    
-    let recordVCorner = recordContainerView.frame.height / 5
-    recordView.layer.cornerRadius = recordVCorner
+
+    recordView.layer.cornerRadius = recordContainerView.frame.height / 5
     recordView.clipsToBounds = true
-    
-    let cameraButtonCorner = cameraButton.frame.height / 5
-    cameraButton.layer.cornerRadius = cameraButtonCorner
+  
+    cameraButton.layer.cornerRadius = cameraButton.frame.height / 5
     cameraButton.clipsToBounds = true
+    
+    recordButton.layer.cornerRadius = recordButton.frame.width / 2
+    recordButton.clipsToBounds = true
+    
   }
   
   @objc private func keepTimer() {
@@ -243,6 +254,19 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   @objc func didTapCameraButton(_ sender: UIButton) {
     present(imagePickerController, animated: true)
   }
+  
+  @objc func didTapRecordButton(_ sender: UIButton) {
+    recordBool.toggle()
+    
+    if recordBool == true {
+      recordView.isHidden = true
+      recordContainerView.isHidden = true
+    } else {
+      recordView.isHidden = false
+      recordContainerView.isHidden = false
+    }
+  }
+  
   
   @objc private func presentCamera(_ sender: Notification) {
     
@@ -293,8 +317,15 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     }
     
     cameraButton.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
+      $0.centerX.equalToSuperview()
+      $0.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview()
+    }
+    
+    recordButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview().multipliedBy(1.8)
+      $0.centerY.equalTo(cameraButton.snp.centerY)
+      
     }
   }
 }
