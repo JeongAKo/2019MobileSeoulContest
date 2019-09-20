@@ -12,6 +12,7 @@ import NMapsMap
 
 class NMapVC: UIViewController, NMFMapViewDelegate {
   
+  // MARK: - Property
   private let naverMapView = NMFNaverMapView(frame: .zero)
   private let activityIndicator = UIActivityIndicatorView(style: .gray)
   private let recordView = RecordTopView()
@@ -69,7 +70,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     addsubViews(naverMapView)
     configureMapView(naverMapView)
     makeConstraints()
-    locationOfMarker()
+    
     popInfoWindow()
     
     location = CLLocationManager()
@@ -78,6 +79,56 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     location.delegate = self
     location.startUpdatingLocation()
     
+    displayFlags()
+  }
+  
+  private func displayFlags() {
+    let moutainDB = MauntainDatabase()
+    
+    guard let db = moutainDB else {
+      return print("moutainDB is nil")
+    }
+    
+    let data = db.getMountainInfomations()
+    
+    print( "got the `mountain data` successfully")
+    
+    let encoder = JSONEncoder()
+    
+    encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+    
+    guard let jsonData = try? encoder.encode(data) else { return }
+    
+//    if let jsonData = jsonData, let jsonString = String(data: jsonData, encoding: .utf8) {
+//      print("📌jsonString📌",jsonString)
+//    }
+    
+    guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: jsonData) else { return print("decoding fail")}
+    print("⛰moutain⛰:\(moutain)")
+    print("📌moutain[0]📌",moutain[0])
+    print("⌛️Mtn Count⌛️",moutain.count)
+    
+    for i in 0...(moutain.count - 1) {
+      
+      let startMarker = NMFMarker(position: NMGLatLng(lat: moutain[i].infoLat, lng: moutain[i].infoLong))
+      startMarker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
+        self?.infoWindow.open(with: startMarker)
+        return true
+      }
+      startMarker.userInfo = ["title" : "\(moutain[i].name)"]
+      startMarker.captionText = "\(moutain[i].name) 시작점"
+      startMarker.iconImage = NMFOverlayImage(name: "icon")
+      startMarker.mapView = naverMapView.mapView
+      
+      let finishMarker = NMFMarker(position: NMGLatLng(lat: moutain[i].mtLat, lng: moutain[i].mtLong))
+      finishMarker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
+        self?.infoWindow.open(with: finishMarker)
+        return true
+      }
+      finishMarker.userInfo = ["title" : "\(moutain[i].name)"]
+      finishMarker.iconImage = NMFOverlayImage(name: "finish")
+      finishMarker.mapView = naverMapView.mapView
+    }
   }
   
   let infoWindow = NMFInfoWindow()
@@ -91,15 +142,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       self?.infoWindow.close()
       return true
     }
-    
-    let marker1 = NMFMarker(position: NMGLatLng(lat: 37.57000, lng: 126.97618))
-    marker1.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
-      self?.infoWindow.open(with: marker1)
-      return true
-    }
-    marker1.userInfo = ["title" : "Marker 1"]
-    marker1.mapView = naverMapView.mapView
-    
   }
   
   //지도 클릭시 CustomInfoWindow close
@@ -116,41 +158,13 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   }
   
   
-  private func locationOfMarker() {
-    let marker: NMFMarker = {
-      let marker = NMFMarker()
-      marker.position = NMGLatLng(lat: 37.686099, lng: 127.036238)
-      marker.captionText = "도봉산 시작점"  //통통 애니매이션 효과 `gif`나
-//      marker.captionOffset = 15
-      marker.iconImage = NMFOverlayImage(name: "icon")
-      marker.iconPerspectiveEnabled = true
-      marker.mapView = naverMapView.mapView
-      
-      return marker
-    }()
-    
-    
-    let startSulockmarker: NMFMarker = {
-      let marker = NMFMarker()
-      marker.position = NMGLatLng(lat: 37.699055, lng: 127.08125)
-      marker.iconImage = NMFOverlayImage(name: "finish")
-      marker.mapView = naverMapView.mapView
-      marker.iconPerspectiveEnabled = true
-      return marker
-    }()
-  }
-  
   // MARK: - Action method
   private func configureMapView(_ naverMapView: NMFNaverMapView) {
     naverMapView.mapView.setLayerGroup(NMF_LAYER_GROUP_MOUNTAIN, isEnabled: true)  // 등산로 모드
     naverMapView.positionMode = .direction
     naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부
-    //    naverMapView.mapView.locale = "en-US"    // 영문표시
     naverMapView.mapView.buildingHeight = 0.5
-    
-    /* FIXME: - 매표소??위치 를 마커를 추가해서 시작지점 명확히 하기 https://navermaps.github.io/ios-map-sdk/guide-ko/5-3.html
-     naverMapView.mapView.showLegalNotice() // 지도 관련 법적고지
-     */
+ 
   }
   
   private func time() {
@@ -301,9 +315,7 @@ extension NMapVC: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
     //    locations.first?.altitude
-    
     //    print("altitude", locations.first?.altitude)
-    
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
