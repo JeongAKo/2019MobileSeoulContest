@@ -115,13 +115,7 @@ class DBTestVC: UIViewController {
       print(jsonString)
       
     }
-//    guard let str = try? JSONSerialization.jsonObject(with: encoded, options: []) else { return print("JSONSerialization")}
-//
-//    print("jsonObject:\(str)")
-//
-//    guard let json11 = try? JSONSerialization.jsonObject(with: mountainSampleData, options: []) else { return print("JSONSerialization")}
-//    print("json11:\(json11)")
-//
+
     guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData) else { return print("decoding fail")}
     
     print("moutain:\(moutain)")

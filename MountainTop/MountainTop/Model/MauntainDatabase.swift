@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Firebase
 
 final class MauntainDatabase {
   
@@ -23,6 +24,13 @@ final class MauntainDatabase {
   private let mtAltitude = Expression<Double>("MtAtitude")
   private let distance = Expression<Double>("distance")
   private let etc = Expression<String>("etc")
+  
+  private var remoteConfig: RemoteConfig = {
+    let config = RemoteConfig.remoteConfig()
+    let settings = RemoteConfigSettings()
+    config.configSettings = settings
+    return config
+  }()
   
   init?() {
     do {
