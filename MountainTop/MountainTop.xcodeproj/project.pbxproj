@@ -39,6 +39,7 @@
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
 		42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FF12317F7A60011A751 /* GoogleService-Info.plist */; };
 		AB11D7B023312B380012D2E2 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D7AF23312B380012D2E2 /* TimeInterval.swift */; };
+		AB15842923351E5300430AD7 /* 201-simple-loader.json in Resources */ = {isa = PBXBuildFile; fileRef = AB15842823351E5300430AD7 /* 201-simple-loader.json */; };
 		AB49F8112327860D00754504 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80C2327860D00754504 /* LogoutVC.swift */; };
 		AB49F8122327860D00754504 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80D2327860D00754504 /* MountainVC.swift */; };
 		AB49F8132327860D00754504 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80E2327860D00754504 /* NMapVC.swift */; };
@@ -90,6 +91,7 @@
 		8B10AC2C79D9DD6C2C470EA2 /* Pods-MountainTop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.release.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.release.xcconfig"; sourceTree = "<group>"; };
 		97CC9E82CDAD8CB1021227FA /* Pods-MountainTop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.debug.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.debug.xcconfig"; sourceTree = "<group>"; };
 		AB11D7AF23312B380012D2E2 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		AB15842823351E5300430AD7 /* 201-simple-loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "201-simple-loader.json"; sourceTree = "<group>"; };
 		AB49F80C2327860D00754504 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
 		AB49F80D2327860D00754504 /* MountainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
 		AB49F80E2327860D00754504 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				AB49F80F2327860D00754504 /* LoginVC.swift */,
 				AB49F80C2327860D00754504 /* LogoutVC.swift */,
 				AB49F80D2327860D00754504 /* MountainVC.swift */,
+				AB15842823351E5300430AD7 /* 201-simple-loader.json */,
 				AB49F80E2327860D00754504 /* NMapVC.swift */,
 				AB49F8102327860D00754504 /* UserSettingVC.swift */,
 				AB7BF879233371FA00097D63 /* CustomInfoWindowView.xib */,
@@ -340,6 +343,7 @@
 				42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */,
 				42D89FE1231691A40011A751 /* Assets.xcassets in Resources */,
 				42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */,
+				AB15842923351E5300430AD7 /* 201-simple-loader.json in Resources */,
 				AB7BF87A233371FA00097D63 /* CustomInfoWindowView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

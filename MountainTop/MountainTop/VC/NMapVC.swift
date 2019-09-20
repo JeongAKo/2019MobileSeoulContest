@@ -18,7 +18,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private let recordView = RecordTopView()
   private let calender = Calendar.current
   private var timer = Timer()
-  private var recordBool = false
+  private var recordBool = true
   private lazy var startDate = Date()
   
   private lazy var recordContainerView: UIView = {
@@ -52,7 +52,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   private lazy var recordButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setImage(UIImage(named: "clock"), for: .normal)
+    button.setImage(UIImage(named: "recordClock"), for: .normal)
     button.alpha = 0.7
     button.addTarget(self, action: #selector(didTapRecordButton(_:)), for: .touchUpInside)
     return button
