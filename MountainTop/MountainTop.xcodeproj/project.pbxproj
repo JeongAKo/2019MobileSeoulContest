@@ -40,6 +40,7 @@
 		42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FF12317F7A60011A751 /* GoogleService-Info.plist */; };
 		AB11D7B023312B380012D2E2 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D7AF23312B380012D2E2 /* TimeInterval.swift */; };
 		AB15842923351E5300430AD7 /* 201-simple-loader.json in Resources */ = {isa = PBXBuildFile; fileRef = AB15842823351E5300430AD7 /* 201-simple-loader.json */; };
+		AB15842B233524F100430AD7 /* 8720-hi-wink.json in Resources */ = {isa = PBXBuildFile; fileRef = AB15842A233524F100430AD7 /* 8720-hi-wink.json */; };
 		AB49F8112327860D00754504 /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80C2327860D00754504 /* LogoutVC.swift */; };
 		AB49F8122327860D00754504 /* MountainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80D2327860D00754504 /* MountainVC.swift */; };
 		AB49F8132327860D00754504 /* NMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49F80E2327860D00754504 /* NMapVC.swift */; };
@@ -92,6 +93,7 @@
 		97CC9E82CDAD8CB1021227FA /* Pods-MountainTop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.debug.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.debug.xcconfig"; sourceTree = "<group>"; };
 		AB11D7AF23312B380012D2E2 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		AB15842823351E5300430AD7 /* 201-simple-loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "201-simple-loader.json"; sourceTree = "<group>"; };
+		AB15842A233524F100430AD7 /* 8720-hi-wink.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "8720-hi-wink.json"; sourceTree = "<group>"; };
 		AB49F80C2327860D00754504 /* LogoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
 		AB49F80D2327860D00754504 /* MountainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountainVC.swift; sourceTree = "<group>"; };
 		AB49F80E2327860D00754504 /* NMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMapVC.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				AB49F80F2327860D00754504 /* LoginVC.swift */,
 				AB49F80C2327860D00754504 /* LogoutVC.swift */,
 				AB49F80D2327860D00754504 /* MountainVC.swift */,
+				AB15842A233524F100430AD7 /* 8720-hi-wink.json */,
 				AB15842823351E5300430AD7 /* 201-simple-loader.json */,
 				AB49F80E2327860D00754504 /* NMapVC.swift */,
 				AB49F8102327860D00754504 /* UserSettingVC.swift */,
@@ -340,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB15842B233524F100430AD7 /* 8720-hi-wink.json in Resources */,
 				42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */,
 				42D89FE1231691A40011A751 /* Assets.xcassets in Resources */,
 				42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */,
