@@ -11,6 +11,7 @@ import SQLite
 
 final class ClibmingDatabase {
 
+  // MARK: - Property
   private var recordDB: Connection!
   private var idDB: Connection!
   
@@ -25,6 +26,7 @@ final class ClibmingDatabase {
   private let primeID = Expression<Int>("id")
   private let userID = Expression<Int>("using")
   
+  // MARK: - init
   init?() {
     do {
       let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -48,6 +50,7 @@ final class ClibmingDatabase {
     }
   }
   
+  // MARK: - create id Table
   private func createUserRecodeTable() {
     let table = self.userRecode.create { t in
       t.column(self.id, primaryKey: true)

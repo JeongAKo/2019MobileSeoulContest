@@ -95,7 +95,18 @@ class DBTestVC: UIViewController {
   }
   
   @objc private func touchGetMoutain(_ sender:UIButton) {
-    
+    testFirebase()
+//    testDB()
+  }
+  
+  private func testFirebase() {
+//    let fire = FDataBaseManager()
+//    fire.fetchMountainRankers {
+//      print("fetchRankers")
+//    }
+  }
+  
+  private func testDB() {
     guard let db = moutainDB else {
       return print("moutainDB is nil")
     }
