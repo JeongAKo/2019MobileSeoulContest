@@ -10,6 +10,7 @@ target 'MountainTop' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'NMapsMap'
   pod 'Kingfisher', '~> 5.0'
+  #pod 'lottie-ios'  
   
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
