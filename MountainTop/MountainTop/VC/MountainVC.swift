@@ -14,7 +14,7 @@ class MountainVC: UIViewController {
   private let mountainName = ["도봉산", "수락산", "불암산", "용마산", "아차산", "구룡산", "대모산", "우면산", "관악산(관음사)", "북한산(효자동)", "북한산(우이동)", "북악산(한양도성)", "청계산(매봉)", "삼성산", "인왕산(사직단)"]
   
   private let mountainXaxis = [0.530, 0.685, 0.716, 0.741, 0.762, 0.600, 0.685, 0.543, 0.473, 0.388, 0.434, 0.416, 0.656, 0.438, 0.374]
-  private let mountainYaxis = [0.188, 0.162, 0.268, 0.473, 0.494, 0.748, 0.730, 0.699, 0.748, 0.240, 0.226, 0.374, 0.819, 0.755, 0.399]
+  private let mountainYaxis = [0.188, 0.266, 0.268, 0.473, 0.494, 0.748, 0.730, 0.699, 0.748, 0.240, 0.226, 0.374, 0.819, 0.755, 0.399]
   
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -31,7 +31,7 @@ class MountainVC: UIViewController {
   private lazy var imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "customMap")
-    imageView.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
+//    imageView.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
     imageView.contentMode = .scaleAspectFit
     self.scrollView.addSubview(imageView)
     return imageView
@@ -71,6 +71,7 @@ class MountainVC: UIViewController {
   
   private func zoomingLottieView() {
       UIView.animate(withDuration: 1) {
+        
         self.scrollView.zoomScale = 2.5
         self.scrollView.minimumZoomScale = 2.5
     }
@@ -92,20 +93,24 @@ class MountainVC: UIViewController {
       moutainButton.snp.makeConstraints {
         $0.centerX.equalTo(imageView.snp.trailing).multipliedBy(mountainXaxis[i])
         $0.centerY.equalTo(imageView.snp.bottom).multipliedBy(mountainYaxis[i])
+        $0.width.height.equalTo(20)
       }
     }
   }
   
   // MARK: - AutoLayout
   private func configureAutoLayout() {
+    let deviceWidht = UIScreen.main.bounds.width
+    
     scrollView.snp.makeConstraints {
       $0.edges.equalToSuperview()
       $0.center.equalTo(view.snp.center)
     }
     
     imageView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
+//      $0.edges.equalToSuperview()
       $0.center.equalToSuperview()
+      $0.width.height.equalTo(deviceWidht)
     }
     
     animationView.snp.makeConstraints {
