@@ -22,6 +22,7 @@ class MountainVC: UIViewController {
     scrollView.minimumZoomScale = 1
     scrollView.maximumZoomScale = 3
     scrollView.delegate = self
+    scrollView.delaysContentTouches = true // ??
     scrollView.showsVerticalScrollIndicator = false
     scrollView.showsHorizontalScrollIndicator = false
     view.addSubview(scrollView)
@@ -31,7 +32,6 @@ class MountainVC: UIViewController {
   private lazy var imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "customMap")
-//    imageView.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
     imageView.contentMode = .scaleAspectFit
     self.scrollView.addSubview(imageView)
     return imageView
@@ -47,10 +47,14 @@ class MountainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       startAnimation()
-      dispalyFlags()
+//      dispalyFlags()
       configureAutoLayout()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    dispalyFlags()
+  }
   
   // MARK: - Action Method
   private func startAnimation() {
