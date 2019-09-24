@@ -150,12 +150,9 @@ final class MauntainDatabase {
   private func insertMountainData() {
     
     firebase.fetchMoutainData { [weak self](result) in
+      guard let `self` = self else { return print("self is nil")}
       switch result {
       case .success(let info):
-//        guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
-//          else { return print("MountainInfo.self decoding fail")}
-        guard let `self` = self else { return print("self is nil")}
-        
         self.deleteAllMountainInfomations()
         
         for mountain in info {
@@ -163,6 +160,12 @@ final class MauntainDatabase {
         }
       case .failure(let error):
         print("fetchMoutainData error: \(error.localizedDescription)")
+        guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
+          else { return print("MountainInfo.self decoding fail")}
+        
+        for mountain in mountainInfos {
+          guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
+        }
       }
     }
   }

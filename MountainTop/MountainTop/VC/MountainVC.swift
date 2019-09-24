@@ -100,6 +100,9 @@ class MountainVC: UIViewController {
         $0.width.height.equalTo(20)
       }
     }
+    
+//    print("self.scrollView.isUserInteractionEnabled: \(self.scrollView.isUserInteractionEnabled), \(isUserInteractionEnabled)")
+    
   }
   
   // MARK: - AutoLayout

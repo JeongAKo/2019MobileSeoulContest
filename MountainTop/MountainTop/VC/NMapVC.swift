@@ -21,6 +21,8 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private var recordBool = true
   private lazy var startDate = Date()
   
+  private let moutainDB = MauntainDatabase()
+  
   private lazy var recordContainerView: UIView = {
     let rView = UIView()
     rView.layer.shadowColor = UIColor.lightGray.cgColor
@@ -92,7 +94,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   }
   
   private func displayFlags() {
-    let moutainDB = MauntainDatabase()
+    
     
     guard let db = moutainDB else {
       return print("moutainDB is nil")
@@ -204,6 +206,10 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
         switch result {
         case .success(_):
           self.presentAlert(title: "사진 저장", message: "사진이\(named) 앨범에 저장 되었습니다.")
+          
+          // MARK: - gps & 고도 가져옴
+          print("location lat: \(self.mapLocation.location.lat), location lng: \(self.mapLocation.location.lng)")
+          print("location.location?.altitude: \(String(describing: self.location.location?.altitude))")
         case .failure(let err):
           self.presentAlert(title: "Error", message: err.localizedDescription)
         }
@@ -276,8 +282,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
         return print("fail downCasting")
     }
     
-    print("location lat: \(mapLocation.location.lat), location lng: \(mapLocation.location.lng)")
-    print("location.location?.altitude: \(String(describing: location.location?.altitude))")
     present(picker, animated: true)
   }
   
