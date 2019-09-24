@@ -10,5 +10,5 @@ import Foundation
 
 enum DbError: Error {
   case DbError
-//  case
+  case firebase
 }

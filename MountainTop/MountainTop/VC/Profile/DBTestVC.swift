@@ -12,6 +12,7 @@ class DBTestVC: UIViewController {
   
   // MARK: - Property
   let moutainDB = MauntainDatabase()
+  let firebase = FDataBaseManager()
   
   private lazy var startButton: UIButton = {
     let btn = UIButton(type: .custom)
@@ -95,7 +96,20 @@ class DBTestVC: UIViewController {
   }
   
   @objc private func touchGetMoutain(_ sender:UIButton) {
+    testFirebase()
+//    testDB()
+  }
+  
+  private func testFirebase() {
+//    let fire = FDataBaseManager()
+//    fire.fetchMountainRankers {
+//      print("fetchRankers")
+//    }
     
+    
+  }
+  
+  private func testDB() {
     guard let db = moutainDB else {
       return print("moutainDB is nil")
     }
@@ -115,13 +129,7 @@ class DBTestVC: UIViewController {
       print(jsonString)
       
     }
-//    guard let str = try? JSONSerialization.jsonObject(with: encoded, options: []) else { return print("JSONSerialization")}
-//
-//    print("jsonObject:\(str)")
-//
-//    guard let json11 = try? JSONSerialization.jsonObject(with: mountainSampleData, options: []) else { return print("JSONSerialization")}
-//    print("json11:\(json11)")
-//
+
     guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData) else { return print("decoding fail")}
     
     print("moutain:\(moutain)")
