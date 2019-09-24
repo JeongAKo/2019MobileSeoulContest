@@ -29,11 +29,14 @@
 		4222C2A3232E029900619406 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2A2232E029900619406 /* CALayer.swift */; };
 		4222C2A5232E06E500619406 /* MountainLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2A4232E06E500619406 /* MountainLevel.swift */; };
 		4222C2A7232E31CE00619406 /* RecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2A6232E31CE00619406 /* RecordHeaderView.swift */; };
+		424FAE692334E9A900D8C009 /* FDataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FAE682334E9A900D8C009 /* FDataBaseManager.swift */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
 		42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */; };
 		42B52B9D2320B8370043A3D2 /* logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9C2320B8370043A3D2 /* logger.swift */; };
 		42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */; };
 		42B52BA32320BC850043A3D2 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52BA22320BC850043A3D2 /* Metric.swift */; };
+		42C7897C2335F7C90005E94B /* RankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897B2335F7C90005E94B /* RankManager.swift */; };
+		42C7897E2335FE890005E94B /* RankerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897D2335FE890005E94B /* RankerInfo.swift */; };
 		42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FD9231691A30011A751 /* AppDelegate.swift */; };
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
@@ -76,6 +79,7 @@
 		4222C2A2232E029900619406 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		4222C2A4232E06E500619406 /* MountainLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainLevel.swift; sourceTree = "<group>"; };
 		4222C2A6232E31CE00619406 /* RecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeaderView.swift; sourceTree = "<group>"; };
+		424FAE682334E9A900D8C009 /* FDataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDataBaseManager.swift; sourceTree = "<group>"; };
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
 		42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 		42B52B9E2320B83E0043A3D2 /* NetworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
 		42B52B9F2320B83E0043A3D2 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		42B52BA22320BC850043A3D2 /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
+		42C7897B2335F7C90005E94B /* RankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankManager.swift; sourceTree = "<group>"; };
+		42C7897D2335FE890005E94B /* RankerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankerInfo.swift; sourceTree = "<group>"; };
 		42D89FD6231691A30011A751 /* MountainTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D89FD9231691A30011A751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D89FE0231691A40011A751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 				42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */,
 				4222C288232751BA00619406 /* UserRecord.swift */,
 				421E6103233224AC005D994B /* MountainInfo.swift */,
+				42C7897D2335FE890005E94B /* RankerInfo.swift */,
 			);
 			path = DataType;
 			sourceTree = "<group>";
@@ -247,6 +254,8 @@
 				421E60F9232F5588005D994B /* UserInfomatoin.swift */,
 				4222C2852324E01200619406 /* ClibmingDatabase.swift */,
 				421E61012331DC0B005D994B /* MauntainDatabase.swift */,
+				424FAE682334E9A900D8C009 /* FDataBaseManager.swift */,
+				42C7897B2335F7C90005E94B /* RankManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,8 +420,10 @@
 				42B52BA32320BC850043A3D2 /* Metric.swift in Sources */,
 				4222C2862324E01200619406 /* ClibmingDatabase.swift in Sources */,
 				4222C2912328D34F00619406 /* ProfileMainCell.swift in Sources */,
+				42C7897E2335FE890005E94B /* RankerInfo.swift in Sources */,
 				421E60FE232FB0DB005D994B /* DBTestVC.swift in Sources */,
 				AB49F8112327860D00754504 /* LogoutVC.swift in Sources */,
+				424FAE692334E9A900D8C009 /* FDataBaseManager.swift in Sources */,
 				4222C2952328D3EC00619406 /* Identifiable.swift in Sources */,
 				AB49F8152327860D00754504 /* UserSettingVC.swift in Sources */,
 				421E60FC232F6912005D994B /* RecordImageCell.swift in Sources */,
@@ -421,6 +432,7 @@
 				AB49F8142327860D00754504 /* LoginVC.swift in Sources */,
 				4222C2A1232D527800619406 /* VoidCell.swift in Sources */,
 				4222C2A7232E31CE00619406 /* RecordHeaderView.swift in Sources */,
+				42C7897C2335F7C90005E94B /* RankManager.swift in Sources */,
 				4222C2992328DE2600619406 /* DefaultCell.swift in Sources */,
 				AB49F8122327860D00754504 /* MountainVC.swift in Sources */,
 				421E6104233224AC005D994B /* MountainInfo.swift in Sources */,

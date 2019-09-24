@@ -11,6 +11,7 @@ import SQLite
 
 final class MauntainDatabase {
   
+  // MARK: - Property
   private var DB: Connection!
   
   private let mountain = Table("Mountain")
@@ -24,6 +25,9 @@ final class MauntainDatabase {
   private let distance = Expression<Double>("distance")
   private let etc = Expression<String>("etc")
   
+  private let firebase = FDataBaseManager()
+  
+  // MARK: - init
   init?() {
     do {
       let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -57,14 +61,14 @@ final class MauntainDatabase {
     do {
       try self.DB.run(table)
       print("create success!!")
-      
-      // table 생성이 성공하면 빈 db 이므로 sample로 채운다
-      self.insertSampleData()
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     }catch {
       print("error createTable: \(error.localizedDescription)")
     }
+    
+    // test
+    self.insertMountainData()
   }
   
   public func insertMountainInfomations(info: MountainInfo) -> Bool {
@@ -142,13 +146,24 @@ final class MauntainDatabase {
     return info
   }
   
-  private func insertSampleData() {
+  // MARK: - download mountain List
+  private func insertMountainData() {
     
-    guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
-      else { return print("MountainInfo.self decoding fail")}
-    
-    for mountain in mountainInfos {
-      guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
+    firebase.fetchMoutainData { [weak self](result) in
+      switch result {
+      case .success(let info):
+//        guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
+//          else { return print("MountainInfo.self decoding fail")}
+        guard let `self` = self else { return print("self is nil")}
+        
+        self.deleteAllMountainInfomations()
+        
+        for mountain in info {
+          guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
+        }
+      case .failure(let error):
+        print("fetchMoutainData error: \(error.localizedDescription)")
+      }
     }
   }
 }
