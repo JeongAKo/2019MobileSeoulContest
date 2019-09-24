@@ -30,7 +30,7 @@ final class FDataBaseManager {
   private var obseverHandle: UInt?
   
   init() {
-  
+    self.fetchMountainRankers()
   }
   
   deinit {
@@ -84,6 +84,7 @@ final class FDataBaseManager {
       }
       
       NotificationCenter.default.post(name: .reload, object: nil, userInfo: ["moutainRecords": moutainRecord])
+      print("moutainRecord: \(moutainRecord)")
     }) { (error) in
       print("error: \(error.localizedDescription)")
     }

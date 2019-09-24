@@ -12,6 +12,7 @@ class DBTestVC: UIViewController {
   
   // MARK: - Property
   let moutainDB = MauntainDatabase()
+  let firebase = FDataBaseManager()
   
   private lazy var startButton: UIButton = {
     let btn = UIButton(type: .custom)
@@ -104,6 +105,8 @@ class DBTestVC: UIViewController {
 //    fire.fetchMountainRankers {
 //      print("fetchRankers")
 //    }
+    
+    
   }
   
   private func testDB() {

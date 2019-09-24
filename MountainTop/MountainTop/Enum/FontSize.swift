@@ -9,6 +9,7 @@
 import Foundation
 
 enum FontSize {
+  static let font = UIFont(name: "Helvetica Bold Oblique", size: 20)
   static let big: CGFloat = 20
   static let midle: CGFloat = 15
   static let small: CGFloat = 13

@@ -69,6 +69,7 @@ PODS:
     - GoogleUtilities/Logger
   - Kingfisher (5.7.1)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -86,12 +87,13 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/RemoteConfig
   - Kingfisher (~> 5.0)
+  - lottie-ios
   - NMapsMap
   - SnapKit (~> 5.0.0)
   - SQLite.swift (~> 0.12.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -104,6 +106,7 @@ SPEC REPOS:
     - GoogleUtilities
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - nanopb
     - NMapsMap
     - Protobuf
@@ -123,12 +126,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
   Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 49cd85b1f24f61a7708ad7ec76a523ab2d0e3100
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NMapsMap: ec883e061245e3636d12640fec4dbb7de5659146
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
 
-PODFILE CHECKSUM: f6fca8c8d6f74edd0f82d5db0373f6c3ce3cd898
+PODFILE CHECKSUM: b8b9b3f71b3cb179400d83d57902b2bc34accdc5
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.0
