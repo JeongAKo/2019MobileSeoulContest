@@ -21,48 +21,67 @@ class MountainVC: UIViewController {
     scrollView.zoomScale = 1
     scrollView.minimumZoomScale = 1
     scrollView.maximumZoomScale = 3
-    scrollView.delegate = self
-    scrollView.delaysContentTouches = true // ??
     scrollView.showsVerticalScrollIndicator = false
     scrollView.showsHorizontalScrollIndicator = false
     view.addSubview(scrollView)
     return scrollView
   }()
   
-  private lazy var imageView: UIImageView = {
+  private lazy var myImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "customMap")
     imageView.contentMode = .scaleAspectFit
-    self.scrollView.addSubview(imageView)
+    scrollView.addSubview(imageView)
     return imageView
   }()
   
-   private lazy var animationView: AnimationView = {
+   private lazy var mapAnimationView: AnimationView = {
     let animationView = AnimationView()
-    self.imageView.addSubview(animationView)
+    myImageView.addSubview(animationView)
     return animationView
+  }()
+  
+  private lazy var mapButtons: [UIButton] = {
+    var array = [UIButton]()
+    for i in 0..<15 {
+      let btn = UIButton(type: .custom)
+      btn.setTitle("\(mountainName[i])", for: .normal)
+      btn.setImage(UIImage(named: "mtnPin"), for: .normal)
+      btn.backgroundColor = .black
+      btn.alpha = 0.8
+      btn.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
+      self.mapAnimationView.addSubview(btn)
+      
+      //    // FIXME: -
+      //    scrollView.isUserInteractionEnabled = true
+      //    scrollView.isExclusiveTouch = true
+      //    scrollView.delaysContentTouches = true
+      //    scrollView.canCancelContentTouches = true
+      
+      print("isUserInteractionEnabled: \(btn.isUserInteractionEnabled), \(self.mapAnimationView.isUserInteractionEnabled), \(self.scrollView.canCancelContentTouches), \(self.scrollView.isExclusiveTouch), \(self.scrollView.delaysContentTouches)")
+      self.scrollView.canCancelContentTouches = true
+      btn.isUserInteractionEnabled = true
+      array.append(btn)
+    }
+    
+    return array
   }()
   
   // MARK: - App Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+      scrollView.delegate = self
       startAnimation()
-//      dispalyFlags()
+      dispalyFlags()
       configureAutoLayout()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    dispalyFlags()
   }
   
   // MARK: - Action Method
   private func startAnimation() {
     let starAnimation = Animation.named("8720-hi-wink")
-    animationView.animation = starAnimation
-//    animationView.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
-    animationView.center = view.center
-    animationView.play { fisnished in
+    mapAnimationView.animation = starAnimation
+    mapAnimationView.center = view.center
+    mapAnimationView.play { fisnished in
       print("🐠 Animaion finished 🐠")
       self.zoomingLottieView()
     }
@@ -82,21 +101,45 @@ class MountainVC: UIViewController {
   }
   
   private func dispalyFlags() {
-    
+    for i in 0..<mapButtons.count {
+      mapButtons[i].snp.makeConstraints {
+        $0.centerX.equalTo(self.myImageView.snp.trailing).multipliedBy(self.mountainXaxis[i])
+        $0.centerY.equalTo(self.myImageView.snp.bottom).multipliedBy(self.mountainYaxis[i])
+        $0.width.height.equalTo(20)
+        print(mountainXaxis[i])
+      }
+    }
+    self.scrollView.canCancelContentTouches = true
+    print("mapButtons.count: \(mapButtons.count), \(self.scrollView.canCancelContentTouches)")
+    return
+//    // FIXME: -
+//    scrollView.isUserInteractionEnabled = true
+//    scrollView.isExclusiveTouch = true
+//    scrollView.delaysContentTouches = true
+//    scrollView.canCancelContentTouches = true
+//    // FIXME: -
+//
     for i in 0...(mountainName.count - 1) {
       
       let moutainButton = UIButton(type: .custom)
-//      moutainButton.isUserInteractionEnabled = true 이것도 안먹네 흐음
         moutainButton.setTitle("\(mountainName[i])", for: .normal)
         moutainButton.setImage(UIImage(named: "mtnPin"), for: .normal)
         moutainButton.backgroundColor = .black
         moutainButton.alpha = 0.8
-        moutainButton.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
-        imageView.addSubview(moutainButton)  //view에 올리면 되는데 imageview나 scrollview에 올리면 버튼 터치가 안됨
       
+        scrollView.delaysContentTouches = false
+        scrollView.isUserInteractionEnabled = true
+//        scrollView.isExclusiveTouch = true
+//        scrollView.delaysContentTouches = true
+//        scrollView.canCancelContentTouches = true
+      
+        moutainButton.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
+        mapAnimationView.addSubview(moutainButton)  //view, scrollview에 올리면 되는데 imageview나 animationView에 올리면 버튼 터치가 안됨
+      moutainButton.isUserInteractionEnabled = true
+      mapAnimationView.isUserInteractionEnabled = true
       moutainButton.snp.makeConstraints {
-        $0.centerX.equalTo(imageView.snp.trailing).multipliedBy(mountainXaxis[i])
-        $0.centerY.equalTo(imageView.snp.bottom).multipliedBy(mountainYaxis[i])
+        $0.centerX.equalTo(myImageView.snp.trailing).multipliedBy(mountainXaxis[i])
+        $0.centerY.equalTo(myImageView.snp.bottom).multipliedBy(mountainYaxis[i])
         $0.width.height.equalTo(20)
       }
     }
@@ -114,13 +157,12 @@ class MountainVC: UIViewController {
       $0.center.equalTo(view.snp.center)
     }
     
-    imageView.snp.makeConstraints {
-//      $0.edges.equalToSuperview()
+    myImageView.snp.makeConstraints {
       $0.center.equalToSuperview()
       $0.width.height.equalTo(deviceWidht)
     }
     
-    animationView.snp.makeConstraints {
+    mapAnimationView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
   }
@@ -129,7 +171,7 @@ class MountainVC: UIViewController {
 
 extension MountainVC: UIScrollViewDelegate {
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-    return imageView
+    return myImageView
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
