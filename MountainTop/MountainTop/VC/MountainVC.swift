@@ -11,6 +11,7 @@ import Lottie
 
 class MountainVC: UIViewController {
   
+  // MARK: - Property
   private let mountainName = ["도봉산", "수락산", "불암산", "용마산", "아차산", "구룡산", "대모산", "우면산", "관악산(관음사)", "북한산(효자동)", "북한산(우이동)", "북악산(한양도성)", "청계산(매봉)", "삼성산", "인왕산(사직단)"]
   
   private let mountainXaxis = [0.530, 0.685, 0.716, 0.741, 0.762, 0.600, 0.685, 0.543, 0.473, 0.388, 0.434, 0.416, 0.656, 0.438, 0.374]
@@ -35,7 +36,7 @@ class MountainVC: UIViewController {
     return imageView
   }()
   
-   private lazy var mapAnimationView: AnimationView = {
+  private lazy var mapAnimationView: AnimationView = {
     let animationView = AnimationView()
     myImageView.addSubview(animationView)
     return animationView
@@ -60,12 +61,12 @@ class MountainVC: UIViewController {
   }()
   
   // MARK: - App Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      scrollView.delegate = self
-      startAnimation()
-      dispalyFlags()
-      configureAutoLayout()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    scrollView.delegate = self
+    startAnimation()
+    dispalyFlags()
+    configureAutoLayout()
   }
   
   // MARK: - Action Method
@@ -75,20 +76,23 @@ class MountainVC: UIViewController {
     mapAnimationView.center = view.center
     mapAnimationView.play { fisnished in
       print("🐠 Animaion finished 🐠")
+      // FIXME: - 애니메이션 끝나기 전까지 버튼 클릭 못하게 막기
       self.zoomingLottieView()
     }
   }
   
   @objc func didTapMoutainButton(_ sender: UIButton) {
-     print("🌼 button tapped 🌼")
     
+    let rankingVC = RankingVC()
+    rankingVC.modalPresentationStyle = .overCurrentContext
+    present(rankingVC, animated: false)
   }
   
   private func zoomingLottieView() {
-      UIView.animate(withDuration: 1) {
-        
-        self.scrollView.zoomScale = 2.5
-        self.scrollView.minimumZoomScale = 2.5
+    UIView.animate(withDuration: 1) {
+      
+      self.scrollView.zoomScale = 2.5
+      self.scrollView.minimumZoomScale = 2.5
     }
   }
   
@@ -104,7 +108,6 @@ class MountainVC: UIViewController {
     self.scrollView.canCancelContentTouches = true
     print("mapButtons.count: \(mapButtons.count), \(self.scrollView.canCancelContentTouches)")
     return
-
   }
   
   // MARK: - AutoLayout
@@ -135,7 +138,6 @@ extension MountainVC: UIScrollViewDelegate {
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     print("⛱ did scroll ⛱")
-   
   }
 }
 
