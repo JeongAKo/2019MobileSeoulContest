@@ -42,7 +42,6 @@
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
 		42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FF12317F7A60011A751 /* GoogleService-Info.plist */; };
 		AB11D7B023312B380012D2E2 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D7AF23312B380012D2E2 /* TimeInterval.swift */; };
-		AB15842923351E5300430AD7 /* 201-simple-loader.json in Resources */ = {isa = PBXBuildFile; fileRef = AB15842823351E5300430AD7 /* 201-simple-loader.json */; };
 		AB15842B233524F100430AD7 /* 8720-hi-wink.json in Resources */ = {isa = PBXBuildFile; fileRef = AB15842A233524F100430AD7 /* 8720-hi-wink.json */; };
 		AB158433233A05AC00430AD7 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB158432233A05AC00430AD7 /* RankingTableViewCell.swift */; };
 		AB158435233A069800430AD7 /* RankingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB158434233A069800430AD7 /* RankingVC.swift */; };
@@ -100,7 +99,6 @@
 		8B10AC2C79D9DD6C2C470EA2 /* Pods-MountainTop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.release.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.release.xcconfig"; sourceTree = "<group>"; };
 		97CC9E82CDAD8CB1021227FA /* Pods-MountainTop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MountainTop.debug.xcconfig"; path = "Target Support Files/Pods-MountainTop/Pods-MountainTop.debug.xcconfig"; sourceTree = "<group>"; };
 		AB11D7AF23312B380012D2E2 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
-		AB15842823351E5300430AD7 /* 201-simple-loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "201-simple-loader.json"; sourceTree = "<group>"; };
 		AB15842A233524F100430AD7 /* 8720-hi-wink.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "8720-hi-wink.json"; sourceTree = "<group>"; };
 		AB158432233A05AC00430AD7 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
 		AB158434233A069800430AD7 /* RankingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingVC.swift; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 				42D89FE5231691A40011A751 /* Info.plist */,
 				42D89FE2231691A40011A751 /* LaunchScreen.storyboard */,
 				AB15842A233524F100430AD7 /* 8720-hi-wink.json */,
-				AB15842823351E5300430AD7 /* 201-simple-loader.json */,
 				42D89FD9231691A30011A751 /* AppDelegate.swift */,
 				42B52B8D2320AF920043A3D2 /* Enum */,
 				42B52B8C2320AF8E0043A3D2 /* Helper */,
@@ -362,7 +359,6 @@
 				42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */,
 				42D89FE1231691A40011A751 /* Assets.xcassets in Resources */,
 				42D89FF22317F7A60011A751 /* GoogleService-Info.plist in Resources */,
-				AB15842923351E5300430AD7 /* 201-simple-loader.json in Resources */,
 				AB7BF87A233371FA00097D63 /* CustomInfoWindowView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
