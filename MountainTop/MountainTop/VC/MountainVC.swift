@@ -42,21 +42,25 @@ class MountainVC: UIViewController {
     return animationView
   }()
   
+  var array = [UIButton]() // FIXME: - 여기
+  
   private lazy var mapButtons: [UIButton] = {
-    var array = [UIButton]()
-    for i in 0..<15 {
+    for i in 0..<mountainName.count {
       let btn = UIButton(type: .custom)
+      btn.tag = i + 1
       btn.setTitle("\(mountainName[i])", for: .normal)
-      btn.setImage(UIImage(named: "mtnPin"), for: .normal)
-      btn.backgroundColor = .black
+      btn.setTitleColor(.darkGray, for: .normal)
+      btn.titleLabel?.font = UIFont.systemFont(ofSize: 5)
+      btn.backgroundColor = .white
       btn.alpha = 0.8
+      btn.layer.cornerRadius = 5 // FIXME: - 나중에 보고 수정
+      btn.clipsToBounds = true
       btn.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
       self.mapAnimationView.addSubview(btn)
       self.myImageView.isUserInteractionEnabled = true
       btn.isUserInteractionEnabled = true
       array.append(btn)
     }
-    
     return array
   }()
   
@@ -65,7 +69,6 @@ class MountainVC: UIViewController {
     super.viewDidLoad()
     scrollView.delegate = self
     startAnimation()
-    dispalyFlags()
     configureAutoLayout()
   }
   
@@ -76,21 +79,21 @@ class MountainVC: UIViewController {
     mapAnimationView.center = view.center
     mapAnimationView.play { fisnished in
       print("🐠 Animaion finished 🐠")
-      // FIXME: - 애니메이션 끝나기 전까지 버튼 클릭 못하게 막기
+      // FIXME: - 깃발 꽂히는 애니메이션효과
+      self.dispalyFlags()
       self.zoomingLottieView()
     }
   }
   
   @objc func didTapMoutainButton(_ sender: UIButton) {
-    
     let rankingVC = RankingVC()
+    rankingVC.buttonTag = sender.tag
     rankingVC.modalPresentationStyle = .overCurrentContext
     present(rankingVC, animated: false)
   }
   
   private func zoomingLottieView() {
     UIView.animate(withDuration: 1) {
-      
       self.scrollView.zoomScale = 2.5
       self.scrollView.minimumZoomScale = 2.5
     }
@@ -101,7 +104,6 @@ class MountainVC: UIViewController {
       mapButtons[i].snp.makeConstraints {
         $0.centerX.equalTo(self.myImageView.snp.trailing).multipliedBy(self.mountainXaxis[i])
         $0.centerY.equalTo(self.myImageView.snp.bottom).multipliedBy(self.mountainYaxis[i])
-        $0.width.height.equalTo(20)
         print(mountainXaxis[i])
       }
     }
