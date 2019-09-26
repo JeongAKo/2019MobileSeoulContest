@@ -9,7 +9,11 @@
 import Foundation
 import SQLite
 
-final class MauntainDatabase {
+extension Notification.Name {
+  static let fetchMountainList = Notification.Name("fetchMountainList")
+}
+
+final class MountainDatabase {
   
   // MARK: - Property
   private var DB: Connection!
@@ -61,13 +65,14 @@ final class MauntainDatabase {
     do {
       try self.DB.run(table)
       print("create success!!")
+      
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     }catch {
       print("error createTable: \(error.localizedDescription)")
     }
     
-    // test
+    // 테이블을 생성했을 경우만 Data lord
     self.insertMountainData()
   }
   
@@ -150,6 +155,7 @@ final class MauntainDatabase {
   private func insertMountainData() {
     
     firebase.fetchMoutainData { [weak self](result) in
+//      print("self: \(self)")
       guard let `self` = self else { return print("self is nil")}
       switch result {
       case .success(let info):
@@ -158,14 +164,17 @@ final class MauntainDatabase {
         for mountain in info {
           guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
         }
+        
+        NotificationCenter.default.post(name: .fetchMountainList, object: nil)
       case .failure(let error):
         print("fetchMoutainData error: \(error.localizedDescription)")
         guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
           else { return print("MountainInfo.self decoding fail")}
-        
+        self.deleteAllMountainInfomations()
         for mountain in mountainInfos {
           guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
         }
+        NotificationCenter.default.post(name: .fetchMountainList, object: nil)
       }
     }
   }

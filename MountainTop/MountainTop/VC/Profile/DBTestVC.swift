@@ -11,7 +11,7 @@ import UIKit
 class DBTestVC: UIViewController {
   
   // MARK: - Property
-  let moutainDB = MauntainDatabase()
+  let moutainDB = MountainDatabase()
   let firebase = FDataBaseManager()
   
   private lazy var startButton: UIButton = {
@@ -41,6 +41,9 @@ class DBTestVC: UIViewController {
     return btn
   }()
   
+  private var startTime: Date?
+  private var finishTime: Date?
+  
   // MARK: - View life cycle
 
   override func viewDidLoad() {
@@ -61,6 +64,15 @@ class DBTestVC: UIViewController {
       $0.top.equalTo(endButton.snp.bottom).offset(Metric.margin)
       $0.leading.width.height.equalTo(startButton)
     }
+    
+    firebase.fetchMoutainData { (result) in
+      switch result {
+      case .success(let info):
+        print(info)
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
   }
 
   // MARK: - Button Action Function
@@ -74,12 +86,16 @@ class DBTestVC: UIViewController {
       return
     }
     
-    if let record = UserInfo.def.record {
-      UserInfo.def.recordingID = record.insertRecode(start: Date().timeIntervalSinceNow,
-                                                     finish: nil,
-                                                     recode: "00:00:00",
-                                                     mountainID: 1)
-    }
+    guard startTime == nil else { return print("startTime is not nil")}
+    
+    startTime = UserInfo.def.startChallengeMountain(mountainId: 1)
+    
+//    if let record = UserInfo.def.record {
+//      UserInfo.def.recordingID = record.insertRecode(start: Date().timeIntervalSinceNow,
+//                                                     finish: nil,
+//                                                     recode: "00:00:00",
+//                                                     mountainID: 1)
+//    }
   }
   
   @objc private func touchEndButton(_ sender: UIButton) {
@@ -87,12 +103,21 @@ class DBTestVC: UIViewController {
       print("UserInfo.def.recordingID is nil")
       return
     }
-    if let record = UserInfo.def.record {
-      record.updateRecode(updateID: id, finish: Date().timeIntervalSinceNow, record: "???")
-      
-      // 초기화 update 후 초기화 필요
-      UserInfo.def.recordingID = nil
-    }
+    guard let time = startTime else { return print("starttime is nil")}
+    
+    let finishTime = Date()
+    
+    let gapTimeInterval = finishTime.timeIntervalSinceReferenceDate - time.timeIntervalSinceReferenceDate
+    
+    print("gapTimeInterval: \(gapTimeInterval)")
+    
+//    UserInfo.def.finishChallengeMountain()
+//    if let record = UserInfo.def.record {
+//      record.updateRecode(updateID: id, finish: Date().timeIntervalSinceNow, record: "???")
+//
+//      // 초기화 update 후 초기화 필요
+//      UserInfo.def.recordingID = nil
+//    }
   }
   
   @objc private func touchGetMoutain(_ sender:UIButton) {

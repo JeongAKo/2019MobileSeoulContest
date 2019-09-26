@@ -21,7 +21,18 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private var recordBool = true
   private lazy var startDate = Date()
   
-  private let moutainDB = MauntainDatabase()
+  private var mountainDB: MountainDatabase!
+  
+  private var mountainList: [MountainInfo]?
+  //MountainDatabase()?.getMountainInfomations() ?? [] //{
+//    if let list = MountainDatabase()?.getMountainInfomations() {
+//      let mt = list
+///     UserInfo.def.
+//      return mt
+//    } else {
+//      return []
+//    }
+//  }()
   
   private lazy var recordContainerView: UIView = {
     let rView = UIView()
@@ -43,12 +54,16 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   private lazy var cameraButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setTitle("사진찍기", for: .normal)
+    button.setTitle("시작위치로 이동해주세요", for: .disabled)
+    button.setTitleColor(.white, for: .disabled)
     button.setTitleColor(.white, for: .normal)
+    button.setTitleColor(.white, for: .selected)
+    button.setTitleColor(.white, for: .highlighted)
     button.titleLabel?.font = UIFont.init(name: "Helvetica Bold Oblique", size: 15)
     button.backgroundColor = .black
-    button.alpha = 0.5
+    button.alpha = 0.9
     button.addTarget(self, action: #selector(didTapCameraButton(_:)), for: .touchUpInside)
+    button.tag = 0
     return button
   }()
   
@@ -69,7 +84,11 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   private var mapLocation: NMFLocationOverlay!
   
-  private var location: CLLocationManager!
+  private lazy var location: CLLocationManager = {
+    let cl = CLLocationManager()
+    cl.delegate = self
+    return cl
+  }()
   
   // MARK: - App Lifecycle
   override func viewDidLoad() {
@@ -84,37 +103,71 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
     popInfoWindow()
     
-    location = CLLocationManager()
-    location.desiredAccuracy = kCLLocationAccuracyBest
-    location.distanceFilter = 10_000.0
-    location.delegate = self
-    location.startUpdatingLocation()
+    settingMountainInfo()
+//    displayFlags()
     
+    settingLocation(0)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    
+  }
+  
+  private func settingMountainInfo() {
+    mountainDB = MountainDatabase()
+    
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(fetchMountainList(_:)),
+                                           name: .fetchMountainList,
+                                           object: nil)
+  }
+  
+  @objc private func fetchMountainList(_ sender: Notification) {
+    
+    mountainList =  mountainDB?.getMountainInfomations()
     displayFlags()
+  }
+  
+  private func settingLocation(_ status: Int) {
+    switch status {
+    case 0: // normal
+      self.location.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+      self.location.distanceFilter = 15.0
+    case 1: // high
+      self.location.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+      self.location.distanceFilter = 1.0
+    case 2: // low
+      self.location.desiredAccuracy = kCLLocationAccuracyHundredMeters
+      self.location.distanceFilter = 100.0
+    default:
+      break
+    }
+    location.startUpdatingLocation()
   }
   
   private func displayFlags() {
     
     
-    guard let db = moutainDB else {
-      return print("moutainDB is nil")
-    }
-    
-    let data = db.getMountainInfomations()
-    
-    print( "got the `mountain data` successfully")
-    
-    let encoder = JSONEncoder()
-    
-    encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
-    
-    guard let jsonData = try? encoder.encode(data) else { return }
-    
-//    if let jsonData = jsonData, let jsonString = String(data: jsonData, encoding: .utf8) {
-//      print("📌jsonString📌",jsonString)
+//    guard let db = moutainDB else {
+//      return print("moutainDB is nil")
 //    }
+//
+//    let moutain = db.getMountainInfomations()
+//
+//    print( "got the `mountain data` successfully")
+//
+//    let encoder = JSONEncoder()
+//
+//    encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+//
+//    guard let jsonData = try? encoder.encode(data) else { return }
+//
+//
+//    guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: jsonData) else { return print("decoding fail")}
+    guard let moutain = mountainList else { return }
     
-    guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: jsonData) else { return print("decoding fail")}
     print("⛰moutain⛰:\(moutain)")
     print("📌moutain[0]📌",moutain[0])
     print("⌛️Mtn Count⌛️",moutain.count)
@@ -130,6 +183,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       startMarker.captionText = "\(moutain[i].name) 시작점"
       startMarker.iconImage = NMFOverlayImage(name: "icon")
       startMarker.mapView = naverMapView.mapView
+      startMarker.alpha = 0.8
       
       let finishMarker = NMFMarker(position: NMGLatLng(lat: moutain[i].mtLat, lng: moutain[i].mtLong))
       finishMarker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
@@ -139,6 +193,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       finishMarker.userInfo = ["title" : "\(moutain[i].name)"]
       finishMarker.iconImage = NMFOverlayImage(name: "finish")
       finishMarker.mapView = naverMapView.mapView
+      finishMarker.alpha = 0.8
     }
   }
   
@@ -257,8 +312,55 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     print("progressTime", progressTime)
   }
   
+  public func setCameraButtonStatus(_ status: CameraButtonStatus) {
+    switch status {
+    case .normal:
+      cameraButton.setTitle("시작위치로 이동해주세요", for: .normal)
+      cameraButton.tag = CameraButtonStatus.normal.rawValue
+      
+    case .challenging:
+      cameraButton.setTitle("도전취소", for: .normal)
+      cameraButton.tag = CameraButtonStatus.challenging.rawValue
+      
+    case .nearStartPoint:
+      cameraButton.setTitle("기록도전", for: .normal)
+      cameraButton.tag = CameraButtonStatus.nearStartPoint.rawValue
+      
+    case .nearFinishPoint:
+      cameraButton.setTitle("등반완료", for: .normal)
+      cameraButton.tag = CameraButtonStatus.nearFinishPoint.rawValue
+    }
+    
+  }
+  
+  // FIXME: - 상황별 record check
   @objc func didTapCameraButton(_ sender: UIButton) {
-    present(imagePickerController, animated: true)
+    switch sender.tag {
+    case CameraButtonStatus.normal.rawValue:
+      UIAlertController.showMessage("도전을 하시려면 시작위치로 이동해주세요!")
+      
+    case CameraButtonStatus.challenging.rawValue:
+      let no = UIAlertAction(title: "도전!!", style: .default, handler: nil)
+      let yes = UIAlertAction(title: "취소...", style: .destructive) { (action) in
+        if let id = UserInfo.def.recordingID {
+          _ = UserInfo.def.cancelRecord(id: id)
+        }
+      }
+      UIAlertController.showAlert(title: "도전취소", message: "등반 도전을 취소 하시나요?", actions: [no, yes])
+      
+    case CameraButtonStatus.nearStartPoint.rawValue:
+      let no = UIAlertAction(title: "아니요", style: .default, handler: nil)
+      let yes = UIAlertAction(title: "도전!!", style: .destructive) { (action) in
+//        UserInfo.def.record
+      }
+      UIAlertController.showAlert(title: "도전", message: "등반 도전을 시작 하시나요? 정해진 위치에서 기념 촬영을 해주세요", actions: [no, yes])
+      
+    case CameraButtonStatus.nearFinishPoint.rawValue:
+      break
+    default:
+      print("didTapCameraButton")
+      break
+    }
   }
   
   @objc func didTapRecordButton(_ sender: UIButton) {
@@ -329,12 +431,12 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     recordButton.snp.makeConstraints {
       $0.centerX.equalToSuperview().multipliedBy(1.8)
       $0.centerY.equalTo(cameraButton.snp.centerY)
-      
     }
   }
 }
 
 
+// MARK: - CLLocationManagerDelegate
 extension NMapVC: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -348,9 +450,30 @@ extension NMapVC: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let current = locations.last,
+      abs(current.timestamp.timeIntervalSinceNow) < 10
+    else { return print("locations is nil")}
     
-    //    locations.first?.altitude
-    //    print("altitude", locations.first?.altitude)
+    let coordinate = current.coordinate
+    
+    if UserInfo.def.getChallengeRecord() {  // 도전중 finish point check
+      
+      if UserInfo.def.nearFinishLocationCheck(userLocation: CLLocation(latitude: coordinate.latitude,
+                                                                      longitude: coordinate.latitude)) {
+        self.setCameraButtonStatus(.nearFinishPoint)
+      } else { // 50m 이내 없음
+        self.setCameraButtonStatus(.challenging)
+      }
+      
+    } else {  // 도전중이 아닌 상태 사용자 위치처리
+      if UserInfo.def.nearStartLocationCheck(userLocation: CLLocation(latitude: coordinate.latitude,
+                                                                      longitude: coordinate.latitude)) {
+        self.setCameraButtonStatus(.nearStartPoint)
+      } else { // 500m 이내 없음
+        self.setCameraButtonStatus(.normal)
+      }
+    }
+//    settingLocation()
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
@@ -360,6 +483,7 @@ extension NMapVC: CLLocationManagerDelegate {
   }
 }
 
+// MARK: -  UIImagePickerControllerDelegate
 extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     guard let image = info[.originalImage] as? UIImage else {
