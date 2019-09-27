@@ -110,6 +110,43 @@ class MountainVC: UIViewController {
     self.scrollView.canCancelContentTouches = true
     print("mapButtons.count: \(mapButtons.count), \(self.scrollView.canCancelContentTouches)")
     return
+//<<<<<<< HEAD
+////    // FIXME: -
+////    scrollView.isUserInteractionEnabled = true
+////    scrollView.isExclusiveTouch = true
+////    scrollView.delaysContentTouches = true
+////    scrollView.canCancelContentTouches = true
+////    // FIXME: -
+////
+//    for i in 0...(mountainName.count - 1) {
+//      
+//      let moutainButton = UIButton(type: .custom)
+//        moutainButton.setTitle("\(mountainName[i])", for: .normal)
+//        moutainButton.setImage(UIImage(named: "mtnPin"), for: .normal)
+//        moutainButton.backgroundColor = .black
+//        moutainButton.alpha = 0.8
+//      
+//        scrollView.delaysContentTouches = false
+//        scrollView.isUserInteractionEnabled = true
+////        scrollView.isExclusiveTouch = true
+////        scrollView.delaysContentTouches = true
+////        scrollView.canCancelContentTouches = true
+//      
+//        moutainButton.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
+//        mapAnimationView.addSubview(moutainButton)  //view, scrollview에 올리면 되는데 imageview나 animationView에 올리면 버튼 터치가 안됨
+//      moutainButton.isUserInteractionEnabled = true
+//      mapAnimationView.isUserInteractionEnabled = true
+//      moutainButton.snp.makeConstraints {
+//        $0.centerX.equalTo(myImageView.snp.trailing).multipliedBy(mountainXaxis[i])
+//        $0.centerY.equalTo(myImageView.snp.bottom).multipliedBy(mountainYaxis[i])
+//        $0.width.height.equalTo(20)
+//      }
+//    }
+//    
+////    print("self.scrollView.isUserInteractionEnabled: \(self.scrollView.isUserInteractionEnabled), \(isUserInteractionEnabled)")
+//    
+//=======
+//>>>>>>> a750b7dde377e1cf496b7d87a24bf3d132d37e58
   }
   
   // MARK: - AutoLayout

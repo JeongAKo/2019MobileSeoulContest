@@ -187,6 +187,17 @@ let mountainSampleData: Data = """
     "mtLat" : 37.584899999999998,
     "mtLong" : 126.95784999999999,
     "name" : "인왕산(사직단)"
+  },
+  {
+    "climbingDistance": 0,
+    "etc": "x",
+    "id": 16,
+    "infoLat": 37.54525,
+    "infoLong": 127.05725,
+    "mtAtitude": 10,
+    "mtLat": 37.54977,
+    "mtLong": 127.04691,
+    "name": "학원(Test)"
   }
 ]
 """.data(using: .utf8)!

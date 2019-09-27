@@ -46,6 +46,7 @@ final class FDataBaseManager {
           if status == .success {
             self?.remoteConfig.activateFetched()
             print("success")
+            print(self?.remoteConfig["MountainList"].stringValue)
             guard let jsonString = self?.remoteConfig["MountainList"].stringValue,
               let data = jsonString.data(using: .utf8) else { return print("remoteConfig fail")}
             
