@@ -111,7 +111,7 @@ final class ClibmingDatabase {
     
     do {
       try self.idDB.run(updateId)
-      print("update success id: \(id)")
+      print("recording update success id: \(id)")
     }  catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     }catch {
@@ -232,7 +232,7 @@ final class ClibmingDatabase {
     }
   }
   
-  public func getRecordID(id: Int, complete: @escaping ([UserRecord]) -> Void) {
+  public func getRecordID(id: Int) -> [UserRecord] {
     do {
       var records = [UserRecord]()
       
@@ -246,18 +246,21 @@ final class ClibmingDatabase {
         let mountainID = try record.get(self.mountainID)
         
         records.append(UserRecord(id: id,
-                                  start: Date(timeIntervalSinceNow: start),
-                                  finish: Date(timeIntervalSinceNow: finish),
+                                  start: Date(timeIntervalSinceReferenceDate: start),
+                                  finish: finish != 0.0 ? Date(timeIntervalSinceReferenceDate: finish) : nil,
                                   recode: climbingRecord,
                                   mountainID: mountainID))
       }
       
-      complete(records)
+      return records
+//      complete(records)
     } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     } catch {
       print("delete error: \(error.localizedDescription)")
     }
+    
+    return []
   }
 }
 

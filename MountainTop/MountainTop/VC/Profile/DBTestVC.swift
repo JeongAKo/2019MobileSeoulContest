@@ -11,7 +11,7 @@ import UIKit
 class DBTestVC: UIViewController {
   
   // MARK: - Property
-  let moutainDB = MauntainDatabase()
+//  let moutainDB = MountainDatabase()
   let firebase = FDataBaseManager()
   
   private lazy var startButton: UIButton = {
@@ -41,6 +41,9 @@ class DBTestVC: UIViewController {
     return btn
   }()
   
+  private var startTime: Date?
+  private var finishTime: Date?
+  
   // MARK: - View life cycle
 
   override func viewDidLoad() {
@@ -61,6 +64,12 @@ class DBTestVC: UIViewController {
       $0.top.equalTo(endButton.snp.bottom).offset(Metric.margin)
       $0.leading.width.height.equalTo(startButton)
     }
+
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
   }
 
   // MARK: - Button Action Function
@@ -69,30 +78,13 @@ class DBTestVC: UIViewController {
   }
   
   @objc private func touchStartButton(_ sender: UIButton) {
-    guard UserInfo.def.recordingID == nil else {
-      print("UserInfo.def.recordingID isn't nil")
-      return
-    }
     
-    if let record = UserInfo.def.record {
-      UserInfo.def.recordingID = record.insertRecode(start: Date().timeIntervalSinceNow,
-                                                     finish: nil,
-                                                     recode: "00:00:00",
-                                                     mountainID: 1)
-    }
+    startTime = UserInfo.def.startChallengeMountain()
   }
   
   @objc private func touchEndButton(_ sender: UIButton) {
-    guard let id = UserInfo.def.recordingID else {
-      print("UserInfo.def.recordingID is nil")
-      return
-    }
-    if let record = UserInfo.def.record {
-      record.updateRecode(updateID: id, finish: Date().timeIntervalSinceNow, record: "???")
-      
-      // 초기화 update 후 초기화 필요
-      UserInfo.def.recordingID = nil
-    }
+    let record = UserInfo.def.finishChallengeMountain()
+    print("recordTime: \(record)")
   }
   
   @objc private func touchGetMoutain(_ sender:UIButton) {
@@ -110,11 +102,11 @@ class DBTestVC: UIViewController {
   }
   
   private func testDB() {
-    guard let db = moutainDB else {
-      return print("moutainDB is nil")
-    }
+//    guard let db = moutainDB else {
+//      return print("moutainDB is nil")
+//    }
     
-    let data = db.getMountainInfomations()
+    let data = UserInfo.def.mountainList
     
     print("data: \(data)")
     

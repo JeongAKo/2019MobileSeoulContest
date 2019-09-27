@@ -134,8 +134,11 @@ class LogoutVC: UIViewController {
   }
   
   private func getRecordID() {
-    db?.getRecordID(id: db?.getTotal() ?? 1, complete: { (record) in
-      print("record: \(record)")
-    })
+//    db?.getRecordID(id: db?.getTotal() ?? 1, complete: { (record) in
+//      print("record: \(record)")
+//    })
+    let record = db?.getRecordID(id: db?.getTotal() ?? 1)
+    
+    print("record: \(String(describing: record))")
   }
 }

@@ -11,7 +11,7 @@ import Foundation
 struct UserRecord {
   let id: Int
   let start: Date
-  let finish: Date
+  let finish: Date?
 //  let start: String
 //  let finish: String
   let recode: String?
