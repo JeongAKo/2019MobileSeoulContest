@@ -11,7 +11,9 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+ 
+  let notiCenter = NotificationCenter.default
+  
   var window: UIWindow?
   var loginViewController: UIViewController?
   var mainViewController: UIViewController?
@@ -27,21 +29,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setupEntryController()
     
     // Kakao
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(AppDelegate.kakaoSessionDidChangeWithNotification),
-                                           name: NSNotification.Name.KOSessionDidChange,
-                                           object: nil)
+    notiCenter.addObserver(self,
+                           selector: #selector(AppDelegate.kakaoSessionDidChangeWithNotification),
+                           name: NSNotification.Name.KOSessionDidChange,
+                           object: nil)
     
     reloadRootViewController()
     
+    
+    notiCenter.addObserver(self,
+                           selector: #selector(AppDelegate.moveSecondTab),
+                           name: .tabbarIndex,
+                           object: nil)
+    
     return true
+  }
+  
+  let tapBarController = UITabBarController()
+  
+  deinit {
+     notiCenter.removeObserver(self, name: .tabbarIndex, object: nil)
+    //오빠는 안해주나?
   }
 
   fileprivate func setupEntryController() {
     let navigationController = UINavigationController(rootViewController: LoginVC())
 //    let navigationController2 = UINavigationController(rootViewController: LogoutVC())
     
-    let tapBarController = UITabBarController()
+//    let tapBarController = UITabBarController()
     let mountainVC = MountainVC()
     let nMapVC = NMapVC()
     let userSettingVC = UINavigationController(rootViewController: ProfileVC())//UserSettingVC())
@@ -77,6 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     self.window?.rootViewController = isOpened ? self.mainViewController : self.loginViewController
     self.window?.makeKeyAndVisible()
+  }
+  
+  @objc func moveSecondTab() {
+    tapBarController.selectedIndex = 1
   }
   
   @objc func kakaoSessionDidChangeWithNotification() {
