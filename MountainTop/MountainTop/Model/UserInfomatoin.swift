@@ -17,13 +17,15 @@ final class UserInfo {
   
   public var login = LoginUserInfo()
   
-  public var moutainList: [MountainInfo] = [] {
+  public let mountainDB = MountainDatabase()
+  
+  public var mountainList: [MountainInfo] = [] {
     didSet {
-      guard !moutainList.isEmpty else { return }
+      guard !mountainList.isEmpty else { return }
       
       var start = [CLLocation]()
       var finish = [CLLocation]()
-      for mountain in moutainList {
+      for mountain in mountainList {
         
         start.append(CLLocation(latitude: mountain.infoLat, longitude: mountain.infoLong))
         finish.append(CLLocation(latitude: mountain.mtLat, longitude: mountain.mtLong))
@@ -41,17 +43,43 @@ final class UserInfo {
   public var recordingID: Int? {
     didSet {
       guard let id = recordingID else {
-        recordDB?.updateID(0)
+        self.recordDB?.updateID(0)
+        self.startRecordTime = nil
         return print("recordingID is nil")
       }
       
-      recordDB?.updateID(id)
+      self.recordDB?.updateID(id)
+      
+      if let record = self.recordDB?.getRecordID(id: id).first {
+        self.startRecordTime = record.start
+        print("didSet startRecordTime is \(startRecordTime)")
+      }
       print("didSet recordingID is \(id)")
     }
   }
   
-  private init() {}
+  public var startRecordTime: Date?
   
+  public var nearMountainID: Int?
+  
+  private init() {
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(getMountainList(_:)),
+                                           name: .fetchMountainList,
+                                           object: nil)
+    print("UserInfo init")
+  }
+  
+  // MARK: - init MountainList
+  @objc public func getMountainList(_ sender: Notification) {
+    guard let list = mountainDB?.getMountainInfomations() else {
+      return print("getMountainInfomations is nil")
+    }
+    
+    mountainList = list
+  }
+  
+  // MARK: - checking challenge status
   public func getChallengeRecord() -> Bool {
     return self.recordingID != nil
   }
@@ -91,19 +119,20 @@ final class UserInfo {
   }
   
   // MARK: - Start mountain challenge
-  public func startChallengeMountain(mountainId: Int) -> Date? {
+  public func startChallengeMountain() -> Date? {
     guard let record = self.recordDB else { return nil }
     guard self.recordingID == nil else { return nil }
+    guard let moutainID = self.nearMountainID else { return nil}
     let startDate = Date()
     
     self.recordingID = record.insertRecode(start: startDate.timeIntervalSinceReferenceDate,
                         finish: nil,
                         recode: "",
-                        mountainID: mountainId)
+                        mountainID: moutainID)
     return startDate
   }
   
-  public func finishChallengeMountain() -> Double? {
+  public func finishChallengeMountain() -> String? {
     guard let record = self.recordDB
       else {
         print("record is nil")
@@ -116,21 +145,34 @@ final class UserInfo {
     }
     
     let finishDate = Date()
-    let startInfo = record.getRecordID(id: challengingID)
+    guard let startInfo = record.getRecordID(id: challengingID).first
+      else { print("finishChallengeMountain: getRecord fail"); return nil }
     
     
+    let startTime = startInfo.start
+    let finishTime = Date()
     
-//    record.updateRecode(updateID: challengingID,
-//                        finish: finishDate.timeIntervalSinceReferenceDate,
-//                        record: <#T##String#>)
+    let gapTimeInterval = finishTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
+    let recordTimeString = gapTimeInterval.asTimeString()
+    print("gapTimeInterval: \(gapTimeInterval), \(recordTimeString)")
     
-    return nil
+    record.updateRecode(updateID: challengingID,
+                        finish: finishDate.timeIntervalSinceReferenceDate,
+                        record: recordTimeString)
+    
+    // complete
+    self.recordingID = nil
+    
+    return recordTimeString
   }
   
+  // MARK: - challenge cancel
   public func cancelRecord(id: Int) -> Bool {
     guard let record = self.recordDB else { return false }
     
     record.deleteRecode(delete: id)
+    record.updateID(0)
+    self.recordingID = nil
     return true
   }
   
@@ -148,10 +190,11 @@ final class UserInfo {
   }
   
   public func nearStartLocationCheck(userLocation: CLLocation) -> Bool {
-    guard !mountainStartLocations.isEmpty else { return false }
+    guard !self.mountainStartLocations.isEmpty else { return false }
     
-    for location in mountainStartLocations {
-      if userLocation.distance(from: location) > 500 { // 500m 이내 의경우 true 반환
+    for index in 0..<self.mountainStartLocations.count {
+      if userLocation.distance(from: self.mountainStartLocations[index]) < 50 { // 50m 이내 의경우 true 반환
+        
         return true
       }
     }
@@ -160,14 +203,15 @@ final class UserInfo {
   }
   
   public func nearFinishLocationCheck(userLocation: CLLocation) -> Bool {
-    guard !mountainFinishLocations.isEmpty else { return false }
+    guard !self.mountainFinishLocations.isEmpty else { return false }
     
-    for location in mountainFinishLocations {
-      if userLocation.distance(from: location) > 100 { // 100m 이내 의경우 true 반환
+    for index in 0..<self.mountainFinishLocations.count {
+      if userLocation.distance(from: self.mountainFinishLocations[index]) < 50 { // 10m 이내 의경우 true 반환
+        self.nearMountainID = index
         return true
       }
     }
-    
+    self.nearMountainID = nil
     return false
   }
   

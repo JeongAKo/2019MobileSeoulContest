@@ -111,7 +111,7 @@ final class ClibmingDatabase {
     
     do {
       try self.idDB.run(updateId)
-      print("update success id: \(id)")
+      print("recording update success id: \(id)")
     }  catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
       print("constraint failed: \(message), in \(String(describing: statement)), code: \(code)")
     }catch {

@@ -72,7 +72,7 @@ final class MountainDatabase {
       print("error createTable: \(error.localizedDescription)")
     }
     
-    // 테이블을 생성했을 경우만 Data lord
+    // 테이블을 생성했을 경우만 Data lord 할까? 다할까?
     self.insertMountainData()
   }
   
@@ -155,17 +155,22 @@ final class MountainDatabase {
   private func insertMountainData() {
     
     firebase.fetchMoutainData { [weak self](result) in
+//      //test demo data 사용
+//      NotificationCenter.default.post(name: .fetchMountainList, object: nil)
+//      return
 //      print("self: \(self)")
       guard let `self` = self else { return print("self is nil")}
       switch result {
       case .success(let info):
         self.deleteAllMountainInfomations()
         
+        
         for mountain in info {
           guard self.insertMountainInfomations(info: mountain) else { return print("insert mountain information fail")}
         }
         
         NotificationCenter.default.post(name: .fetchMountainList, object: nil)
+        
       case .failure(let error):
         print("fetchMoutainData error: \(error.localizedDescription)")
         guard let mountainInfos = try? JSONDecoder().decode([MountainInfo].self, from: mountainSampleData)
