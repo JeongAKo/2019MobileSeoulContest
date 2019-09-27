@@ -37,6 +37,8 @@
 		42B52BA32320BC850043A3D2 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52BA22320BC850043A3D2 /* Metric.swift */; };
 		42C7897C2335F7C90005E94B /* RankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897B2335F7C90005E94B /* RankManager.swift */; };
 		42C7897E2335FE890005E94B /* RankerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897D2335FE890005E94B /* RankerInfo.swift */; };
+		42C78980233A0FCF0005E94B /* CameraButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897F233A0FCF0005E94B /* CameraButtonStatus.swift */; };
+		42C78983233A37910005E94B /* LocationCheckType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C78982233A37910005E94B /* LocationCheckType.swift */; };
 		42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FD9231691A30011A751 /* AppDelegate.swift */; };
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
@@ -90,6 +92,8 @@
 		42B52BA22320BC850043A3D2 /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
 		42C7897B2335F7C90005E94B /* RankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankManager.swift; sourceTree = "<group>"; };
 		42C7897D2335FE890005E94B /* RankerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankerInfo.swift; sourceTree = "<group>"; };
+		42C7897F233A0FCF0005E94B /* CameraButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonStatus.swift; sourceTree = "<group>"; };
+		42C78982233A37910005E94B /* LocationCheckType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCheckType.swift; sourceTree = "<group>"; };
 		42D89FD6231691A30011A751 /* MountainTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D89FD9231691A30011A751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D89FE0231691A40011A751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -195,6 +199,8 @@
 				4222C29A232CCDE500619406 /* FontSize.swift */,
 				4222C2A4232E06E500619406 /* MountainLevel.swift */,
 				421E60FF23308B45005D994B /* DbError.swift */,
+				42C7897F233A0FCF0005E94B /* CameraButtonStatus.swift */,
+				42C78982233A37910005E94B /* LocationCheckType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -208,6 +214,14 @@
 				42C7897D2335FE890005E94B /* RankerInfo.swift */,
 			);
 			path = DataType;
+			sourceTree = "<group>";
+		};
+		42C78981233A27950005E94B /* NMapVC */ = {
+			isa = PBXGroup;
+			children = (
+				AB49F80E2327860D00754504 /* NMapVC.swift */,
+			);
+			path = NMapVC;
 			sourceTree = "<group>";
 		};
 		42D89FCD231691A30011A751 = {
@@ -277,9 +291,9 @@
 				AB49F80C2327860D00754504 /* LogoutVC.swift */,
 				AB49F80D2327860D00754504 /* MountainVC.swift */,
 				AB158434233A069800430AD7 /* RankingVC.swift */,
-				AB49F80E2327860D00754504 /* NMapVC.swift */,
 				AB49F8102327860D00754504 /* UserSettingVC.swift */,
 				AB7BF879233371FA00097D63 /* CustomInfoWindowView.xib */,
+				42C78981233A27950005E94B /* NMapVC */,
 				4222C28C2328D14F00619406 /* Profile */,
 			);
 			path = VC;
@@ -443,6 +457,7 @@
 				4222C29D232D436B00619406 /* UserRecordsVC.swift in Sources */,
 				421E61022331DC0B005D994B /* MauntainDatabase.swift in Sources */,
 				4222C2A3232E029900619406 /* CALayer.swift in Sources */,
+				42C78980233A0FCF0005E94B /* CameraButtonStatus.swift in Sources */,
 				AB49F81D23279BB600754504 /* Error+.swift in Sources */,
 				AB158433233A05AC00430AD7 /* RankingTableViewCell.swift in Sources */,
 				4222C28E2328D19F00619406 /* ProfileVC.swift in Sources */,
@@ -452,6 +467,7 @@
 				421E60FA232F5588005D994B /* UserInfomatoin.swift in Sources */,
 				4222C2972328D59C00619406 /* UserClimbingRecord.swift in Sources */,
 				AB49F8172327861B00754504 /* RecordTopView.swift in Sources */,
+				42C78983233A37910005E94B /* LocationCheckType.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 				AB7BF86D2333486900097D63 /* MainColor.swift in Sources */,
 			);
