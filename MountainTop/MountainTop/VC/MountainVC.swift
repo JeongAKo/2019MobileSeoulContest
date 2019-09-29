@@ -8,14 +8,16 @@
 
 import UIKit
 import Lottie
+import ImageIO
+
 
 class MountainVC: UIViewController {
   
   // MARK: - Property
   private let mountainName = ["도봉산", "수락산", "불암산", "용마산", "아차산", "구룡산", "대모산", "우면산", "관악산(관음사)", "북한산(효자동)", "북한산(우이동)", "북악산(한양도성)", "청계산(매봉)", "삼성산", "인왕산(사직단)"]
   
-  private let mountainXaxis = [0.530, 0.685, 0.716, 0.741, 0.762, 0.600, 0.685, 0.543, 0.473, 0.388, 0.434, 0.416, 0.656, 0.438, 0.374]
-  private let mountainYaxis = [0.188, 0.266, 0.268, 0.473, 0.494, 0.748, 0.730, 0.699, 0.748, 0.240, 0.226, 0.374, 0.819, 0.755, 0.399]
+  private let mountainXaxis = [0.542, 0.729, 0.771, 0.781, 0.771, 0.646, 0.750, 0.573, 0.495, 0.365, 0.417, 0.401, 0.677, 0.406, 0.292]
+  private let mountainYaxis = [0.313, 0.313, 0.380, 0.563, 0.615, 0.802, 0.823, 0.771, 0.833, 0.380, 0.333, 0.479, 0.870, 0.859, 0.479]
   
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -30,17 +32,17 @@ class MountainVC: UIViewController {
   
   private lazy var myImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "customMap")
+    imageView.loadGif(name: "mtnTop")
     imageView.contentMode = .scaleAspectFit
     scrollView.addSubview(imageView)
     return imageView
   }()
   
-  private lazy var mapAnimationView: AnimationView = {
-    let animationView = AnimationView()
-    myImageView.addSubview(animationView)
-    return animationView
-  }()
+  //  private lazy var mapAnimationView: AnimationView = {
+  //    let animationView = AnimationView()
+  //    myImageView.addSubview(animationView)
+  //    return animationView
+  //  }()
   
   var array = [UIButton]() // FIXME: - 여기
   
@@ -56,7 +58,7 @@ class MountainVC: UIViewController {
       btn.layer.cornerRadius = 5 // FIXME: - 나중에 보고 수정
       btn.clipsToBounds = true
       btn.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
-      self.mapAnimationView.addSubview(btn)
+      self.myImageView.addSubview(btn)
       self.myImageView.isUserInteractionEnabled = true
       btn.isUserInteractionEnabled = true
       array.append(btn)
@@ -70,19 +72,22 @@ class MountainVC: UIViewController {
     scrollView.delegate = self
     startAnimation()
     configureAutoLayout()
+    view.backgroundColor = #colorLiteral(red: 0.9616169333, green: 0.9346559644, blue: 0.8509911299, alpha: 1)
   }
   
   // MARK: - Action Method
   private func startAnimation() {
-    let starAnimation = Animation.named("8720-hi-wink")
-    mapAnimationView.animation = starAnimation
-    mapAnimationView.center = view.center
-    mapAnimationView.play { fisnished in
-      print("🐠 Animaion finished 🐠")
-      // FIXME: - 깃발 꽂히는 애니메이션효과
-      self.dispalyFlags()
-      self.zoomingLottieView()
-    }
+    
+    //    let starAnimation = Animation.named("data")
+    //    mapAnimationView.animation = starAnimation
+    //    mapAnimationView.center = view.center
+    //    mapAnimationView.play { fisnished in
+    //      print("🐠 Animaion finished 🐠")
+    self.dispalyFlags()
+    //      self.zoomingLottieView()
+    //    }
+    
+    
   }
   
   @objc func didTapMoutainButton(_ sender: UIButton) {
@@ -110,43 +115,6 @@ class MountainVC: UIViewController {
     self.scrollView.canCancelContentTouches = true
     print("mapButtons.count: \(mapButtons.count), \(self.scrollView.canCancelContentTouches)")
     return
-//<<<<<<< HEAD
-////    // FIXME: -
-////    scrollView.isUserInteractionEnabled = true
-////    scrollView.isExclusiveTouch = true
-////    scrollView.delaysContentTouches = true
-////    scrollView.canCancelContentTouches = true
-////    // FIXME: -
-////
-//    for i in 0...(mountainName.count - 1) {
-//      
-//      let moutainButton = UIButton(type: .custom)
-//        moutainButton.setTitle("\(mountainName[i])", for: .normal)
-//        moutainButton.setImage(UIImage(named: "mtnPin"), for: .normal)
-//        moutainButton.backgroundColor = .black
-//        moutainButton.alpha = 0.8
-//      
-//        scrollView.delaysContentTouches = false
-//        scrollView.isUserInteractionEnabled = true
-////        scrollView.isExclusiveTouch = true
-////        scrollView.delaysContentTouches = true
-////        scrollView.canCancelContentTouches = true
-//      
-//        moutainButton.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
-//        mapAnimationView.addSubview(moutainButton)  //view, scrollview에 올리면 되는데 imageview나 animationView에 올리면 버튼 터치가 안됨
-//      moutainButton.isUserInteractionEnabled = true
-//      mapAnimationView.isUserInteractionEnabled = true
-//      moutainButton.snp.makeConstraints {
-//        $0.centerX.equalTo(myImageView.snp.trailing).multipliedBy(mountainXaxis[i])
-//        $0.centerY.equalTo(myImageView.snp.bottom).multipliedBy(mountainYaxis[i])
-//        $0.width.height.equalTo(20)
-//      }
-//    }
-//    
-////    print("self.scrollView.isUserInteractionEnabled: \(self.scrollView.isUserInteractionEnabled), \(isUserInteractionEnabled)")
-//    
-//=======
-//>>>>>>> a750b7dde377e1cf496b7d87a24bf3d132d37e58
   }
   
   // MARK: - AutoLayout
@@ -159,13 +127,14 @@ class MountainVC: UIViewController {
     }
     
     myImageView.snp.makeConstraints {
-      $0.center.equalToSuperview()
+      //      $0.center.equalToSuperview()
+      $0.centerX.equalToSuperview()
+      $0.centerY.equalToSuperview().offset(-50)
       $0.width.height.equalTo(deviceWidht)
     }
-    
-    mapAnimationView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
-    }
+    //    mapAnimationView.snp.makeConstraints {
+    //      $0.edges.equalToSuperview()
+    //    }
   }
 }
 
