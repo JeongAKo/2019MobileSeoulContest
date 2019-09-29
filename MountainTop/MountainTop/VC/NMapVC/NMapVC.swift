@@ -20,6 +20,8 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private var timer = Timer()
   private var recordBool = true
   private lazy var startDate = Date()
+  internal var buttonTag = 0
+  private var directTab: Bool = true
   
 //  private var mountainDB: MountainDatabase!
   
@@ -67,6 +69,14 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     return button
   }()
   
+  private lazy var currentLocationBtn: UIButton = {
+    let button = UIButton(type: .custom)
+    button.setImage(UIImage(named: "currentLocation"), for: .normal)
+    button.alpha = 0.7
+    button.addTarget(self, action: #selector(didTapCurrentLocationBtn(_:)), for: .touchUpInside)
+    return button
+  }()
+  
   private lazy var recordButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(UIImage(named: "recordClock"), for: .normal)
@@ -109,9 +119,15 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     popInfoWindow()
     
     settingMountainInfo()
-//    displayFlags()
+
     
     settingLocation(0)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    applyDesign()
+    cameraUpdate()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -176,9 +192,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
 //    guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: jsonData) else { return print("decoding fail")}
     guard let moutain = mountainList else { return }
     
-    print("⛰moutain⛰:\(moutain)")
-    print("📌moutain[0]📌",moutain[0])
-    print("⌛️Mtn Count⌛️",moutain.count)
+//    print("⛰moutain⛰:\(moutain)")
+//    print("📌moutain[0]📌",moutain[0])
+//    print("⌛️Mtn Count⌛️",moutain.count)
     
     for i in 0...(moutain.count - 1) {
       
@@ -234,18 +250,13 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    applyDesign()
-  }
-  
   
   // MARK: - Action method
   private func configureMapView(_ naverMapView: NMFNaverMapView) {
     naverMapView.mapView.setLayerGroup(NMF_LAYER_GROUP_MOUNTAIN, isEnabled: true)  // 등산로 모드
-    naverMapView.positionMode = .direction
-    naverMapView.showLocationButton = true   // 현 위치 버튼이 활성화되어 있는지 여부
+    naverMapView.positionMode = .normal
     naverMapView.mapView.buildingHeight = 0.5
+    naverMapView.mapView.zoomLevel = 16
   }
   
   private func time() {
@@ -256,6 +267,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     view.addSubview(naverMapView)
     view.addSubview(recordContainerView)
     view.addSubview(buttonContainerView)
+    view.addSubview(currentLocationBtn)
     view.addSubview(recordButton)
     recordContainerView.addSubview(recordView)
     buttonContainerView.addSubview(cameraButton)
@@ -288,6 +300,37 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     }
   }
   
+  
+  internal func cameraUpdate() {
+    // 탭에서 바로 들어갈수 있으니까 시작점과 끝점이 있어야 한다.
+    // 여기서 tag로 lat / lng 확인
+    
+    let lat = self.mapLocation.location.lat
+    let long = self.mapLocation.location.lng
+    
+    let myPosition = NMGLatLng(lat: lat, lng: long)
+    let destiMountain = NMGLatLng(lat: mapLocation.location.lat, lng: mapLocation.location.lng)
+    
+    print("♟location lat: \(mapLocation.location.lat), location lng: \(mapLocation.location.lng)")
+    
+    //    directTab = !directTab
+    
+    //    if moving {
+    //      naverMapView.mapView.cancelTransitions()
+    //    } else {
+    //
+    //    }
+    //    let currentLocation = NMFCameraUpdate(scrollTo: NMGLatLng(lat: 37.686099, lng: 127.036238))
+    //
+    //    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: 37.686099, lng: 127.036238))
+    //    cameraUpdate.animation = .fly
+    //    cameraUpdate.animationDuration = 1
+    //    naverMapView.mapView.moveCamera(cameraUpdate)
+    //    naverMapView.mapView.animationDuration = 0.5
+    
+    // FIXME: - 깃발 나중에 나오게 하기
+  }
+  
   private func applyDesign() {
     view.layoutIfNeeded()
 
@@ -299,6 +342,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
     recordButton.layer.cornerRadius = recordButton.frame.width / 2
     recordButton.clipsToBounds = true
+    
+    currentLocationBtn.layer.cornerRadius = currentLocationBtn.frame.width / 2
+    currentLocationBtn.clipsToBounds = true
     
   }
   
@@ -388,6 +434,15 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     }
   }
   
+  @objc func didTapCurrentLocationBtn(_ sender: UIButton) {
+    
+    let lat = self.mapLocation.location.lat
+    let long = self.mapLocation.location.lng
+    let currentLocation = NMGLatLng(lat: lat, lng: long)
+    
+    naverMapView.mapView.moveCamera(NMFCameraUpdate(scrollTo: currentLocation))
+  }
+  
   @objc func didTapRecordButton(_ sender: UIButton) {
     recordBool.toggle()
     
@@ -451,6 +506,11 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       $0.centerX.equalToSuperview()
       $0.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview()
+    }
+    
+    currentLocationBtn.snp.makeConstraints {
+      $0.centerX.equalTo(cameraButton.snp.leading).offset(-38)
+      $0.centerY.equalTo(cameraButton.snp.centerY)
     }
     
     recordButton.snp.makeConstraints {
