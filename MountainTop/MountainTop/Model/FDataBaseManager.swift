@@ -27,6 +27,8 @@ final class FDataBaseManager {
     return config
   }()
   
+  private var storage = Storage.storage().reference()
+  
   private var obseverHandle: UInt?
   
   init() {
@@ -68,20 +70,26 @@ final class FDataBaseManager {
   private func fetchMountainRankers()  {
     
     ref.child("Ranker").observe(.value, with: { (snapshot) in
-      guard let values = snapshot.value as? [[String: Any]] else { return print("values is nil")}
-      var moutainRecord = [RankerInfo]()
+      guard let values = snapshot.value as? [[[String: Any]]] else { return print("values is nil")}
+      var moutainRecord = [[RankerInfo]]()
       
-      for info in values {
-        if let userName = info["user"] as? String,
-          let profile = info["profileURL"] as? String,
-          let record = info["record"] as? Double,
-          let image = info["image"] as? String {
-          
-          moutainRecord.append(RankerInfo(user: userName,
-                                          record: record,
-                                          profileUrl: profile,
-                                          image: image))
+      for infoArray in values {
+        print("infoArray: \(infoArray)")
+        var recordRank = [RankerInfo]()
+        for info in infoArray {
+          if let userName = info["user"] as? String,
+            let profile = info["profileURL"] as? String,
+            let record = info["record"] as? Double,
+            let image = info["image"] as? String {
+  
+            recordRank.append(RankerInfo(user: userName,
+                                            record: record,
+                                            profileUrl: profile,
+                                            image: image))
+          }
         }
+        moutainRecord.append(recordRank)
+        recordRank.removeAll()
       }
       
       NotificationCenter.default.post(name: .reload, object: nil, userInfo: ["moutainRecords": moutainRecord])
@@ -89,28 +97,52 @@ final class FDataBaseManager {
     }) { (error) in
       print("error: \(error.localizedDescription)")
     }
-//
-//    ref.child("Ranker").observeSingleEvent(of: .value, with: { (snapshot) in
-//
-//      guard let values = snapshot.value as? [[String: Any]] else { return print("values is nil")}
-//      var moutainRecord = [RankerInfo]()
-//
-//      for info in values {
-//        if let userName = info["user"] as? String,
-//          let profile = info["profileURL"] as? String,
-//          let record = info["record"] as? Double,
-//          let image = info["image"] as? String {
-//
-//          moutainRecord.append(RankerInfo(user: userName,
-//                                          record: record,
-//                                          profileUrl: profile,
-//                                          image: image))
-//        }
-//      }
-//    }) { (error) in
-//      print(error.localizedDescription)
-//    }
-//
+  }
+  
+  public func postMountainRecordRank(index: Int, rankersInfo: [RankerInfo]) {
+    
+    var rank: [AnyHashable: Any] = [:]
+    
+    for index in 0..<rankersInfo.count {
+      rank["/\(index)/user"] = rankersInfo[index].user
+      rank["/\(index)/record"] = rankersInfo[index].record
+      rank["/\(index)/profileURL"] = rankersInfo[index].profileUrl
+      rank["/\(index)/image"] = rankersInfo[index].image
+    }
+
+    ref.child("Ranker").child("\(index)").updateChildValues(rank)//updateChildValues(rankInfo)
+  }
+  
+  public func uploadRankerImage(index: Int, rankIndex: Int, image: UIImage) {
+    guard let imageData = image.jpegData(compressionQuality: 0.7) else { return print("")}
+    let upload = storage.child("Ranker").child("/images").child("\(index)").child("\(rankIndex).jpg")
+    
+    upload.putData(imageData, metadata: nil) { (metaData, error) in
+      guard let error = error else { return  }
+      if let meta = metaData {
+        print("upload Date: \(String(describing: meta.updated))")
+      } else {
+        print("error: \(error.localizedDescription)")
+      }
+    }
+  }
+  
+  public func downloadRankerImage(index: Int, rankIndex: Int, completionHandler: @escaping ((Data) -> Void)) {
+    let download = storage.child("Ranker").child("/images").child("\(index)").child("\(rankIndex).jpg")
+    
+    download.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+      guard error != nil else {
+        print("error: \(String(describing: error?.localizedDescription))")
+        return
+      }
+      
+      guard let data = data else {
+        print("downloadRankerImage: is nil ")
+        return
+      }
+      
+      completionHandler(data)
+    }
   }
   
 }

@@ -144,7 +144,7 @@ final class ClibmingDatabase {
   }
   
   public func insertRecode(start: Double, finish: Double?, recode: String, mountainID: Int) -> Int {
-    print("insert Recode: \(start), \(Date(timeIntervalSinceNow: start as TimeInterval))")
+    print("insert Recode: \(start), \(Date(timeIntervalSinceReferenceDate: start as TimeInterval))")
     
     
     let insertRecode = self.userRecode.insert(self.startTime <- start,
@@ -167,7 +167,7 @@ final class ClibmingDatabase {
   }
   
   public func updateRecode(updateID: Int, finish: Double, record: String) {
-    print("update Recode: \(finish), \(Date(timeIntervalSinceNow: finish as TimeInterval))")
+    print("update Recode: \(finish), \(Date(timeIntervalSinceReferenceDate: finish as TimeInterval))")
     
     let updateFilter = self.userRecode.filter(self.id == updateID)
     
@@ -218,8 +218,8 @@ final class ClibmingDatabase {
         print("id: \(id), start: \(start), finish: \(finish), record: \(climbingRecord), mountainID: \(mountainID)")
         
         records.append(UserRecord(id: id,
-                                  start: Date(timeIntervalSinceNow: start),
-                                  finish: Date(timeIntervalSinceNow: finish),
+                                  start: Date(timeIntervalSinceReferenceDate: start),
+                                  finish: Date(timeIntervalSinceReferenceDate: finish),
                                   recode: climbingRecord,
                                   mountainID: mountainID))
       }

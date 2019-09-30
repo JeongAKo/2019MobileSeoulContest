@@ -19,7 +19,8 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private let calender = Calendar.current
   private var timer = Timer()
   private var recordBool = true
-  private lazy var startDate = Date()
+  private var startDate: Date?
+//  private lazy var startDate = Date()
   internal var buttonTag = 0
   internal var directTab: Bool = false
   
@@ -123,16 +124,30 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     settingLocation(0)
   }
   
+//  override func viewWillAppear(_ animated: Bool) {
+//    super.viewWillAppear(animated)
+//    applyDesign()
+//    cameraUpdate()
+//  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     applyDesign()
-    cameraUpdate()
+    
+    self.timer.fire()
+    
+    if let startDate = UserInfo.def.startRecordTime {
+      self.startDate = startDate
+      self.time()
+    }
+    
+    
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    
+    cameraUpdate()
   }
   
   private func settingMountainInfo() {
@@ -248,6 +263,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     
     
   }
+
   
   
   // MARK: - Action method
@@ -309,25 +325,25 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       print("🎸mountain Lat", mountainList?[1].mtLat)
       print("🎸mountain mtLong", mountainList?[1].mtLong)
       
-      guard let lat = mountainList?[buttonTag].mtLat else { return print("can't get mtn lat info") }
-      guard let long = mountainList?[buttonTag].mtLong else { return print("can't get mtn lng info") }
+      guard let lat = mountainList?[buttonTag-1].mtLat else { return print("can't get mtn lat info") }
+      guard let long = mountainList?[buttonTag-1].mtLong else { return print("can't get mtn lng info") }
       let mtnPosition = NMGLatLng(lat: lat, lng: long)
       let destiMountain = NMFCameraUpdate(scrollTo: mtnPosition)
       destiMountain.animation = .fly
       destiMountain.animationDuration = 1
       naverMapView.mapView.moveCamera(destiMountain)
       naverMapView.mapView.animationDuration = 0.5
-      
+      naverMapView.mapView.zoomLevel = 15
       directTab.toggle()
       
     } else {
-      let directLat = mapLocation.location.lat
-      let directLong = mapLocation.location.lng
-      let currentPosition = NMFCameraUpdate(scrollTo: NMGLatLng(lat: directLat, lng: directLong))
-      currentPosition.animation = .fly
-      currentPosition.animationDuration = 1
-      naverMapView.mapView.moveCamera(currentPosition)
-      naverMapView.mapView.animationDuration = 0.5
+//      let directLat = mapLocation.location.lat
+//      let directLong = mapLocation.location.lng
+//      let currentPosition = NMFCameraUpdate(scrollTo: NMGLatLng(lat: directLat, lng: directLong))
+//      currentPosition.animation = .fly
+//      currentPosition.animationDuration = 1
+//      naverMapView.mapView.moveCamera(currentPosition)
+//      naverMapView.mapView.animationDuration = 0.5
       
     }
   }
@@ -351,7 +367,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   @objc private func keepTimer() {
     
-    let startTime = calender.dateInterval(of: .nanosecond, for: startDate)
+    guard let date = self.startDate else { return }
+    
+    let startTime = calender.dateInterval(of: .nanosecond, for: date)
     var endDate = Date()
     let endTime = calender.dateInterval(of: .nanosecond, for: endDate)
     let timePeriod = calender.dateComponents([.second], from: startTime!.start, to: endTime!.end)
@@ -360,19 +378,30 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     //    let duration = TimeInterval(Double(progressTime ?? 0))
     
     let duration = TimeInterval(progressTime)
-    recordView.challengerRecordTimeLabel.text = duration.asTimeString() // Duration -> Date
+//    recordView.challengerRecordTimeLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+    recordView.challengerRecordTimeLabel.text = duration.asTimeString2() // Duration -> Date
+   
+//    recordView.transform =
     
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "ko_KR")
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//    UIView.animate(withDuration: 0.8, animations: { [weak self] in
+//      guard let `self` = self else { return }
+////      self.recordView.challengerRecordTimeLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+//    }) { [weak self] (flag) in
+//      guard let `self` = self else { return }
+//
+//    }
     
-    let endFommat = dateFormatter.string(from: endDate)
-    let startFommat = dateFormatter.string(from: startDate)
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.locale = Locale(identifier: "ko_KR")
+//    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    print("endFommat", endFommat)
-    print("startFommat", startFommat)
-    print("timePeriod", timePeriod)
-    print("progressTime", progressTime)
+//    let endFommat = dateFormatter.string(from: endDate)
+//    let startFommat = dateFormatter.string(from: date)
+    
+//    print("endFommat", endFommat)
+//    print("startFommat", startFommat)
+//    print("timePeriod", timePeriod)
+//    print("progressTime", progressTime)
   }
   
   public func setCameraButtonStatus(_ status: CameraButtonStatus) {
@@ -389,6 +418,14 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       cameraButton.setTitle("기록도전", for: .normal)
       cameraButton.tag = CameraButtonStatus.nearStartPoint.rawValue
       
+      if let moutainID = UserInfo.def.nearMountainID {
+        let record = UserInfo.def.climbingRankers[moutainID][0].record
+        if record > 0 {
+          recordView.winnerRecordTimeLabel.text = record.asTimeString2()
+        }
+      }
+      
+      
     case .nearFinishPoint:
       cameraButton.setTitle("등반완료", for: .normal)
       cameraButton.tag = CameraButtonStatus.nearFinishPoint.rawValue
@@ -400,7 +437,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   @objc func didTapCameraButton(_ sender: UIButton) {
     switch sender.tag {
     case CameraButtonStatus.normal.rawValue:
-      UIAlertController.showMessage("도전을 하시려면 시작위치로 이동해주세요!", vc: self)
+      UIAlertController.showMessage("도전 하시려면 시작위치로 이동해주세요!", vc: self)
       
     case CameraButtonStatus.challenging.rawValue:
       let no = UIAlertAction(title: "도전!!", style: .default, handler: nil)
@@ -412,20 +449,21 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       UIAlertController.showAlert(title: "도전취소", message: "등반 도전을 취소 하시나요?", actions: [no, yes], vc: self)
       
     case CameraButtonStatus.nearStartPoint.rawValue:
-      let no = UIAlertAction(title: "아니요", style: .default, handler: nil)
-      let yes = UIAlertAction(title: "도전!!", style: .destructive) { [weak self] (action) in
-        if let _ = UserInfo.def.startChallengeMountain() {
-          UIAlertController.showMessage("도전을 시작합니다.", vc: self)
-        } else {
-          UIAlertController.showMessage("startChallengeMountain: error", vc: self)
-        }
+      let no = UIAlertAction(title: "아니요", style: .destructive, handler: nil)
+      let yes = UIAlertAction(title: "도전!!", style: .default) { [weak self] (action) in
+        guard let `self` = self else { return print("nearStartPoint: self is nil")}
+        
+        self.present(self.imagePickerController, animated: true, completion: nil)
       }
-      UIAlertController.showAlert(title: "도전", message: "등반 도전을 시작 하시나요? 정해진 위치에서 기념 촬영을 해주세요", actions: [no, yes], vc: self)
+      UIAlertController.showAlert(title: "도전", message: "등반 도전을 시작 하시나요?\n 정해진 위치에서 기념 촬영을 해주세요", actions: [no, yes], vc: self)
       
     case CameraButtonStatus.nearFinishPoint.rawValue:
       let no = UIAlertAction(title: "아니요", style: .destructive, handler: nil)
-      let yes = UIAlertAction(title: "기록", style: .default) { (action) in
+      let yes = UIAlertAction(title: "기록", style: .default) { [weak self] (action) in
+//        UIAlertController.showMessage("도전을 완료했습니다.", vc: self)
+        guard let `self` = self else { return print("nearStartPoint: self is nil")}
         
+        self.present(self.imagePickerController, animated: true, completion: nil)
       }
       
       UIAlertController.showAlert(title: "등반완료", message: "등반을 완료 하셨습니다! 정해진 위치에서 기념찰영을 해주세요", actions: [no, yes], vc: self)
@@ -519,6 +557,18 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       $0.centerY.equalTo(cameraButton.snp.centerY)
     }
   }
+  
+  private func presentFinishMountainClimbing(record: String, image: UIImage) {
+    let vc = FinishClimbingVC()
+    
+    
+    vc.modalTransitionStyle = .crossDissolve
+    vc.modalPresentationStyle = .overFullScreen
+    present(vc, animated: true)
+//    self.present(vc, animated: true, completion: nil)
+    vc.setRecordingInfomation(record, image)
+    vc.recordLabel.text = "등반 기록: \(record)"
+  }
 }
 
 
@@ -536,8 +586,8 @@ extension NMapVC: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let current = locations.last,
-      abs(current.timestamp.timeIntervalSinceNow) < self.locatoinCheckTimeInterval
+    guard let current = locations.last//,
+//      abs(current.timestamp.timeIntervalSinceNow) > self.locatoinCheckTimeInterval
     else { return print("locations is nil")}
     
     let coordinate = current.coordinate
@@ -546,21 +596,24 @@ extension NMapVC: CLLocationManagerDelegate {
       
       if UserInfo.def.nearFinishLocationCheck(userLocation: CLLocation(latitude: coordinate.latitude,
                                                                        longitude: coordinate.longitude)) {
-        self.locatoinCheckTimeInterval = 3
+        self.locatoinCheckTimeInterval = 1
         self.setCameraButtonStatus(.nearFinishPoint)
+        self.settingLocation(2)
       } else {
-        self.locatoinCheckTimeInterval = 10
+        self.locatoinCheckTimeInterval = 3
         self.setCameraButtonStatus(.challenging) // 50m 이내 없음
       }
       
     } else {  // 도전중이 아닌 상태 사용자 위치처리
       if UserInfo.def.nearStartLocationCheck(userLocation: CLLocation(latitude: coordinate.latitude,
                                                                       longitude: coordinate.longitude)) {
-        self.locatoinCheckTimeInterval = 3
+        self.locatoinCheckTimeInterval = 1
         self.setCameraButtonStatus(.nearStartPoint) // 시작위치
+        self.settingLocation(1)
       } else {
-        self.locatoinCheckTimeInterval = 10
+        self.locatoinCheckTimeInterval = 3
         self.setCameraButtonStatus(.normal) // 50m 이내 없음
+        self.settingLocation(0)
       }
     }
 //    settingLocation()
@@ -581,15 +634,35 @@ extension NMapVC: UINavigationControllerDelegate, UIImagePickerControllerDelegat
       return
     }
     
-    if UserInfo.def.getChallengeRecord() {
-      saveToAlbum(named: "서울 봉우리", image: image)
-      print("📷saved image")
-      time()
-    } else {
-      
+    imagePickerController.dismiss(animated: true, completion: nil)
+    
+    if UserInfo.def.getChallengeRecord() {  // 도전 완료
+      if let timeRecord = UserInfo.def.finishChallengeMountain(image: image) {
+        saveToAlbum(named: "서울 봉우리", image: image)
+        print("📷saved finish image: \(timeRecord)")
+        
+        self.startDate = nil
+        self.recordView.challengerRecordTimeLabel.text = "00:00:00"
+        self.setCameraButtonStatus(.normal)
+        self.presentFinishMountainClimbing(record: timeRecord, image: image)
+      } else {
+        print("finishChallengeMountain is nil")
+      }
+    } else {  // 도전 시작
+      if let date = UserInfo.def.startChallengeMountain() {
+        saveToAlbum(named: "서울 봉우리", image: image)
+        print("📷saved start image")
+        self.locatoinCheckTimeInterval = 1
+        self.startDate = date
+        time()
+        self.setCameraButtonStatus(.challenging)
+//        presentFinishMountainClimbing(record: "", image: image)
+      } else {
+        print("startChallengeMountain is nil")
+      }
     }
     
-    imagePickerController.dismiss(animated: true, completion: nil)
+    
   }
 }
 

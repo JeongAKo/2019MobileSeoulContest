@@ -33,9 +33,9 @@ class RecordTopView: UIView {
     return label
   }()
   
-  private lazy var winnerRecordTimeLabel: UILabel = {
+  public lazy var winnerRecordTimeLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
-    label.text = "01 : 35 : 29"
+    label.text = "00 : 00 : 00"
     label.font = UIFont(name: "Helvetica Bold Oblique", size: 20)
     label.textColor = .lightGray
     label.textAlignment = .center
