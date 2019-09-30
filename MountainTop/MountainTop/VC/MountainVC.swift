@@ -8,55 +8,55 @@
 
 import UIKit
 import Lottie
+import ImageIO
+
 
 class MountainVC: UIViewController {
   
   // MARK: - Property
   private let mountainName = ["도봉산", "수락산", "불암산", "용마산", "아차산", "구룡산", "대모산", "우면산", "관악산(관음사)", "북한산(효자동)", "북한산(우이동)", "북악산(한양도성)", "청계산(매봉)", "삼성산", "인왕산(사직단)"]
   
-  private let mountainXaxis = [0.530, 0.685, 0.716, 0.741, 0.762, 0.600, 0.685, 0.543, 0.473, 0.388, 0.434, 0.416, 0.656, 0.438, 0.374]
-  private let mountainYaxis = [0.188, 0.266, 0.268, 0.473, 0.494, 0.748, 0.730, 0.699, 0.748, 0.240, 0.226, 0.374, 0.819, 0.755, 0.399]
+  private let mountainXaxis = [0.542, 0.729, 0.771, 0.781, 0.771, 0.646, 0.750, 0.573, 0.495, 0.365, 0.417, 0.401, 0.677, 0.406, 0.292]
+  private let mountainYaxis = [0.313, 0.313, 0.380, 0.563, 0.615, 0.802, 0.823, 0.771, 0.833, 0.380, 0.333, 0.479, 0.870, 0.859, 0.479]
   
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     scrollView.zoomScale = 1
     scrollView.minimumZoomScale = 1
-    scrollView.maximumZoomScale = 3
+    scrollView.maximumZoomScale = 1.8
     scrollView.showsVerticalScrollIndicator = false
     scrollView.showsHorizontalScrollIndicator = false
     view.addSubview(scrollView)
     return scrollView
   }()
   
-  private lazy var myImageView: UIImageView = {
+  private lazy var mtnImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "customMap")
+    imageView.loadGif(name: "mtnTop")
     imageView.contentMode = .scaleAspectFit
     scrollView.addSubview(imageView)
     return imageView
   }()
   
-  private lazy var mapAnimationView: AnimationView = {
-    let animationView = AnimationView()
-    myImageView.addSubview(animationView)
-    return animationView
-  }()
+  var array = [UIButton]()
   
   private lazy var mapButtons: [UIButton] = {
-    var array = [UIButton]()
-    for i in 0..<15 {
+    for i in 0..<mountainName.count {
       let btn = UIButton(type: .custom)
+      btn.tag = i + 1
       btn.setTitle("\(mountainName[i])", for: .normal)
-      btn.setImage(UIImage(named: "mtnPin"), for: .normal)
-      btn.backgroundColor = .black
+      btn.setTitleColor(.darkGray, for: .normal)
+      btn.titleLabel?.font = UIFont.systemFont(ofSize: 5)
+      btn.backgroundColor = .white
       btn.alpha = 0.8
+      btn.layer.cornerRadius = 5 // FIXME: - 나중에 보고 수정
+      btn.clipsToBounds = true
       btn.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
-      self.mapAnimationView.addSubview(btn)
-      self.myImageView.isUserInteractionEnabled = true
+      self.mtnImageView.addSubview(btn)
+      self.mtnImageView.isUserInteractionEnabled = true
       btn.isUserInteractionEnabled = true
       array.append(btn)
     }
-    
     return array
   }()
   
@@ -65,86 +65,52 @@ class MountainVC: UIViewController {
     super.viewDidLoad()
     scrollView.delegate = self
     startAnimation()
-    dispalyFlags()
     configureAutoLayout()
+    view.backgroundColor = #colorLiteral(red: 0.9616169333, green: 0.9346559644, blue: 0.8509911299, alpha: 1)
   }
   
   // MARK: - Action Method
   private func startAnimation() {
-    let starAnimation = Animation.named("8720-hi-wink")
-    mapAnimationView.animation = starAnimation
-    mapAnimationView.center = view.center
-    mapAnimationView.play { fisnished in
-      print("🐠 Animaion finished 🐠")
-      // FIXME: - 애니메이션 끝나기 전까지 버튼 클릭 못하게 막기
-      self.zoomingLottieView()
+    
+    UIView.animateKeyframes(withDuration: 0.3, delay: 1, animations: {
+      
+    }) { _ in
+      self.dispalyFlags()
+      self.zoomingImageView()
+
     }
   }
   
   @objc func didTapMoutainButton(_ sender: UIButton) {
-    
     let rankingVC = RankingVC()
+    rankingVC.buttonTag = sender.tag
+    
     rankingVC.modalPresentationStyle = .overCurrentContext
     present(rankingVC, animated: false)
   }
   
-  private func zoomingLottieView() {
+  private func zoomingImageView() {
     UIView.animate(withDuration: 1) {
-      
-      self.scrollView.zoomScale = 2.5
-      self.scrollView.minimumZoomScale = 2.5
+      self.scrollView.zoomScale = 1.5
+      self.scrollView.minimumZoomScale = 1.5
+  
+      self.mtnImageView.snp.updateConstraints {
+        let yValue = self.view.frame.height * 0.25
+        $0.centerY.equalToSuperview().offset(-yValue)
+      }
     }
   }
   
   private func dispalyFlags() {
     for i in 0..<mapButtons.count {
       mapButtons[i].snp.makeConstraints {
-        $0.centerX.equalTo(self.myImageView.snp.trailing).multipliedBy(self.mountainXaxis[i])
-        $0.centerY.equalTo(self.myImageView.snp.bottom).multipliedBy(self.mountainYaxis[i])
-        $0.width.height.equalTo(20)
-        print(mountainXaxis[i])
+        $0.centerX.equalTo(self.mtnImageView.snp.trailing).multipliedBy(self.mountainXaxis[i])
+        $0.centerY.equalTo(self.mtnImageView.snp.bottom).multipliedBy(self.mountainYaxis[i])
+//        print(mountainXaxis[i])
       }
     }
     self.scrollView.canCancelContentTouches = true
-    print("mapButtons.count: \(mapButtons.count), \(self.scrollView.canCancelContentTouches)")
     return
-//<<<<<<< HEAD
-////    // FIXME: -
-////    scrollView.isUserInteractionEnabled = true
-////    scrollView.isExclusiveTouch = true
-////    scrollView.delaysContentTouches = true
-////    scrollView.canCancelContentTouches = true
-////    // FIXME: -
-////
-//    for i in 0...(mountainName.count - 1) {
-//      
-//      let moutainButton = UIButton(type: .custom)
-//        moutainButton.setTitle("\(mountainName[i])", for: .normal)
-//        moutainButton.setImage(UIImage(named: "mtnPin"), for: .normal)
-//        moutainButton.backgroundColor = .black
-//        moutainButton.alpha = 0.8
-//      
-//        scrollView.delaysContentTouches = false
-//        scrollView.isUserInteractionEnabled = true
-////        scrollView.isExclusiveTouch = true
-////        scrollView.delaysContentTouches = true
-////        scrollView.canCancelContentTouches = true
-//      
-//        moutainButton.addTarget(self, action: #selector(didTapMoutainButton(_:)), for: .touchUpInside)
-//        mapAnimationView.addSubview(moutainButton)  //view, scrollview에 올리면 되는데 imageview나 animationView에 올리면 버튼 터치가 안됨
-//      moutainButton.isUserInteractionEnabled = true
-//      mapAnimationView.isUserInteractionEnabled = true
-//      moutainButton.snp.makeConstraints {
-//        $0.centerX.equalTo(myImageView.snp.trailing).multipliedBy(mountainXaxis[i])
-//        $0.centerY.equalTo(myImageView.snp.bottom).multipliedBy(mountainYaxis[i])
-//        $0.width.height.equalTo(20)
-//      }
-//    }
-//    
-////    print("self.scrollView.isUserInteractionEnabled: \(self.scrollView.isUserInteractionEnabled), \(isUserInteractionEnabled)")
-//    
-//=======
-//>>>>>>> a750b7dde377e1cf496b7d87a24bf3d132d37e58
   }
   
   // MARK: - AutoLayout
@@ -152,17 +118,15 @@ class MountainVC: UIViewController {
     let deviceWidht = UIScreen.main.bounds.width
     
     scrollView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
+      $0.edges.equalTo(view.safeAreaLayoutGuide)
       $0.center.equalTo(view.snp.center)
     }
     
-    myImageView.snp.makeConstraints {
-      $0.center.equalToSuperview()
+    mtnImageView.snp.makeConstraints {
+      let yValue = view.frame.height * 0.25
+      $0.centerX.equalToSuperview()
+      $0.centerY.equalToSuperview().offset(-50)
       $0.width.height.equalTo(deviceWidht)
-    }
-    
-    mapAnimationView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
     }
   }
 }
@@ -170,7 +134,7 @@ class MountainVC: UIViewController {
 
 extension MountainVC: UIScrollViewDelegate {
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-    return myImageView
+    return mtnImageView
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -256,7 +256,7 @@ final class UserInfo {
     guard !self.mountainStartLocations.isEmpty else { return false }
     
     for index in 0..<self.mountainStartLocations.count {
-      if userLocation.distance(from: self.mountainStartLocations[index]) < 5000 { // 50m 이내 의경우 true 반환
+      if userLocation.distance(from: self.mountainStartLocations[index]) < 50 { // 50m 이내 의경우 true 반환
         self.nearMountainID = index
         return true
       }
@@ -269,7 +269,7 @@ final class UserInfo {
     guard !self.mountainFinishLocations.isEmpty else { return false }
     
     for index in 0..<self.mountainFinishLocations.count {
-      if userLocation.distance(from: self.mountainFinishLocations[index]) < 5000 { // 50m 이내 의경우 true 반환
+      if userLocation.distance(from: self.mountainFinishLocations[index]) < 50 { // 50m 이내 의경우 true 반환
         self.nearMountainID = index
         return true
       }
