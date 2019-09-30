@@ -78,13 +78,26 @@ class DBTestVC: UIViewController {
   }
   
   @objc private func touchStartButton(_ sender: UIButton) {
-    
-    startTime = UserInfo.def.startChallengeMountain()
+    var rankerInfo: [RankerInfo] = [
+      RankerInfo(user: "창근1", record: 101, profileUrl: "profile1", image: "image1"),
+      RankerInfo(user: "창근2", record: 102, profileUrl: "profile2", image: "image2"),
+      RankerInfo(user: "창근3", record: 103, profileUrl: "profile3", image: "image3"),
+    ]
+    firebase.postMountainRecordRank(index: 0, rankersInfo: rankerInfo)
+//    startTime = UserInfo.def.startChallengeMountain()
   }
   
   @objc private func touchEndButton(_ sender: UIButton) {
-    let record = UserInfo.def.finishChallengeMountain()
-    print("recordTime: \(record)")
+
+    let rankerInfo = RankerInfo(user: UserInfo.def.login.name,
+                                record: 50.0,
+                                profileUrl: UserInfo.def.login.profile,
+                                image: "")
+    
+    
+//    if let newRanking = UserInfo.def.compareMountainRanks(mountainID: 0, nowRecord: rankerInfo) {
+//      firebase.postMountainRecordRank(index: 0, rankersInfo: newRanking)
+//    }
   }
   
   @objc private func touchGetMoutain(_ sender:UIButton) {

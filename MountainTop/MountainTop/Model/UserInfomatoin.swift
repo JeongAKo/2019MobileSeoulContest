@@ -13,11 +13,13 @@ final class UserInfo {
   
   static public let def = UserInfo()
   
-  private var recordDB = ClibmingDatabase()
+  public var recordDB = ClibmingDatabase()
   
   public var login = LoginUserInfo()
   
   public let mountainDB = MountainDatabase()
+  
+  private let firebase = FDataBaseManager()
   
   public var mountainList: [MountainInfo] = [] {
     didSet {
@@ -33,6 +35,14 @@ final class UserInfo {
       
       mountainStartLocations = start
       mountainFinishLocations = finish
+    }
+  }
+  
+  public var climbingRankers: [[RankerInfo]] = [] {
+    didSet {
+      guard !climbingRankers.isEmpty else { return print("climbingRankers is empty")}
+      
+      
     }
   }
   
@@ -67,6 +77,10 @@ final class UserInfo {
                                            selector: #selector(getMountainList(_:)),
                                            name: .fetchMountainList,
                                            object: nil)
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(getClimbingRankerList(_:)),
+                                           name: .reload,
+                                           object: nil)
     print("UserInfo init")
   }
   
@@ -77,6 +91,13 @@ final class UserInfo {
     }
     
     mountainList = list
+  }
+  
+  @objc private func getClimbingRankerList(_ sender: Notification) {
+    guard let dict = sender.userInfo as? [String: [[RankerInfo]]],
+      let list = dict["moutainRecords"] else { return }
+    
+    self.climbingRankers = list
   }
   
   // MARK: - checking challenge status
@@ -112,6 +133,13 @@ final class UserInfo {
   
   public func activeApp() {
     self.recordingID = recordDB?.getUsingID()
+    
+    if let id = self.recordingID,
+      let record = recordDB?.getRecordID(id: id).first{
+      self.startRecordTime = record.start
+    } else {
+      self.startRecordTime = nil
+    }
   }
   
   public func backgroundApp() {
@@ -129,10 +157,13 @@ final class UserInfo {
                         finish: nil,
                         recode: "",
                         mountainID: moutainID)
+    
+    self.startRecordTime = startDate
     return startDate
   }
   
-  public func finishChallengeMountain() -> String? {
+  // MARK: - finish record
+  public func finishChallengeMountain(image: UIImage) -> String? {
     guard let record = self.recordDB
       else {
         print("record is nil")
@@ -143,6 +174,7 @@ final class UserInfo {
         print("finishChallengeMountain: recordingID is nil")
         return nil
     }
+    guard let moutainID = self.nearMountainID else { print("self.nearMountainID is nil"); return nil }
     
     let finishDate = Date()
     guard let startInfo = record.getRecordID(id: challengingID).first
@@ -160,10 +192,41 @@ final class UserInfo {
                         finish: finishDate.timeIntervalSinceReferenceDate,
                         record: recordTimeString)
     
+    let rankerInfo = RankerInfo(user: UserInfo.def.login.name,
+                                record: gapTimeInterval,
+                                profileUrl: UserInfo.def.login.profile,
+                                image: "")
+    
+    
+    if let newRanking = compareMountainRanks(mountainID: moutainID, nowRecord: rankerInfo, image: image) {
+      firebase.postMountainRecordRank(index: moutainID, rankersInfo: newRanking)
+    }
+    
     // complete
     self.recordingID = nil
     
     return recordTimeString
+  }
+  
+  public func compareMountainRanks(mountainID: Int, nowRecord: RankerInfo, image: UIImage) -> [RankerInfo]? {
+    var rankers = climbingRankers[mountainID]
+    
+    for index in 0..<rankers.count {
+      if rankers[index].record < 0 {
+        rankers.insert(nowRecord, at: index)
+        rankers.remove(at: 3)
+        firebase.uploadRankerImage(index: mountainID, rankIndex: index, image: image)
+        return rankers
+      } else {
+        if rankers[index].record > nowRecord.record {
+          rankers.insert(nowRecord, at: index)
+          rankers.remove(at: 3)
+        firebase.uploadRankerImage(index: mountainID, rankIndex: index, image: image)
+          return rankers
+        }
+      }
+    }
+    return nil
   }
   
   // MARK: - challenge cancel
@@ -193,20 +256,7 @@ final class UserInfo {
     guard !self.mountainStartLocations.isEmpty else { return false }
     
     for index in 0..<self.mountainStartLocations.count {
-      if userLocation.distance(from: self.mountainStartLocations[index]) < 50 { // 50m 이내 의경우 true 반환
-        
-        return true
-      }
-    }
-    
-    return false
-  }
-  
-  public func nearFinishLocationCheck(userLocation: CLLocation) -> Bool {
-    guard !self.mountainFinishLocations.isEmpty else { return false }
-    
-    for index in 0..<self.mountainFinishLocations.count {
-      if userLocation.distance(from: self.mountainFinishLocations[index]) < 50 { // 10m 이내 의경우 true 반환
+      if userLocation.distance(from: self.mountainStartLocations[index]) < 5000 { // 50m 이내 의경우 true 반환
         self.nearMountainID = index
         return true
       }
@@ -215,4 +265,16 @@ final class UserInfo {
     return false
   }
   
+  public func nearFinishLocationCheck(userLocation: CLLocation) -> Bool {
+    guard !self.mountainFinishLocations.isEmpty else { return false }
+    
+    for index in 0..<self.mountainFinishLocations.count {
+      if userLocation.distance(from: self.mountainFinishLocations[index]) < 5000 { // 50m 이내 의경우 true 반환
+        self.nearMountainID = index
+        return true
+      }
+    }
+    self.nearMountainID = nil
+    return false
+  }
 }

@@ -26,6 +26,8 @@ class UserRecordsVC: UIViewController {
     return tb
   }()
   
+  public var climbingList: [UserRecord] = []
+  
   // MARK: - View life cycle
   
   deinit {
@@ -41,13 +43,14 @@ class UserRecordsVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupNavigationBar()
+    
     settingTableView()
+    setupNotification()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    setupNotification()
+    setupNavigationBar()
   }
   
   // MARK: - setup control
@@ -74,6 +77,28 @@ class UserRecordsVC: UIViewController {
     self.navigationController?.popViewController(animated: true)
   }
   
+  private func getDate(_ date: Date) -> String {
+    let formet = DateFormatter()
+    formet.dateFormat = "yyyy-MM-dd"
+//    formet.
+    return formet.string(from: date)
+  }
+  
+  private func getRecord(start: Date, finish: Date) -> String {
+    
+    let record = finish.timeIntervalSinceReferenceDate - start.timeIntervalSinceReferenceDate
+    return record.asTimeString2()
+  }
+  
+  private func getMountainName(_ id: Int) -> String {
+    guard id > 0 else { return "unknown"}
+    return UserInfo.def.mountainList[id - 1].name
+  }
+  
+  private func getDistance(start: Date, finish: Date) -> String {
+    let record = finish.timeIntervalSinceReferenceDate - start.timeIntervalSinceReferenceDate
+    return record.asTimeString()
+  }
 }
 
 extension UserRecordsVC: UITableViewDataSource {
@@ -83,17 +108,23 @@ extension UserRecordsVC: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return self.climbingList.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row % 2 == 0 {
       let cell = tableView.dequeue(RecordCell.self)
-      cell.setupCell(date: "0000.00.00",
-                     level: .high,
-                     name: "힘든산",
-                     record: "00:00:00",
-                     distance: "0.00")
+      
+      if let finish = climbingList[indexPath.row].finish {
+      
+        cell.setupCell(date: getDate(climbingList[indexPath.row].start),
+                       level: .high,
+                       name: getMountainName(climbingList[indexPath.row].mountainID),
+                       record: getRecord(start: climbingList[indexPath.row].start,
+                                         finish: finish),
+                       distance: getDistance(start: climbingList[indexPath.row].start,
+                       finish: finish))
+      }
       return cell
     } else {
       let cell = tableView.dequeue(VoidCell.self)
