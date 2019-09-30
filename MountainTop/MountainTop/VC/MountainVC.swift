@@ -84,6 +84,7 @@ class MountainVC: UIViewController {
   @objc func didTapMoutainButton(_ sender: UIButton) {
     let rankingVC = RankingVC()
     rankingVC.buttonTag = sender.tag
+    
     rankingVC.modalPresentationStyle = .overCurrentContext
     present(rankingVC, animated: false)
   }

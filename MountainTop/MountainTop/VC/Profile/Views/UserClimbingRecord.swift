@@ -118,8 +118,8 @@ class UserClimbingRecordCell: UITableViewCell {
   }
   
   public func setupCell(times: String, hour: String, distance: String) {
-    totalTimes.text = "\(times)번"
+    totalTimes.text = "\(times)"
     totalHour.text = "\(hour)"
-    totalDistance.text = "\(distance)km"
+    totalDistance.text = "\(distance)"
   }
 }
