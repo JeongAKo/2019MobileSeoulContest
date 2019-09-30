@@ -90,9 +90,8 @@ class RankingVC: UIViewController, UITabBarControllerDelegate {
     
     disMissRankingView()
     let nMap = NMapVC()
-//    nMap.buttonTag = buttonTag
-    print("Tag🎟", buttonTag)
-//    print("nMap.buttonTag", nMap.buttonTag)
+    nMap.directTab = true // FIXME: - 아닌가 ;;
+    nMap.buttonTag = sender.tag // FIXME: - 어케 하는구징..;;
     let tabbarIndex = 1
     notiCenter.post(name: .tabbarIndex, object: sender, userInfo: ["tabbarIndex" : tabbarIndex])
   }
@@ -178,6 +177,8 @@ extension RankingVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RankingTableViewCell.identifier, for: indexPath) as! RankingTableViewCell
+    cell.medalImageView.image = UIImage(named: "medal\(indexPath.row+1)")
+    
     return cell
   }
   

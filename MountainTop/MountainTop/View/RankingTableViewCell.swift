@@ -11,21 +11,21 @@ import UIKit
 class RankingTableViewCell: UITableViewCell {
   
   // MARK: - Property
-  private lazy var userImageView: UIImageView = {
+  lazy var userImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "user"))
     imageView.contentMode = .scaleAspectFill
     addSubview(imageView)
     return imageView
   }()
   
-  private lazy var medalImageView: UIImageView = {
+  lazy var medalImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "1"))
     imageView.contentMode = .scaleAspectFill
     addSubview(imageView)
     return imageView
   }()
   
-  private lazy var userNameLabel: UILabel = {
+  lazy var userNameLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "사냥꾼 쩡🌹"
     label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -34,7 +34,7 @@ class RankingTableViewCell: UITableViewCell {
     return label
   }()
   
-  private lazy var dateLabel: UILabel = {
+  lazy var dateLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "2019. 06 .15"
     label.font = UIFont.systemFont(ofSize: 14)
@@ -43,7 +43,7 @@ class RankingTableViewCell: UITableViewCell {
     return label
   }()
   
-  private lazy var climbingRecordLabel: UILabel = {
+  lazy var climbingRecordLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "01 : 34 : 15"
     label.font = UIFont.systemFont(ofSize: 14)

@@ -21,7 +21,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   private var recordBool = true
   private lazy var startDate = Date()
   internal var buttonTag = 0
-  private var directTab: Bool = true
+  internal var directTab: Bool = false
   
 //  private var mountainDB: MountainDatabase!
   
@@ -119,7 +119,6 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     popInfoWindow()
     
     settingMountainInfo()
-
     
     settingLocation(0)
   }
@@ -302,33 +301,35 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   
   internal func cameraUpdate() {
-    // 탭에서 바로 들어갈수 있으니까 시작점과 끝점이 있어야 한다.
-    // 여기서 tag로 lat / lng 확인
     
-    let lat = self.mapLocation.location.lat
-    let long = self.mapLocation.location.lng
+    // FIXME: - 수정
     
-    let myPosition = NMGLatLng(lat: lat, lng: long)
-    let destiMountain = NMGLatLng(lat: mapLocation.location.lat, lng: mapLocation.location.lng)
-    
-    print("♟location lat: \(mapLocation.location.lat), location lng: \(mapLocation.location.lng)")
-    
-    //    directTab = !directTab
-    
-    //    if moving {
-    //      naverMapView.mapView.cancelTransitions()
-    //    } else {
-    //
-    //    }
-    //    let currentLocation = NMFCameraUpdate(scrollTo: NMGLatLng(lat: 37.686099, lng: 127.036238))
-    //
-    //    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: 37.686099, lng: 127.036238))
-    //    cameraUpdate.animation = .fly
-    //    cameraUpdate.animationDuration = 1
-    //    naverMapView.mapView.moveCamera(cameraUpdate)
-    //    naverMapView.mapView.animationDuration = 0.5
-    
-    // FIXME: - 깃발 나중에 나오게 하기
+    if directTab == true {
+      print("🎸buttonTag", buttonTag)
+      print("🎸mountain Lat", mountainList?[1].mtLat)
+      print("🎸mountain mtLong", mountainList?[1].mtLong)
+      
+      guard let lat = mountainList?[buttonTag].mtLat else { return print("can't get mtn lat info") }
+      guard let long = mountainList?[buttonTag].mtLong else { return print("can't get mtn lng info") }
+      let mtnPosition = NMGLatLng(lat: lat, lng: long)
+      let destiMountain = NMFCameraUpdate(scrollTo: mtnPosition)
+      destiMountain.animation = .fly
+      destiMountain.animationDuration = 1
+      naverMapView.mapView.moveCamera(destiMountain)
+      naverMapView.mapView.animationDuration = 0.5
+      
+      directTab.toggle()
+      
+    } else {
+      let directLat = mapLocation.location.lat
+      let directLong = mapLocation.location.lng
+      let currentPosition = NMFCameraUpdate(scrollTo: NMGLatLng(lat: directLat, lng: directLong))
+      currentPosition.animation = .fly
+      currentPosition.animationDuration = 1
+      naverMapView.mapView.moveCamera(currentPosition)
+      naverMapView.mapView.animationDuration = 0.5
+      
+    }
   }
   
   private func applyDesign() {
