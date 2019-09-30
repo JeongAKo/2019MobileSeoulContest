@@ -325,15 +325,15 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
       print("🎸mountain Lat", mountainList?[1].mtLat)
       print("🎸mountain mtLong", mountainList?[1].mtLong)
       
-      guard let lat = mountainList?[buttonTag].mtLat else { return print("can't get mtn lat info") }
-      guard let long = mountainList?[buttonTag].mtLong else { return print("can't get mtn lng info") }
+      guard let lat = mountainList?[buttonTag-1].mtLat else { return print("can't get mtn lat info") }
+      guard let long = mountainList?[buttonTag-1].mtLong else { return print("can't get mtn lng info") }
       let mtnPosition = NMGLatLng(lat: lat, lng: long)
       let destiMountain = NMFCameraUpdate(scrollTo: mtnPosition)
       destiMountain.animation = .fly
       destiMountain.animationDuration = 1
       naverMapView.mapView.moveCamera(destiMountain)
       naverMapView.mapView.animationDuration = 0.5
-      
+      naverMapView.mapView.zoomLevel = 15
       directTab.toggle()
       
     } else {
