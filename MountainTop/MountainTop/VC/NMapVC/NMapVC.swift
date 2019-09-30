@@ -322,17 +322,18 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     //    let duration = TimeInterval(Double(progressTime ?? 0))
     
     let duration = TimeInterval(progressTime)
-    recordView.challengerRecordTimeLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+//    recordView.challengerRecordTimeLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
     recordView.challengerRecordTimeLabel.text = duration.asTimeString2() // Duration -> Date
    
+//    recordView.transform =
     
-    UIView.animate(withDuration: 0.8, animations: { [weak self] in
-      guard let `self` = self else { return }
-      self.recordView.challengerRecordTimeLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-    }) { [weak self] (flag) in
-      guard let `self` = self else { return }
-      
-    }
+//    UIView.animate(withDuration: 0.8, animations: { [weak self] in
+//      guard let `self` = self else { return }
+////      self.recordView.challengerRecordTimeLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+//    }) { [weak self] (flag) in
+//      guard let `self` = self else { return }
+//
+//    }
     
 //    let dateFormatter = DateFormatter()
 //    dateFormatter.locale = Locale(identifier: "ko_KR")

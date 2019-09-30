@@ -39,12 +39,13 @@ class FinishClimbingVC: UIViewController {
     label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
     label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
 //    label.backgroundColor = .red
-    label.text = "등산 완료!!"
+    label.textAlignment = .center
+    label.text = "등산 완료"
     self.view.addSubview(label)
     return label
   }()
   
-  public lazy var imageView: UIImageView = {
+  private lazy var imageView: UIImageView = {
     let iv = UIImageView(frame: .zero)
     iv.contentMode = .scaleAspectFit
     iv.backgroundColor = .black

@@ -97,7 +97,7 @@ class UserRecordsVC: UIViewController {
   
   private func getDistance(start: Date, finish: Date) -> String {
     let record = finish.timeIntervalSinceReferenceDate - start.timeIntervalSinceReferenceDate
-    return record.asTimeString()
+    return "\(String(format: "%0.2f", record*0.002))km"
   }
 }
 
