@@ -94,8 +94,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.makeKeyAndVisible()
   }
   
-  @objc func moveSecondTab() {
+  @objc func moveSecondTab(_ nofi: Notification) {
+    guard let dict = nofi.userInfo as? [String: Int] else { return }
+    if let vc = tapBarController.viewControllers?[1] as? NMapVC {
+      vc.buttonTag = dict["buttonTag"] ?? 0
+      vc.directTab = true
+      print(vc.buttonTag)
+    }
+    
     tapBarController.selectedIndex = 1
+    
+    
+    
+    
   }
   
   @objc func kakaoSessionDidChangeWithNotification() {

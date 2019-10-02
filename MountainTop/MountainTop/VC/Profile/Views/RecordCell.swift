@@ -149,12 +149,12 @@ class RecordCell: UITableViewCell {
       $0.leading.equalTo(recordMarkImageView.snp.trailing).offset(Metric.margin)
     }
     distanceLabel.snp.makeConstraints {
-      $0.leading.equalTo(self.contentView.snp.centerX)
+      $0.leading.equalTo(distanceMarkImageView.snp.trailing).offset(Metric.margin/3)
       $0.centerY.equalTo(timeLabel)
     }
     distanceMarkImageView.snp.makeConstraints {
       $0.centerY.equalTo(distanceLabel)
-      $0.trailing.equalTo(distanceLabel.snp.leading).offset(Metric.margin)
+      $0.leading.equalTo(self.contentView.snp.centerX).offset(Metric.margin)
     }
   }
   

@@ -39,6 +39,7 @@
 		42C7897E2335FE890005E94B /* RankerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897D2335FE890005E94B /* RankerInfo.swift */; };
 		42C78980233A0FCF0005E94B /* CameraButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7897F233A0FCF0005E94B /* CameraButtonStatus.swift */; };
 		42C78983233A37910005E94B /* LocationCheckType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C78982233A37910005E94B /* LocationCheckType.swift */; };
+		42C78987234082CD0005E94B /* FinishClimbingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C78986234082CD0005E94B /* FinishClimbingVC.swift */; };
 		42D89FDA231691A30011A751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D89FD9231691A30011A751 /* AppDelegate.swift */; };
 		42D89FE1231691A40011A751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE0231691A40011A751 /* Assets.xcassets */; };
 		42D89FE4231691A40011A751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D89FE2231691A40011A751 /* LaunchScreen.storyboard */; };
@@ -95,6 +96,7 @@
 		42C7897D2335FE890005E94B /* RankerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankerInfo.swift; sourceTree = "<group>"; };
 		42C7897F233A0FCF0005E94B /* CameraButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonStatus.swift; sourceTree = "<group>"; };
 		42C78982233A37910005E94B /* LocationCheckType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCheckType.swift; sourceTree = "<group>"; };
+		42C78986234082CD0005E94B /* FinishClimbingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishClimbingVC.swift; sourceTree = "<group>"; };
 		42D89FD6231691A30011A751 /* MountainTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D89FD9231691A30011A751 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D89FE0231691A40011A751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,7 +152,6 @@
 				4222C28D2328D19F00619406 /* ProfileVC.swift */,
 				4222C29C232D436B00619406 /* UserRecordsVC.swift */,
 				4222C28F2328D31200619406 /* Views */,
-				421E60FD232FB0DB005D994B /* DBTestVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -222,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				AB49F80E2327860D00754504 /* NMapVC.swift */,
+				42C78986234082CD0005E94B /* FinishClimbingVC.swift */,
 			);
 			path = NMapVC;
 			sourceTree = "<group>";
@@ -297,6 +299,7 @@
 				AB7BF879233371FA00097D63 /* CustomInfoWindowView.xib */,
 				42C78981233A27950005E94B /* NMapVC */,
 				4222C28C2328D14F00619406 /* Profile */,
+				421E60FD232FB0DB005D994B /* DBTestVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				AB49F8172327861B00754504 /* RecordTopView.swift in Sources */,
 				42C78983233A37910005E94B /* LocationCheckType.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
+				42C78987234082CD0005E94B /* FinishClimbingVC.swift in Sources */,
 				AB7BF86D2333486900097D63 /* MainColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

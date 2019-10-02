@@ -51,6 +51,10 @@ class RankingVC: UIViewController, UITabBarControllerDelegate {
     return tableView
   }()
   
+  private let showChallengePlease = UILabel(frame: .zero)
+  
+  private var rankers: [RankerInfo] = []
+  
   // MARK: - App Lifecycle
   override func viewDidLoad() {
     tabBarController?.delegate = self
@@ -58,6 +62,24 @@ class RankingVC: UIViewController, UITabBarControllerDelegate {
     self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
     
     configureAutoLayout()
+    
+    print(UserInfo.def.climbingRankers)
+    var rankersInfo = UserInfo.def.climbingRankers[buttonTag-1]
+    for index in 0..<rankersInfo.count {
+      if rankersInfo[index].record != -1.0 {
+        self.rankers.append(rankersInfo[index])
+      }
+    }
+    
+    if self.rankers.isEmpty {
+      self.showChallengePlease.text = "도전자가 아직 없습니다.\n 도전해주세요!"
+      self.showChallengePlease.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+      self.tableView.addSubview(showChallengePlease)
+      
+      self.showChallengePlease.snp.makeConstraints {
+        $0.center.equalToSuperview()
+      }
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -89,11 +111,7 @@ class RankingVC: UIViewController, UITabBarControllerDelegate {
     // FIXME: - 여기서 바로 AppDelegate로 접근 못하나?
     
     disMissRankingView()
-    let nMap = NMapVC()
-    nMap.directTab = true // FIXME: - 아닌가 ;;
-    nMap.buttonTag = sender.tag // FIXME: - 어케 하는구징..;;
-    let tabbarIndex = 1
-    notiCenter.post(name: .tabbarIndex, object: sender, userInfo: ["tabbarIndex" : tabbarIndex])
+    notiCenter.post(name: .tabbarIndex, object: sender, userInfo: ["buttonTag" : buttonTag])
   }
   
   private func applyDesign() {
@@ -156,6 +174,13 @@ class RankingVC: UIViewController, UITabBarControllerDelegate {
       $0.bottom.equalToSuperview().offset(self.view.frame.height)
     }
   }
+  
+  private func getDate(_ date: Date) -> String {
+      let formet = DateFormatter()
+      formet.dateFormat = "yyyy-MM-dd"
+  //    formet.
+      return formet.string(from: date)
+    }
 }
 
 extension RankingVC: UITableViewDataSource, UITableViewDelegate {
@@ -172,12 +197,23 @@ extension RankingVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 3
+    return rankers.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RankingTableViewCell.identifier, for: indexPath) as! RankingTableViewCell
+    
+    if let url = URL(string: rankers[indexPath.row].profileUrl) {
+      cell.userImageView.kf.setImage(with: url,
+                  placeholder: nil,
+                  options: [.transition(.fade(0)), .loadDiskFileSynchronously],
+                  progressBlock: nil) { (_) in
+      }
+    }
     cell.medalImageView.image = UIImage(named: "medal\(indexPath.row+1)")
+    cell.userNameLabel.text = rankers[indexPath.row].user
+    cell.dateLabel.text = getDate(Date())
+    cell.climbingRecordLabel.text = rankers[indexPath.row].record.asTimeString2()
     
     return cell
   }

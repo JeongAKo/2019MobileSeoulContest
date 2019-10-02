@@ -22,12 +22,52 @@ class ProfileVC: UIViewController {
     return tb
   }()
   
+  private var climbingList: [UserRecord] = [] {
+    didSet {
+      guard !self.climbingList.isEmpty else {
+        self.totalhours = "00:00:00"
+        self.totalTimes = "0회"
+        self.totalDistance = "0.0km"
+        return print("climbingList is empty")
+        
+      }
+      
+      var hours: TimeInterval = 0.0
+//      var distance: Double = 0.0
+      for info in self.climbingList {
+        guard let finish = info.finish else { continue }
+        hours += finish.timeIntervalSinceReferenceDate - info.start.timeIntervalSinceReferenceDate
+//        self.totalTimes = climbingLis
+      }
+      self.totalhours = "\(hours.asTimeString2())"
+      self.totalTimes = "\(self.climbingList.count) 회"
+      
+      self.totalDistance = "\(String(format: "%0.2f", hours*0.002))km"
+      DispatchQueue.main.async { [weak self] in
+        self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+      }
+    }
+  }
+  
+  private var totalTimes: String = ""
+  private var totalhours: String = ""
+  private var totalDistance: String = ""
+  
   private let cellTitles = ["프로필", "나의 등반 기록", "이용약관", "개인정보 보호정책", "위치정보 이용약관", "로그아웃"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigationBar()
     settingTableView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    UserInfo.def.recordDB?.getAllRecode(complete: { [weak self] (records) in
+      
+      self?.climbingList = records
+    })
   }
   
   private func setupNavigationBar() {
@@ -74,6 +114,10 @@ extension ProfileVC: UITableViewDataSource {
       return cell
     case 1:
        let cell = tableView.dequeue(UserClimbingRecordCell.self)
+       
+       cell.setupCell(times: self.totalTimes,
+                      hour: self.totalhours,
+                      distance: self.totalDistance)
       return cell
     case 2:
       let cell = tableView.dequeue(DefaultCell.self)
@@ -105,7 +149,9 @@ extension ProfileVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch indexPath.row {
     case 1:
-      self.navigationController?.pushViewController(UserRecordsVC(), animated: true)
+      let userClimbingList = UserRecordsVC()
+      userClimbingList.climbingList = self.climbingList
+      self.navigationController?.pushViewController(userClimbingList, animated: true)
 //      present(UserRecordsVC(), animated: true, completion: nil)
     case 2:
       self.navigationController?.pushViewController(DBTestVC(), animated: true)
