@@ -33,7 +33,7 @@ class ProfileMainCell: UITableViewCell {
   private lazy var userName: UILabel = {
     let label = UILabel(frame: .zero)
     label.text = "Guest"
-    label.font = UIFont.systemFont(ofSize: FontSize.midle, weight: .regular)
+    label.font = UIFont.systemFont(ofSize: FontSize.big, weight: .regular)
     self.contentView.addSubview(label)
     return label
   }()

@@ -560,14 +560,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
   
   private func presentFinishMountainClimbing(record: String, image: UIImage) {
     let vc = FinishClimbingVC()
-    
-    
-    vc.modalTransitionStyle = .crossDissolve
-    vc.modalPresentationStyle = .overFullScreen
+
     present(vc, animated: true)
-//    self.present(vc, animated: true, completion: nil)
     vc.setRecordingInfomation(record, image)
-    vc.recordLabel.text = "등반 기록: \(record)"
   }
 }
 

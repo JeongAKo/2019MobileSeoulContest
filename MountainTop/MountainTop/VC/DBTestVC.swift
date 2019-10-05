@@ -78,12 +78,18 @@ class DBTestVC: UIViewController {
   }
   
   @objc private func touchStartButton(_ sender: UIButton) {
-    var rankerInfo: [RankerInfo] = [
-      RankerInfo(user: "창근1", record: 101, profileUrl: "profile1", image: "image1"),
-      RankerInfo(user: "창근2", record: 102, profileUrl: "profile2", image: "image2"),
-      RankerInfo(user: "창근3", record: 103, profileUrl: "profile3", image: "image3"),
-    ]
-    firebase.postMountainRecordRank(index: 0, rankersInfo: rankerInfo)
+
+    let vc = FinishClimbingVC()
+
+    present(vc, animated: true)
+//    vc.setRecordingInfomation(record, image)
+    
+//    var rankerInfo: [RankerInfo] = [
+//      RankerInfo(user: "창근1", record: 101, profileUrl: "profile1", image: "image1"),
+//      RankerInfo(user: "창근2", record: 102, profileUrl: "profile2", image: "image2"),
+//      RankerInfo(user: "창근3", record: 103, profileUrl: "profile3", image: "image3"),
+//    ]
+//    firebase.postMountainRecordRank(index: 0, rankersInfo: rankerInfo)
 //    startTime = UserInfo.def.startChallengeMountain()
   }
   
