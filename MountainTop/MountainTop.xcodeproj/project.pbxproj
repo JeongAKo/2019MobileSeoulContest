@@ -30,6 +30,8 @@
 		4222C2A5232E06E500619406 /* MountainLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2A4232E06E500619406 /* MountainLevel.swift */; };
 		4222C2A7232E31CE00619406 /* RecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222C2A6232E31CE00619406 /* RecordHeaderView.swift */; };
 		424FAE692334E9A900D8C009 /* FDataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FAE682334E9A900D8C009 /* FDataBaseManager.swift */; };
+		4282309A23483E3200A4B21A /* FinishTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4282309923483E3200A4B21A /* FinishTestVC.swift */; };
+		4282309C234862A700A4B21A /* TextViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4282309B234862A700A4B21A /* TextViewVC.swift */; };
 		42B52B74231A757A0043A3D2 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */; };
 		42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */; };
 		42B52B9D2320B8370043A3D2 /* logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B52B9C2320B8370043A3D2 /* logger.swift */; };
@@ -85,6 +87,8 @@
 		4222C2A4232E06E500619406 /* MountainLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainLevel.swift; sourceTree = "<group>"; };
 		4222C2A6232E31CE00619406 /* RecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeaderView.swift; sourceTree = "<group>"; };
 		424FAE682334E9A900D8C009 /* FDataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDataBaseManager.swift; sourceTree = "<group>"; };
+		4282309923483E3200A4B21A /* FinishTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishTestVC.swift; sourceTree = "<group>"; };
+		4282309B234862A700A4B21A /* TextViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewVC.swift; sourceTree = "<group>"; };
 		42B52B73231A757A0043A3D2 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		42B52B75231A7D560043A3D2 /* MountainTop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MountainTop-Bridging-Header.h"; sourceTree = "<group>"; };
 		42B52B982320B77C0043A3D2 /* LoginUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserInfo.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 			children = (
 				AB49F80E2327860D00754504 /* NMapVC.swift */,
 				42C78986234082CD0005E94B /* FinishClimbingVC.swift */,
+				4282309923483E3200A4B21A /* FinishTestVC.swift */,
 			);
 			path = NMapVC;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				42C78981233A27950005E94B /* NMapVC */,
 				4222C28C2328D14F00619406 /* Profile */,
 				421E60FD232FB0DB005D994B /* DBTestVC.swift */,
+				4282309B234862A700A4B21A /* TextViewVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -460,6 +466,7 @@
 				42B52B992320B77C0043A3D2 /* LoginUserInfo.swift in Sources */,
 				AB7BF878233371C400097D63 /* CustomInfoWindow.swift in Sources */,
 				AB49F8142327860D00754504 /* LoginVC.swift in Sources */,
+				4282309C234862A700A4B21A /* TextViewVC.swift in Sources */,
 				4222C2A1232D527800619406 /* VoidCell.swift in Sources */,
 				AB158435233A069800430AD7 /* RankingVC.swift in Sources */,
 				4222C2A7232E31CE00619406 /* RecordHeaderView.swift in Sources */,
@@ -482,6 +489,7 @@
 				421E60FA232F5588005D994B /* UserInfomatoin.swift in Sources */,
 				4222C2972328D59C00619406 /* UserClimbingRecord.swift in Sources */,
 				AB49F8172327861B00754504 /* RecordTopView.swift in Sources */,
+				4282309A23483E3200A4B21A /* FinishTestVC.swift in Sources */,
 				42C78983233A37910005E94B /* LocationCheckType.swift in Sources */,
 				42B52BA12320B83E0043A3D2 /* UIAlertController.swift in Sources */,
 				42C78987234082CD0005E94B /* FinishClimbingVC.swift in Sources */,
@@ -632,6 +640,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MountainTop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,7 +686,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "MountainTop/MountainTop-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -694,6 +703,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MountainTop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -738,7 +748,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MountainTop/MountainTop-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
