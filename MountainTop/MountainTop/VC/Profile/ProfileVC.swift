@@ -15,6 +15,7 @@ class ProfileVC: UIViewController {
     tb.register(cell: ProfileMainCell.self)
     tb.register(cell: UserClimbingRecordCell.self)
     tb.register(cell: DefaultCell.self)
+    
     tb.dataSource = self
     tb.delegate = self
     tb.backgroundColor = .clear
@@ -57,6 +58,7 @@ class ProfileVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     setupNavigationBar()
     settingTableView()
   }
@@ -113,10 +115,11 @@ extension ProfileVC: UITableViewDataSource {
       let cell = tableView.dequeue(ProfileMainCell.self)
       cell.setupCell(url: UserInfo.def.login.profile,
                      name: UserInfo.def.login.name)
+      cell.separatorInset = UIEdgeInsets.zero
       return cell
     case 1:
        let cell = tableView.dequeue(UserClimbingRecordCell.self)
-       
+       cell.separatorInset = UIEdgeInsets.zero
        cell.setupCell(times: self.totalTimes,
                       hour: self.totalhours,
                       distance: self.totalDistance)
@@ -128,6 +131,7 @@ extension ProfileVC: UITableViewDataSource {
 //      return cell
     default:
       let cell = tableView.dequeue(DefaultCell.self)
+      cell.separatorInset = UIEdgeInsets.zero
       cell.mainLabel.text = cellTitles[indexPath.row]
       cell.markImageView.isHidden = false
       return cell
