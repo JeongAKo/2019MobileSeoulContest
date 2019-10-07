@@ -21,6 +21,13 @@ final class LoginVC: UIViewController {
     return btn
   }()
   
+  private lazy var imageview: UIImageView = {
+    let iv = UIImageView(image: UIImage(named: "seoulMap"))
+    iv.contentMode = .scaleAspectFill
+    self.view.addSubview(iv)
+    return iv
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -30,7 +37,17 @@ final class LoginVC: UIViewController {
     print("uuid: \(String(describing: UIDevice.current.identifierForVendor?.uuidString))")
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    self.navigationController?.navigationBar.isHidden = true
+  }
+  
   private func autolayout() {
+    imageview.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+    
     loginButton.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.margin*5)
@@ -69,31 +86,6 @@ final class LoginVC: UIViewController {
       }
       
       UserInfo.def.getUserInfomation()
-      /// 사용자 정보 요청하기
-//      KOSessionTask.userMeTask { (error, me) in
-//
-//        if let error = error as NSError? {
-//          UIAlertController.showMessage(error.description)
-//
-//        } else if let me = me as KOUserMe? {
-//
-//          guard let id = me.id else { return }
-//
-////          var userInfo = LoginUserInfo()
-//          UserInfo.def.login.id = id
-//
-//          if let account = me.account {
-//            if let email = account.email {
-//              UserInfo.def.login.email = email
-//            }
-//          }
-//          if let properties = me.properties {
-//            UserInfo.def.login.name = properties["nickname"] ?? ""
-//            UserInfo.def.login.profile = properties["thumbnail_image"] ?? ""
-//          }
-//        }
-//
-//      }
     })
     
   }

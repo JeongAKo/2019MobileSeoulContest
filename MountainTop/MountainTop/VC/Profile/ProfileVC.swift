@@ -15,6 +15,7 @@ class ProfileVC: UIViewController {
     tb.register(cell: ProfileMainCell.self)
     tb.register(cell: UserClimbingRecordCell.self)
     tb.register(cell: DefaultCell.self)
+    
     tb.dataSource = self
     tb.delegate = self
     tb.backgroundColor = .clear
@@ -57,6 +58,7 @@ class ProfileVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     setupNavigationBar()
     settingTableView()
   }
@@ -68,6 +70,8 @@ class ProfileVC: UIViewController {
       
       self?.climbingList = records
     })
+    
+    self.navigationController?.navigationBar.isHidden = true
   }
   
   private func setupNavigationBar() {
@@ -111,21 +115,23 @@ extension ProfileVC: UITableViewDataSource {
       let cell = tableView.dequeue(ProfileMainCell.self)
       cell.setupCell(url: UserInfo.def.login.profile,
                      name: UserInfo.def.login.name)
+      cell.separatorInset = UIEdgeInsets.zero
       return cell
     case 1:
        let cell = tableView.dequeue(UserClimbingRecordCell.self)
-       
+       cell.separatorInset = UIEdgeInsets.zero
        cell.setupCell(times: self.totalTimes,
                       hour: self.totalhours,
                       distance: self.totalDistance)
       return cell
-    case 2:
-      let cell = tableView.dequeue(DefaultCell.self)
-      cell.mainLabel.text = cellTitles[indexPath.row]
-      cell.markImageView.isHidden = true
-      return cell
+//    case 2:
+//      let cell = tableView.dequeue(DefaultCell.self)
+//      cell.mainLabel.text = cellTitles[indexPath.row]
+//      cell.markImageView.isHidden = true
+//      return cell
     default:
       let cell = tableView.dequeue(DefaultCell.self)
+      cell.separatorInset = UIEdgeInsets.zero
       cell.mainLabel.text = cellTitles[indexPath.row]
       cell.markImageView.isHidden = false
       return cell
@@ -154,7 +160,20 @@ extension ProfileVC: UITableViewDelegate {
       self.navigationController?.pushViewController(userClimbingList, animated: true)
 //      present(UserRecordsVC(), animated: true, completion: nil)
     case 2:
-      self.navigationController?.pushViewController(DBTestVC(), animated: true)
+      let vc = TextViewVC()
+      present(vc, animated: true, completion: nil)
+      vc.setText(agreement)
+      vc.titleLabel.text = "이용약관"
+    case 3:
+      let vc = TextViewVC()
+      present(vc, animated: true, completion: nil)
+      vc.setText(security)
+      vc.titleLabel.text = "개인정보 보호정책"
+    case 4:
+      let vc = TextViewVC()
+      present(vc, animated: true, completion: nil)
+      vc.setText(position)
+      vc.titleLabel.text = "위치정보 이용약관"
     case 5:
       self.showAlert()
     default:

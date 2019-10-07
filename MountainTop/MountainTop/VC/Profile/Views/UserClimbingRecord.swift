@@ -72,6 +72,13 @@ class UserClimbingRecordCell: UITableViewCell {
     return label
   }()
   
+  public lazy var markImageView: UIImageView = {
+    let iv = UIImageView(image: UIImage(named: "back"))
+    iv.contentMode = .scaleAspectFit
+    self.contentView.addSubview(iv)
+    return iv
+  }()
+  
   // MARK: - View life cycle
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -114,6 +121,13 @@ class UserClimbingRecordCell: UITableViewCell {
     totalDistance.snp.makeConstraints {
       $0.top.equalTo(distanceLabel)
       $0.leading.equalTo(distanceLabel.snp.trailing).offset(Metric.margin)
+    }
+    
+    markImageView.snp.makeConstraints {
+      $0.trailing.equalToSuperview().inset(Metric.margin)
+      $0.centerY.equalToSuperview()
+      $0.height.equalTo(recordLabel).multipliedBy(1.5)
+      $0.width.equalTo(markImageView)
     }
   }
   
