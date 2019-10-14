@@ -33,7 +33,11 @@
 
   
 
-![66712294-911e2680-edd5-11e9-89a7-dacd74b6fa51](https://user-images.githubusercontent.com/47776915/66712373-d7c05080-edd6-11e9-9b45-1d6d132c1530.png)  ![IMG_3286](https://user-images.githubusercontent.com/47776915/66712375-dabb4100-edd6-11e9-8b37-66d6674cc28a.PNG)    ![IMG_3288](https://user-images.githubusercontent.com/47776915/66712378-e1e24f00-edd6-11e9-8808-7117e7f40838.PNG)  ![IMG_3284](https://user-images.githubusercontent.com/47776915/66712380-e73f9980-edd6-11e9-8ef2-f51a4ad3cf08.PNG)  ![IMG_3287](https://user-images.githubusercontent.com/47776915/66712382-e9095d00-edd6-11e9-8aea-4a38ca574241.PNG)   ![IMG_3285](https://user-images.githubusercontent.com/47776915/66712384-eb6bb700-edd6-11e9-9c83-f372109ea899.PNG)
+![1 2](https://user-images.githubusercontent.com/45986486/66750269-03226880-eec7-11e9-9d4e-df06d25cc873.png)
+
+
+
+![2](https://user-images.githubusercontent.com/45986486/66750409-5c8a9780-eec7-11e9-853a-84af04463ffc.png)
 
 
 
@@ -47,7 +51,7 @@
 
 ### 사용 기술
 
-카카오 SDK로그인, 네이버 SDK 맵뷰, SQLite, firebase, Lottie, snapkit, Kingfisher,,,
+카카오 SDK로그인, 네이버 SDK 맵뷰, SQLite, Firebase Database, Firebase Storage, Forebase Remote Config , Lottie, snapkit, Kingfisher
 
 
 
