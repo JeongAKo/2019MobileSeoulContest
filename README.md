@@ -1,4 +1,4 @@
-### 2019 스마트서울 모바일 앱 공모전
+## 2019 스마트서울 모바일 앱 공모전
 
 
 
@@ -10,12 +10,12 @@
 
 
 
-#### 기획배경
+### 기획배경
 서울을 둘러싸고 있는 여러 산들을 등반하면서 등산을 조금 더 재밌게 하면서 정확한 기록을 측정 할 순 없을까? 하는 고민에서 시작되었습니다.
 
 
 
-#### 앱 기능 설명
+### 앱 기능 설명
 
 * 각 산을 클릭하면 선택한 산의 1...3등의 유저 정보(카카오톡 프로필사진, 이름)가 보여짐 (랭킹기록은 Firebase DB에 등록 )
 
@@ -33,11 +33,11 @@
 
   
 
-![66712294-911e2680-edd5-11e9-89a7-dacd74b6fa51](https://user-images.githubusercontent.com/47776915/66712373-d7c05080-edd6-11e9-9b45-1d6d132c1530.png)![IMG_3286](https://user-images.githubusercontent.com/47776915/66712375-dabb4100-edd6-11e9-8b37-66d6674cc28a.PNG)![IMG_3288](https://user-images.githubusercontent.com/47776915/66712378-e1e24f00-edd6-11e9-8808-7117e7f40838.PNG)![IMG_3284](https://user-images.githubusercontent.com/47776915/66712380-e73f9980-edd6-11e9-8ef2-f51a4ad3cf08.PNG)![IMG_3287](https://user-images.githubusercontent.com/47776915/66712382-e9095d00-edd6-11e9-8aea-4a38ca574241.PNG)![IMG_3285](https://user-images.githubusercontent.com/47776915/66712384-eb6bb700-edd6-11e9-9c83-f372109ea899.PNG)
+![66712294-911e2680-edd5-11e9-89a7-dacd74b6fa51](https://user-images.githubusercontent.com/47776915/66712373-d7c05080-edd6-11e9-9b45-1d6d132c1530.png)  ![IMG_3286](https://user-images.githubusercontent.com/47776915/66712375-dabb4100-edd6-11e9-8b37-66d6674cc28a.PNG)    ![IMG_3288](https://user-images.githubusercontent.com/47776915/66712378-e1e24f00-edd6-11e9-8808-7117e7f40838.PNG)  ![IMG_3284](https://user-images.githubusercontent.com/47776915/66712380-e73f9980-edd6-11e9-8ef2-f51a4ad3cf08.PNG)  ![IMG_3287](https://user-images.githubusercontent.com/47776915/66712382-e9095d00-edd6-11e9-8aea-4a38ca574241.PNG)   ![IMG_3285](https://user-images.githubusercontent.com/47776915/66712384-eb6bb700-edd6-11e9-9c83-f372109ea899.PNG)
 
 
 
-#### 기존 출시된 앱과의 차별성
+### 기존 출시된 앱과의 차별성
 
 사진을 찍는 순간 시간, 위치, 고도를 가져와  `출발-도착`의 정확한 등산기록을 간편하게 남길 수 있습니다.
 
@@ -45,13 +45,13 @@
 
 
 
-#### 사용 기술
+### 사용 기술
 
 카카오 SDK로그인, 네이버 SDK 맵뷰, SQLite, firebase, Lottie, snapkit, Kingfisher,,,
 
 
 
-#### 협업툴
+### 협업툴
 
 -  ##### JIRA
 
