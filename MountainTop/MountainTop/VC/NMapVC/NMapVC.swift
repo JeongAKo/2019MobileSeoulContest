@@ -204,7 +204,9 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
 //
 //
 //    guard let moutain = try? JSONDecoder().decode([MountainInfo].self, from: jsonData) else { return print("decoding fail")}
-    guard let moutain = mountainList else { return }
+    guard let moutain = mountainList,
+      moutain.isEmpty == false
+      else { return }
     
 //    print("⛰moutain⛰:\(moutain)")
 //    print("📌moutain[0]📌",moutain[0])

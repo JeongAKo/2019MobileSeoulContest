@@ -159,6 +159,7 @@ class RecordCell: UITableViewCell {
   }
   
   private func setupViews() {
+    self.contentView.backgroundColor = UIColor(named: "profileBackground")
     levelMarkView.layer.cornerRadius = levelMarkView.frame.height/2
   }
   

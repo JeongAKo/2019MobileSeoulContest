@@ -18,7 +18,7 @@ class ProfileVC: UIViewController {
     
     tb.dataSource = self
     tb.delegate = self
-    tb.backgroundColor = .clear
+    tb.backgroundColor = UIColor(named: "profileBackground")
     view.addSubview(tb)
     return tb
   }()
@@ -58,6 +58,9 @@ class ProfileVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.view.backgroundColor = UIColor(named: "profileBackground")
+    
     tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     setupNavigationBar()
     settingTableView()

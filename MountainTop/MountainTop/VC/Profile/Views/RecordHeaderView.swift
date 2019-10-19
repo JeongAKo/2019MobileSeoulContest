@@ -36,8 +36,8 @@ class RecordHeaderView: UITableViewHeaderFooterView {
   // MARK: - View life cycle
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
-    self.contentView.backgroundColor = .white
-    self.backgroundColor = .clear
+    self.contentView.backgroundColor = UIColor(named: "profileBackground")
+    self.backgroundColor = UIColor(named: "profileBackground")
     autolayout()
   }
   
