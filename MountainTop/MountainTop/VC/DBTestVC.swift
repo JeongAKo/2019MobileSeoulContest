@@ -112,19 +112,9 @@ class DBTestVC: UIViewController {
   }
   
   private func testFirebase() {
-//    let fire = FDataBaseManager()
-//    fire.fetchMountainRankers {
-//      print("fetchRankers")
-//    }
-    
-    
   }
   
   private func testDB() {
-//    guard let db = moutainDB else {
-//      return print("moutainDB is nil")
-//    }
-    
     let data = UserInfo.def.mountainList
     
     print("data: \(data)")

@@ -68,6 +68,7 @@ class ProfileMainCell: UITableViewCell {
   }
   
   private func setupViews() {
+    self.contentView.backgroundColor = UIColor(named: "profileBackground")
     userImageView.layer.masksToBounds = true
     userImageView.layer.cornerRadius = UIScreen.main.bounds.width/10
   }

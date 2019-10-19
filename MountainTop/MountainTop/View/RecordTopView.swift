@@ -16,8 +16,8 @@ class RecordTopView: UIView {
   private lazy var winnerTitleLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "1위 기록"
-    label.font = UIFont.systemFont(ofSize: 13)
-    label.textColor = .darkGray
+    label.font = UIFont.systemFont(ofSize: 18)
+    label.textColor = UIColor(named: "MapTextColor")
     label.textAlignment = .center
     addSubview(label)
     return label
@@ -26,8 +26,8 @@ class RecordTopView: UIView {
   private lazy var challengerTitleLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "나의 기록"
-    label.font = UIFont.systemFont(ofSize: 13)
-    label.textColor = .darkGray
+    label.font = UIFont.systemFont(ofSize: 18)
+    label.textColor = UIColor(named: "MapTextColor")
     label.textAlignment = .center
     addSubview(label)
     return label
@@ -36,8 +36,8 @@ class RecordTopView: UIView {
   public lazy var winnerRecordTimeLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "00 : 00 : 00"
-    label.font = UIFont(name: "Helvetica Bold Oblique", size: 20)
-    label.textColor = .lightGray
+    label.font = UIFont(name: "Helvetica Bold Oblique", size: 23)
+    label.textColor = UIColor(named: "MapTextColor")
     label.textAlignment = .center
     addSubview(label)
     return label
@@ -46,8 +46,8 @@ class RecordTopView: UIView {
   lazy var challengerRecordTimeLabel: UILabel = {
     let label = UILabel(frame: CGRect.zero)
     label.text = "00 : 00 : 00"
-    label.font = UIFont(name: "Helvetica Bold Oblique", size: 20)
-    label.textColor = .lightGray
+    label.font = UIFont(name: "Helvetica Bold Oblique", size: 23)
+    label.textColor = UIColor(named: "MapTextColor")
     label.textAlignment = .center
     addSubview(label)
     return label
@@ -78,7 +78,7 @@ class RecordTopView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     makeConstraints()
-    backgroundColor = .white
+    backgroundColor = UIColor(named: "MapTab")
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -101,13 +101,13 @@ class RecordTopView: UIView {
     }
     
     winnerRecordTimeLabel.snp.makeConstraints {
-      $0.centerY.equalToSuperview().offset(10)
+      $0.centerY.equalToSuperview().offset(15)
       $0.centerX.equalTo(winnerTitleLabel.snp.centerX)
       $0.width.equalToSuperview().multipliedBy(0.45)
     }
     
     challengerRecordTimeLabel.snp.makeConstraints {
-      $0.centerY.equalToSuperview().offset(10)
+      $0.centerY.equalToSuperview().offset(15)
       $0.centerX.equalTo(challengerTitleLabel.snp.centerX)
       $0.width.equalToSuperview().multipliedBy(0.45)
     
