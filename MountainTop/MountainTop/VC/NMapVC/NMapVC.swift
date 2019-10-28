@@ -417,6 +417,7 @@ class NMapVC: UIViewController, NMFMapViewDelegate {
     case .nearStartPoint:
       cameraButton.setTitle("기록도전", for: .normal)
       cameraButton.tag = CameraButtonStatus.nearStartPoint.rawValue
+    // FIXME: - cameraButton. 색상 변경하기 애니메니션 효과도 주기
       
       if let moutainID = UserInfo.def.nearMountainID {
         let record = UserInfo.def.climbingRankers[moutainID][0].record
