@@ -15,7 +15,7 @@ class VoidCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
-    self.contentView.backgroundColor = .clear
+    self.contentView.backgroundColor = UIColor(named: "profileBackground")
   }
   
   required init?(coder aDecoder: NSCoder) {

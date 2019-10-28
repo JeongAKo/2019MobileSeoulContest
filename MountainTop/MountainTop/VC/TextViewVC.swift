@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TextViewVC: UIViewController {
   
@@ -30,7 +31,7 @@ class TextViewVC: UIViewController {
     let tv = UITextView(frame: .zero)
     tv.isEditable = false
     tv.font = UIFont.systemFont(ofSize: 10)
-    tv.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    tv.textColor = UIColor(named: "profileTextColor")
     self.view.addSubview(tv)
     return tv
   }()
@@ -38,7 +39,7 @@ class TextViewVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    self.view.backgroundColor = UIColor(named: "profileBackground")
     
     titleLabel.snp.makeConstraints {
       $0.top.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.margin/3)

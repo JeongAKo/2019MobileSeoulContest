@@ -31,6 +31,7 @@ class DefaultCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     self.selectionStyle = .none
+    self.contentView.backgroundColor = UIColor(named: "profileBackground")
     
     mainLabel.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.margin)

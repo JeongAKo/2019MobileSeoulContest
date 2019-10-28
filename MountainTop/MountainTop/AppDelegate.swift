@@ -21,11 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.backgroundColor = .white
+    window?.backgroundColor = UIColor(named: "profileBackground")
     
     // Firebase 등록
     FirebaseApp.configure()
-    
     setupEntryController()
     
     // Kakao
@@ -54,12 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   fileprivate func setupEntryController() {
     let navigationController = UINavigationController(rootViewController: LoginVC())
-//    let navigationController2 = UINavigationController(rootViewController: LogoutVC())
-    
-//    let tapBarController = UITabBarController()
     let mountainVC = MountainVC()
     let nMapVC = NMapVC()
-    let userSettingVC = UINavigationController(rootViewController: ProfileVC())//UserSettingVC())
+    let userSettingVC = UINavigationController(rootViewController: ProfileVC())
     
     mountainVC.title = "Mountain"
     nMapVC.title = "Map"
@@ -71,11 +67,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     nMapVC.tabBarItem.image = UIImage(named: "placeholder")
     userSettingVC.tabBarItem.image = UIImage(named: "profile")
     
-//    window?.rootViewController = tapBarController
-    UITabBar.appearance().tintColor = UIColor.darkGray // 틴트컬러 변경
+    if #available(iOS 13, *) {
+      let appearance = UITabBarAppearance()
+      appearance.stackedLayoutAppearance.normal.iconColor = UIColor(named: "tabbarTextColorNormal")
+      appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "tabbarTextColorNormal") ?? .black]
+      appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "tabbarTextColorSelected")
+      appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "tabbarTextColorSelected") ?? .white]
+      
+      self.tapBarController.tabBar.standardAppearance = appearance
+    } else {
+      UITabBar.appearance().tintColor = UIColor.darkGray // 틴트컬러 변경
+    }
     
     self.loginViewController = navigationController
-    self.mainViewController = tapBarController//navigationController2
+    self.mainViewController = tapBarController
   }
   
   fileprivate func reloadRootViewController() {
@@ -84,11 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return
     }
     if !isOpened {
-      print("login: \(isOpened)")
-//      let mainViewController = self.mainViewController as! UINavigationController
-//      mainViewController.popToRootViewController(animated: true)
+        print("login: \(isOpened), isOpened false")
     }
-    UserInfo.def.getUserInfomation()
+    else {
+        print("isOpened true")
+        UserInfo.def.getUserInfomation()
+    }
+    
     
     self.window?.rootViewController = isOpened ? self.mainViewController : self.loginViewController
     self.window?.makeKeyAndVisible()
@@ -103,10 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     tapBarController.selectedIndex = 1
-    
-    
-    
-    
   }
   
   @objc func kakaoSessionDidChangeWithNotification() {

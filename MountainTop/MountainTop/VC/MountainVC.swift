@@ -66,7 +66,7 @@ class MountainVC: UIViewController {
     scrollView.delegate = self
     startAnimation()
     configureAutoLayout()
-    view.backgroundColor = #colorLiteral(red: 0.9616169333, green: 0.9346559644, blue: 0.8509911299, alpha: 1)
+    view.backgroundColor = UIColor(named: "MountainTab")
   }
   
   // MARK: - Action Method
