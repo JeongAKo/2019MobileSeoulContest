@@ -89,9 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return
     }
     if !isOpened {
-      print("login: \(isOpened)")
+        print("login: \(isOpened), isOpened false")
     }
-    UserInfo.def.getUserInfomation()
+    else {
+        print("isOpened true")
+        UserInfo.def.getUserInfomation()
+    }
+    
     
     self.window?.rootViewController = isOpened ? self.mainViewController : self.loginViewController
     self.window?.makeKeyAndVisible()

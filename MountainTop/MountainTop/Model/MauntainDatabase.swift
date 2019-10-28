@@ -34,7 +34,7 @@ final class MountainDatabase {
   // MARK: - init
   init?() {
     do {
-      let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+      let documentDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
       
       // 사용자 등산기록 table
       let fileUrl = documentDirectory.appendingPathComponent("MountainInfomation").appendingPathExtension("sqlite3")
