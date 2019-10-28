@@ -8,8 +8,7 @@
 
 import UIKit
 import Lottie
-import ImageIO
-
+import SwiftGifOrigin
 
 class MountainVC: UIViewController {
   
@@ -33,6 +32,7 @@ class MountainVC: UIViewController {
   private lazy var mtnImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.loadGif(name: "mtnTop")
+    imageView.animationRepeatCount = 1
     imageView.contentMode = .scaleAspectFit
     scrollView.addSubview(imageView)
     return imageView
@@ -67,6 +67,7 @@ class MountainVC: UIViewController {
     startAnimation()
     configureAutoLayout()
     view.backgroundColor = UIColor(named: "MountainTab")
+    
   }
   
   // MARK: - Action Method

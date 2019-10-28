@@ -19,7 +19,6 @@ extension UIImageView {
       }
     }
   }
-  
 }
 
 extension UIImage {

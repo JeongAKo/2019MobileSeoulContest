@@ -89,6 +89,7 @@ PODS:
   - SQLite.swift (0.12.0):
     - SQLite.swift/standard (= 0.12.0)
   - SQLite.swift/standard (0.12.0)
+  - SwiftGifOrigin (1.7.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -100,6 +101,7 @@ DEPENDENCIES:
   - NMapsMap
   - SnapKit (~> 5.0.0)
   - SQLite.swift (~> 0.12.0)
+  - SwiftGifOrigin (~> 1.7.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -123,6 +125,8 @@ SPEC REPOS:
     - Protobuf
     - SnapKit
     - SQLite.swift
+  trunk:
+    - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   Firebase: 5965bac23e7fcb5fa6d926ed429c9ecef8a2014e
@@ -145,7 +149,8 @@ SPEC CHECKSUMS:
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: 5e6551e5de2d4fab7d8ef91eab38dbdd78e96b2e
+PODFILE CHECKSUM: 352c5e763e440256479cc6d3aec10f8d1479bcd6
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4
